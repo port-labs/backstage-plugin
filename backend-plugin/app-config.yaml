@@ -1,0 +1,18 @@
+app:
+  title: Port Backstage Backend Test
+  baseUrl: http://localhost:3000
+
+backend:
+  baseUrl: http://localhost:7007
+  listen:
+    port: 7007
+  auth:
+    # For testing purposes, we're disabling the default auth policy
+    dangerouslyDisableDefaultAuthPolicy: true
+
+port:
+  api:
+    baseUrl: https://api.getport.io
+    auth:
+      clientId:
+      clientSecret:
