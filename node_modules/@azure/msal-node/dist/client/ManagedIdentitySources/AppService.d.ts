@@ -1,0 +1,18 @@
+import { INetworkModule, Logger } from "@azure/msal-common";
+import { BaseManagedIdentitySource } from "./BaseManagedIdentitySource";
+import { CryptoProvider } from "../../crypto/CryptoProvider";
+import { ManagedIdentityRequestParameters } from "../../config/ManagedIdentityRequestParameters";
+import { ManagedIdentityId } from "../../config/ManagedIdentityId";
+import { NodeStorage } from "../../cache/NodeStorage";
+/**
+ * Original source of code: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/identity/Azure.Identity/src/AppServiceManagedIdentitySource.cs
+ */
+export declare class AppService extends BaseManagedIdentitySource {
+    private identityEndpoint;
+    private identityHeader;
+    constructor(logger: Logger, nodeStorage: NodeStorage, networkClient: INetworkModule, cryptoProvider: CryptoProvider, identityEndpoint: string, identityHeader: string);
+    static getEnvironmentVariables(): Array<string | undefined>;
+    static tryCreate(logger: Logger, nodeStorage: NodeStorage, networkClient: INetworkModule, cryptoProvider: CryptoProvider): AppService | null;
+    createRequest(resource: string, managedIdentityId: ManagedIdentityId): ManagedIdentityRequestParameters;
+}
+//# sourceMappingURL=AppService.d.ts.map
