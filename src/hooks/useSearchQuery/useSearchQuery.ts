@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState, useMemo } from 'react';
-import search, { PortEntity } from '../../api/search';
-import { useApi, configApiRef } from '@backstage/core-plugin-api';
+import { configApiRef, useApi } from "@backstage/core-plugin-api";
+import { useEffect, useMemo, useState } from "react";
+import search, { PortEntity } from "../../api/search";
 
 const tryJsonParse = (str: string) => {
   try {
@@ -11,30 +11,28 @@ const tryJsonParse = (str: string) => {
   }
 };
 
-function useSearchQuery(searchQueryStr: string) {
+function useSearchQuery(searchQuery: any) {
   const [data, setData] = useState<PortEntity[]>([]);
   const [error, setError] = useState<string | null>();
   const [isLoading, setIsLoading] = useState(false);
   const config = useApi(configApiRef);
-  const backendUrl = useMemo(() => config.getString('backend.baseUrl'), []);
-
-  const searchQuery = tryJsonParse(searchQueryStr);
+  const backendUrl = useMemo(() => config.getString("backend.baseUrl"), []);
 
   useEffect(() => {
     setIsLoading(true);
 
     search(backendUrl, searchQuery)
-      .then(entities => {
+      .then((entities) => {
         setData(entities);
         setError(null);
       })
       .catch(() => {
-        setError('Failed fetching files');
+        setError("Failed fetching related entities");
       })
       .finally(() => {
         setIsLoading(false);
       });
-  }, [searchQueryStr]);
+  }, [JSON.stringify(searchQuery)]);
 
   if (!searchQuery) {
     return { data: [], error: null, isLoading: false };

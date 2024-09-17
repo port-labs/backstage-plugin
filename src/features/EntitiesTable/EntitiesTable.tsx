@@ -7,6 +7,7 @@ import { PortEntity } from "../../api/search";
 export const EntitiesTable = (props: {
   entities: PortEntity[];
   isLoading: boolean;
+  title: string;
 }) => {
   const columns: TableColumn[] = useMemo(() => {
     const getUniqueFieldsByProperties = (entities: PortEntity[]) => {
@@ -66,6 +67,7 @@ export const EntitiesTable = (props: {
   return (
     <div>
       <Table
+        title={props.title}
         columns={columns}
         isLoading={props.isLoading}
         data={props.entities}

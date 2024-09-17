@@ -1,12 +1,12 @@
 import {
-  createPlugin,
   createComponentExtension,
-} from '@backstage/core-plugin-api';
+  createPlugin,
+} from "@backstage/core-plugin-api";
 
-import { rootRouteRef } from './routes';
+import { rootRouteRef } from "./routes";
 
 export const portPlugin = createPlugin({
-  id: 'port',
+  id: "port",
   routes: {
     root: rootRouteRef,
   },
@@ -14,20 +14,21 @@ export const portPlugin = createPlugin({
 
 export const EntityTabPortContent = portPlugin.provide(
   createComponentExtension({
-    name: 'EntityTabPortContent',
+    name: "EntityTabPortContent",
     component: {
       lazy: () =>
-      import('./features/EntityTabPortContent/EntityTabPortContent').then(m => m.EntityTabPortContent),
-    }
-  }),
+        import("./features/EntityTabPortContent/EntityTabPortContent").then(
+          (m) => m.EntityTabPortContent
+        ),
+    },
+  })
 );
 
 export const HomePage = portPlugin.provide(
   createComponentExtension({
-    name: 'HomePage',
+    name: "HomePage",
     component: {
-      lazy: () =>
-      import('./features/HomePage').then(m => m.HomePage),
-    }
-  }),
+      lazy: () => import("./features/HomePage").then((m) => m.HomePage),
+    },
+  })
 );
