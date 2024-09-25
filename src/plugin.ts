@@ -24,6 +24,16 @@ export const EntityTabPortContent = portPlugin.provide(
   })
 );
 
+export const ScorecardCard = portPlugin.provide(
+  createComponentExtension({
+    name: "ScorecardCard",
+    component: {
+      lazy: () =>
+        import("./features/Scorecards/ScorecardCard").then((m) => m.default),
+    },
+  })
+);
+
 export const HomePage = portPlugin.provide(
   createComponentExtension({
     name: "HomePage",

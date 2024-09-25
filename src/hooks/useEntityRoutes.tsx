@@ -1,17 +1,15 @@
 import { EntityLayout } from "@backstage/plugin-catalog";
-import { useEntity } from "@backstage/plugin-catalog-react";
 import { groupBy } from "lodash";
 import React, { useMemo } from "react";
 import { EntityTabPortContent } from "..";
-import { Scorecards } from "../features/Scorecards/scorecards";
-import useEntityQuery from "./useSearchQuery/useEntityQuery";
+import ScorecardCard from "../features/Scorecards/ScorecardCard";
 import useSearchQuery from "./useSearchQuery/useSearchQuery";
+import { useServiceName } from "./useServiceName";
 
 const SERVICE_BLUEPRINT_ID = "service";
 
 export const useEntityRoutes = () => {
-  const { entity } = useEntity();
-  const serviceName = entity.metadata.annotations?.["getport.io/service-name"];
+  const serviceName = useServiceName();
 
   const { searchQuery } = useMemo(
     () => ({
@@ -32,36 +30,17 @@ export const useEntityRoutes = () => {
   );
 
   const { data, isLoading } = useSearchQuery(searchQuery);
-  const { data: entityData } = useEntityQuery(
-    serviceName,
-    SERVICE_BLUEPRINT_ID
-  );
-
   const groupedData = useMemo(() => {
     return groupBy(data, "blueprint");
   }, [data]);
 
   const scorecardRoute = useMemo(() => {
-    if (!entityData?.scorecards) return null;
-
-    const scorecards = Object.entries(entityData.scorecards).map(
-      ([scorecardId, scorecard]) => {
-        return {
-          name: scorecardId,
-          level: scorecard.level as string,
-          rules: scorecard.rules.map((rule) => ({
-            name: rule.identifier as string,
-            status: rule.status as string,
-          })),
-        };
-      }
-    );
     return (
       <EntityLayout.Route path="/port/info" title={`${serviceName} Scorecards`}>
-        <Scorecards name={serviceName ?? ""} scorecards={scorecards} />
+        <ScorecardCard />
       </EntityLayout.Route>
     );
-  }, [entityData, serviceName]);
+  }, [serviceName]);
 
   const routes = useMemo(() => {
     return Object.entries(groupedData)
