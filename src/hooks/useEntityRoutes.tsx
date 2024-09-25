@@ -3,7 +3,10 @@ import { useEntity } from "@backstage/plugin-catalog-react";
 import { groupBy } from "lodash";
 import React, { useMemo } from "react";
 import { EntityTabPortContent } from "..";
+import useEntityQuery from "./useSearchQuery/useEntityQuery";
 import useSearchQuery from "./useSearchQuery/useSearchQuery";
+
+const SERVICE_BLUEPRINT_ID = "service";
 
 export const useEntityRoutes = () => {
   const { entity } = useEntity();
@@ -17,7 +20,7 @@ export const useEntityRoutes = () => {
             rules: [
               {
                 operator: "relatedTo",
-                blueprint: "service",
+                blueprint: SERVICE_BLUEPRINT_ID,
                 value: serviceName,
               },
             ],
@@ -28,10 +31,25 @@ export const useEntityRoutes = () => {
   );
 
   const { data, isLoading } = useSearchQuery(searchQuery);
+  const { data: entityData } = useEntityQuery(
+    serviceName,
+    SERVICE_BLUEPRINT_ID
+  );
 
   const groupedData = useMemo(() => {
     return groupBy(data, "blueprint");
   }, [data]);
+
+  const scorecardRoute = useMemo(() => {
+    return (
+      <EntityLayout.Route
+        path={`/port/info`}
+        title={serviceName + " Scorecards"}
+      >
+        {entityData ? JSON.stringify(entityData) : "Loading..."}
+      </EntityLayout.Route>
+    );
+  });
 
   const routes = useMemo(() => {
     return Object.entries(groupedData)
@@ -47,5 +65,5 @@ export const useEntityRoutes = () => {
       ));
   }, [groupedData, isLoading]);
 
-  return routes;
+  return [scorecardRoute, ...routes];
 };

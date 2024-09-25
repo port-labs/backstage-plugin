@@ -1,21 +1,21 @@
 import { PortEntity } from "./types";
 
-export default async function search(
+export default async function getEntity(
   backendApiUrl: string,
-  searchQuery: object
-): Promise<PortEntity[]> {
+  entityId: string,
+  blueprintId: string
+): Promise<PortEntity> {
   const response = await fetch(
-    `${backendApiUrl}/api/proxy/getport/entities/search`,
+    `${backendApiUrl}/api/proxy/getport/blueprints/${blueprintId}/entities/${entityId}`,
     {
-      method: "POST",
+      method: "GET",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(searchQuery),
     }
   );
   const json = await response.json();
 
-  return json.entities;
+  return json.entity;
 }
