@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import useEntityQuery from "../../hooks/useSearchQuery/useEntityQuery";
+import useEntityQuery from "../../hooks/api-hooks/useEntityQuery";
 import { useServiceName } from "../../hooks/useServiceName";
 import Scorecards from "./scorecards";
 

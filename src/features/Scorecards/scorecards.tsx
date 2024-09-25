@@ -15,6 +15,33 @@ export type ScorecardProps = {
   }[];
 };
 
+const getLevelEmoji = (level: "Bronze" | "Silver" | "Gold" | "Basic") => {
+  switch (level) {
+    case "Bronze":
+      return "🥉";
+    case "Silver":
+      return "🥈";
+    case "Gold":
+      return "🥇";
+    case "Basic":
+    default:
+      return "🚫";
+  }
+};
+
+const getLevelColor = (level: "Bronze" | "Silver" | "Gold" | "Basic") => {
+  switch (level) {
+    case "Bronze":
+      return "#eba763";
+    case "Silver":
+      return "#C0C0C0";
+    case "Gold":
+      return "#FFA500";
+    default:
+      return "#FFFFFF";
+  }
+};
+
 export const Scorecards = ({ name, scorecards }: ScorecardProps) => {
   const data = scorecards.map((scorecard) => ({
     name: scorecard.name,
@@ -33,6 +60,16 @@ export const Scorecards = ({ name, scorecards }: ScorecardProps) => {
     {
       title: "Level",
       field: "level",
+      render: (rowData: any) => {
+        return (
+          <Chip
+            label={`${getLevelEmoji(rowData.level)} ${rowData.level}`}
+            style={{
+              backgroundColor: getLevelColor(rowData.level),
+            }}
+          />
+        );
+      },
     },
     {
       title: "Rules",
@@ -43,8 +80,11 @@ export const Scorecards = ({ name, scorecards }: ScorecardProps) => {
             <Chip
               label={rule.name}
               style={{
+                color: rule.status === "SUCCESS" ? "#046B15" : "#6F2518",
                 backgroundColor:
-                  rule.status === "SUCCESS" ? "#73EC8B" : "#FF7373",
+                  rule.status === "SUCCESS"
+                    ? "rgba(79, 205, 68, 0.3)"
+                    : "rgba(255, 111, 85, 0.3)",
               }}
             />
           </p>

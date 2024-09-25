@@ -34,6 +34,15 @@ export const ScorecardCard = portPlugin.provide(
   })
 );
 
+export const Actions = portPlugin.provide(
+  createComponentExtension({
+    name: "Actions",
+    component: {
+      lazy: () => import("./features/Actions/Actions").then((m) => m.Actions),
+    },
+  })
+);
+
 export const HomePage = portPlugin.provide(
   createComponentExtension({
     name: "HomePage",

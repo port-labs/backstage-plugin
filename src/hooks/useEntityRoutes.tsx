@@ -3,7 +3,7 @@ import { groupBy } from "lodash";
 import React, { useMemo } from "react";
 import { EntityTabPortContent } from "..";
 import ScorecardCard from "../features/Scorecards/ScorecardCard";
-import useSearchQuery from "./useSearchQuery/useSearchQuery";
+import useSearchQuery from "./api-hooks/useSearchQuery";
 import { useServiceName } from "./useServiceName";
 
 const SERVICE_BLUEPRINT_ID = "service";
