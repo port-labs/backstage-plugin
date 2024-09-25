@@ -1,5 +1,5 @@
 import React from "react";
-import { PortEntity } from "../../api/search";
+import { PortEntity } from "../../api/types";
 import { EntitiesTable } from "../EntitiesTable/EntitiesTable";
 
 export const EntityTabPortContent = ({

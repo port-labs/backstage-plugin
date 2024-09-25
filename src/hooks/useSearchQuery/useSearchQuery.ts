@@ -1,15 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { configApiRef, useApi } from "@backstage/core-plugin-api";
 import { useEffect, useMemo, useState } from "react";
-import search, { PortEntity } from "../../api/search";
-
-const tryJsonParse = (str: string) => {
-  try {
-    return JSON.parse(str);
-  } catch {
-    return null;
-  }
-};
+import search from "../../api/search";
+import { PortEntity } from "../../api/types";
 
 function useSearchQuery(searchQuery: any) {
   const [data, setData] = useState<PortEntity[]>([]);

@@ -41,15 +41,39 @@ export const useEntityRoutes = () => {
   }, [data]);
 
   const scorecardRoute = useMemo(() => {
+    if (!entityData?.scorecards) return null;
+
+    const scorecards = Object.entries(entityData.scorecards).map(
+      ([scorecardId, scorecard]) => {
+        return {
+          name: scorecardId,
+          level: scorecard.level as string,
+          rules: scorecard.rules.map((rule) => ({
+            name: rule.identifier as string,
+            status: rule.status as string,
+          })),
+        };
+      }
+    );
     return (
-      <EntityLayout.Route
-        path={`/port/info`}
-        title={serviceName + " Scorecards"}
-      >
-        {entityData ? JSON.stringify(entityData) : "Loading..."}
+      <EntityLayout.Route path="/port/info" title={`${serviceName} Scorecards`}>
+        <div>
+          {scorecards.map((scorecard) => (
+            <div key={scorecard.name}>
+              <h1>{scorecard.name}</h1>
+              <h3>{scorecard.level}</h3>
+              {scorecard.rules.map((rule) => (
+                <p key={rule.name}>
+                  <span>{rule.name}</span>
+                  <span> - {rule.status}</span>
+                </p>
+              ))}
+            </div>
+          ))}
+        </div>
       </EntityLayout.Route>
     );
-  });
+  }, [entityData, serviceName]);
 
   const routes = useMemo(() => {
     return Object.entries(groupedData)
