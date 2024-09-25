@@ -3,6 +3,7 @@ import { useEntity } from "@backstage/plugin-catalog-react";
 import { groupBy } from "lodash";
 import React, { useMemo } from "react";
 import { EntityTabPortContent } from "..";
+import { Scorecards } from "../features/Scorecards/scorecards";
 import useEntityQuery from "./useSearchQuery/useEntityQuery";
 import useSearchQuery from "./useSearchQuery/useSearchQuery";
 
@@ -57,20 +58,7 @@ export const useEntityRoutes = () => {
     );
     return (
       <EntityLayout.Route path="/port/info" title={`${serviceName} Scorecards`}>
-        <div>
-          {scorecards.map((scorecard) => (
-            <div key={scorecard.name}>
-              <h1>{scorecard.name}</h1>
-              <h3>{scorecard.level}</h3>
-              {scorecard.rules.map((rule) => (
-                <p key={rule.name}>
-                  <span>{rule.name}</span>
-                  <span> - {rule.status}</span>
-                </p>
-              ))}
-            </div>
-          ))}
-        </div>
+        <Scorecards name={serviceName ?? ""} scorecards={scorecards} />
       </EntityLayout.Route>
     );
   }, [entityData, serviceName]);
