@@ -2,7 +2,6 @@ import { EntityLayout } from "@backstage/plugin-catalog";
 import { groupBy } from "lodash";
 import React, { useMemo } from "react";
 import { EntityTabPortContent } from "..";
-import ScorecardCard from "../features/Scorecards/ScorecardCard";
 import useSearchQuery from "./api-hooks/useSearchQuery";
 import { useServiceName } from "./useServiceName";
 
@@ -34,14 +33,6 @@ export const useEntityRoutes = () => {
     return groupBy(data, "blueprint");
   }, [data]);
 
-  const scorecardRoute = useMemo(() => {
-    return (
-      <EntityLayout.Route path="/port/info" title={`${serviceName} Scorecards`}>
-        <ScorecardCard />
-      </EntityLayout.Route>
-    );
-  }, [serviceName]);
-
   const routes = useMemo(() => {
     return Object.entries(groupedData)
       .sort((a, b) => a[0].localeCompare(b[0]))
@@ -56,5 +47,5 @@ export const useEntityRoutes = () => {
       ));
   }, [groupedData, isLoading]);
 
-  return [scorecardRoute, ...routes];
+  return routes;
 };

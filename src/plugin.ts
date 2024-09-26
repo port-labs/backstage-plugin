@@ -43,6 +43,18 @@ export const Actions = portPlugin.provide(
   })
 );
 
+export const PortDependencyCard = portPlugin.provide(
+  createComponentExtension({
+    name: "PortDependencyCard",
+    component: {
+      lazy: () =>
+        import("./features/PortDependencyCard/PortDependencyCard").then(
+          (m) => m.default
+        ),
+    },
+  })
+);
+
 export const HomePage = portPlugin.provide(
   createComponentExtension({
     name: "HomePage",

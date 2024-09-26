@@ -6,6 +6,7 @@ export {
   HomePage,
   portPlugin,
   ScorecardCard,
+  PortDependencyCard,
 } from "./plugin";
 
 export const isPortDataAvailable = (entity: Entity) => {
