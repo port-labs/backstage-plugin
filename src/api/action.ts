@@ -1,3 +1,4 @@
+import { PORT_PROXY_PATH } from "./consts";
 import { Action, GlobalAction } from "./types";
 
 export default async function getActions(
@@ -5,7 +6,7 @@ export default async function getActions(
   blueprintId: string
 ): Promise<(GlobalAction | Action)[]> {
   const response = await fetch(
-    `${backendApiUrl}/api/proxy/getport/actions?blueprint_identifier=${blueprintId}&version=v2`,
+    `${backendApiUrl}${PORT_PROXY_PATH}/actions?blueprint_identifier=${blueprintId}&version=v2`,
     {
       method: "GET",
       credentials: "include",
@@ -32,7 +33,7 @@ export async function executeAction(
   properties: Record<string, string> = {}
 ): Promise<Response> {
   const response = await fetch(
-    `${backendApiUrl}/api/proxy/getport/actions/${actionId}/runs`,
+    `${backendApiUrl}${PORT_PROXY_PATH}/actions/${actionId}/runs`,
     {
       method: "POST",
       credentials: "include",

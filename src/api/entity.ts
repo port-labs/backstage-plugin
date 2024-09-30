@@ -1,3 +1,4 @@
+import { PORT_PROXY_PATH } from "./consts";
 import { PortEntity } from "./types";
 
 export default async function getEntity(
@@ -6,7 +7,7 @@ export default async function getEntity(
   blueprintId: string
 ): Promise<PortEntity> {
   const response = await fetch(
-    `${backendApiUrl}/api/proxy/getport/blueprints/${blueprintId}/entities/${entityId}`,
+    `${backendApiUrl}${PORT_PROXY_PATH}/blueprints/${blueprintId}/entities/${entityId}`,
     {
       method: "GET",
       credentials: "include",

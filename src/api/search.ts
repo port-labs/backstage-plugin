@@ -1,3 +1,4 @@
+import { PORT_PROXY_PATH } from "./consts";
 import { PortEntity } from "./types";
 
 export default async function search(
@@ -5,7 +6,7 @@ export default async function search(
   searchQuery: object
 ): Promise<PortEntity[]> {
   const response = await fetch(
-    `${backendApiUrl}/api/proxy/getport/entities/search`,
+    `${backendApiUrl}${PORT_PROXY_PATH}/entities/search`,
     {
       method: "POST",
       credentials: "include",
