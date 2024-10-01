@@ -9,6 +9,7 @@
     "main": "dist/index.cjs.js",
     "types": "dist/index.d.ts"
   },
+  "homepage": "https://github.com/port-labs/backstage-plugin",
   "backstage": {
     "role": "backend-plugin"
   },
