@@ -4,8 +4,9 @@ import {
   InfoCard,
 } from "@backstage/core-components";
 import { makeStyles, useTheme } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 import React, { useMemo } from "react";
-import useEntityQuery from "../../hooks/api-hooks/useEntityQuery";
+import useSearchQuery from "../../hooks/api-hooks/useSearchQuery";
 import { useServiceName } from "../../hooks/useServiceName";
 import { DefaultRenderLabel } from "./DefaultRenderLabel";
 import { DefaultRenderNode } from "./DefaultRenderNode";
@@ -41,10 +42,26 @@ function PortDependencyCard() {
   const classes = useStyles();
   const theme = useTheme();
   const serviceName = useServiceName();
-  const { data: entityData } = useEntityQuery(
-    serviceName,
-    SERVICE_BLUEPRINT_ID
+  const { searchQuery } = useMemo(
+    () => ({
+      searchQuery: serviceName
+        ? {
+            combinator: "and",
+            rules: [
+              {
+                operator: "relatedTo",
+                blueprint: SERVICE_BLUEPRINT_ID,
+                value: serviceName,
+              },
+            ],
+          }
+        : {},
+    }),
+    [serviceName]
   );
+  const { data: entitiesData, error, isLoading } = useSearchQuery(searchQuery);
+
+  const entityData = entitiesData[0];
 
   const nodes = useMemo((): EntityNode[] => {
     const relations = entityData?.relations;
@@ -109,6 +126,16 @@ function PortDependencyCard() {
 
   return (
     <InfoCard title="Port Dependency Graph" noPadding>
+      {isLoading && (
+        <Alert severity="info" style={{ margin: theme.spacing(2) }}>
+          Loading...
+        </Alert>
+      )}
+      {error && (
+        <Alert severity="error" style={{ margin: theme.spacing(2) }}>
+          {error}
+        </Alert>
+      )}
       <DependencyGraph
         nodes={nodes}
         edges={edges}

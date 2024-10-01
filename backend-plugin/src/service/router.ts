@@ -5,7 +5,7 @@ import {
 } from "@backstage/backend-plugin-api";
 import express from "express";
 import Router from "express-promise-router";
-import { createProxyMiddleware } from "http-proxy-middleware";
+import { createProxyMiddleware, fixRequestBody } from "http-proxy-middleware";
 import jwt from "jsonwebtoken";
 import { createAccessToken } from "../lib/api/auth";
 import { getBaseUrl } from "../lib/api/consts";
@@ -75,6 +75,9 @@ export function createPortProxyMiddleware(options: {
     target,
     logger,
     changeOrigin: true,
+    on: {
+      proxyReq: fixRequestBody,
+    },
   });
 }
 

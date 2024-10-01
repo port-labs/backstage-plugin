@@ -13,7 +13,6 @@ function useSearchQuery(searchQuery: any) {
 
   useEffect(() => {
     setIsLoading(true);
-
     search(backendUrl, searchQuery)
       .then((entities) => {
         setData(entities);
