@@ -20,7 +20,7 @@ To integrate the Port Backstage plugins into your Backstage deployment, follow t
    ```bash
    # In your Backstage root directory
    yarn add --cwd packages/backend @port-labs/backstage-plugin-port-backend
-   yarn add --cwd packages/app @port-labs/backstage-plugin-port
+   yarn add --cwd packages/app @port-labs/backstage-plugin-frontend-port
    ```
 
 2. Configure the `app-config.yaml` file:

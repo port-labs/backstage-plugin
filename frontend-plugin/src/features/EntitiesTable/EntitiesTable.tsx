@@ -2,7 +2,7 @@ import { Link, Table, TableColumn } from "@backstage/core-components";
 import get from "lodash/get";
 import React, { useMemo } from "react";
 import validator from "validator";
-import { PortEntity } from "../../api/search";
+import { PortEntity } from "../../api/types";
 
 export const EntitiesTable = (props: {
   entities: PortEntity[];
@@ -19,7 +19,7 @@ export const EntitiesTable = (props: {
         Object.keys(entity.properties).forEach((key) => {
           uniqueFields.add(`properties.${key}`);
         });
-        Object.keys(entity.relations).forEach((key) => {
+        Object.keys(entity.relations ?? {}).forEach((key) => {
           uniqueFields.add(`relations.${key}`);
         });
       });
@@ -62,7 +62,8 @@ export const EntitiesTable = (props: {
         },
       })
     );
-  }, [props.entities.length]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(props.entities)]);
 
   return (
     <div>

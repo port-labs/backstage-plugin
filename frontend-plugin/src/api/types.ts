@@ -66,8 +66,6 @@ export type PortEntity = {
   >;
 };
 
-type JQQuery = { jqQuery: string };
-
 export type UserInputs = {
   properties: Record<string, any>;
   order?: string[];

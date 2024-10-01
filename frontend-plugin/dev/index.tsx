@@ -15,21 +15,21 @@
  */
 
 // eslint-disable-next-line @backstage/no-undeclared-imports
-import React from 'react';
-import { EntityProvider } from '@backstage/plugin-catalog-react';
-import { createDevApp } from '@backstage/dev-utils';
-import { EntityTabPortContent, portPlugin } from '../src/plugin';
-import { mockEntity } from './mockPortEntity';
+import { createDevApp } from "@backstage/dev-utils";
+import { EntityProvider } from "@backstage/plugin-catalog-react";
+import React from "react";
+import { portPlugin } from "../src/plugin";
+import { mockEntity } from "./mockPortEntity";
 
 createDevApp()
-    .registerPlugin(portPlugin)
-    .addPage({
-        path: '/port',
-        title: 'Port',
-        element: (
-            <EntityProvider entity={mockEntity}>
-                <EntityTabPortContent annotation="getport.io/Jira_Project" />
-            </EntityProvider>
-        ),
-    })
-    .render();
+  .registerPlugin(portPlugin)
+  .addPage({
+    path: "/port",
+    title: "Port",
+    element: (
+      <EntityProvider entity={mockEntity}>
+        <div>TODO</div>
+      </EntityProvider>
+    ),
+  })
+  .render();
