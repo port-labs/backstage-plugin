@@ -6,6 +6,7 @@ import {
 import { makeStyles, useTheme } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import React, { useMemo } from "react";
+import useEntityQuery from "../../hooks/api-hooks/useEntityQuery";
 import useSearchQuery from "../../hooks/api-hooks/useSearchQuery";
 import { useServiceName } from "../../hooks/useServiceName";
 import { DefaultRenderLabel } from "./DefaultRenderLabel";
@@ -60,29 +61,22 @@ function PortDependencyCard() {
     [serviceName]
   );
   const { data: entitiesData, error, isLoading } = useSearchQuery(searchQuery);
-
-  const entityData = entitiesData[0];
+  const { data: entityData } = useEntityQuery(
+    serviceName,
+    SERVICE_BLUEPRINT_ID
+  );
 
   const nodes = useMemo((): EntityNode[] => {
-    const relations = entityData?.relations;
-    if (!relations) {
-      return [];
-    }
-
-    const objects = Object.values(relations)
-      .filter((relation): relation is string[] | string => !!relation)
-      .flat();
-
     return [
-      ...objects.map(
-        (relation) =>
+      ...entitiesData.map(
+        (entity) =>
           ({
-            id: relation,
+            id: entity.identifier,
             entity: {
               apiVersion: "v1",
               kind: "Port",
               metadata: {
-                name: relation,
+                name: entity.title ?? entity.identifier,
               },
             },
             color: "secondary",
@@ -100,29 +94,60 @@ function PortDependencyCard() {
         color: "primary",
       },
     ] as const;
-  }, [entityData, serviceName]);
+  }, [entitiesData, serviceName]);
 
   const edges: EntityEdge[] = useMemo((): EntityEdge[] => {
-    if (!entityData?.relations) {
+    if (!serviceName || !entityData?.relations) {
       return [];
     }
 
-    return Object.entries(entityData.relations)
-      .filter((objects): objects is [string, string[]] => !!objects[1])
-      .map(([relationName, to]) => {
-        if (typeof to === "string") {
-          return [[relationName, to]];
-        }
-        return to.map((to2) => [relationName, to2]);
-      })
-      .flat()
-      .map(([relationName, to]) => ({
-        from: serviceName ?? "",
-        to: typeof to === "string" ? to : (to ?? [""])[0],
+    const directEdges: EntityEdge[] = Object.entries(
+      entityData.relations
+    ).flatMap(([relationType, fromIdentifier]) => {
+      if (Array.isArray(fromIdentifier)) {
+        return fromIdentifier.map((from) => ({
+          to: from,
+          from: entityData.identifier,
+          label: "visible",
+          relations: [relationType],
+        }));
+      }
+      if (!fromIdentifier) {
+        return [];
+      }
+
+      return {
+        to: fromIdentifier,
+        from: entityData.identifier,
         label: "visible",
-        relations: [relationName],
-      }));
-  }, [entityData, serviceName]);
+        relations: [relationType],
+      };
+    });
+
+    return [
+      ...entitiesData.flatMap((entity) =>
+        Object.entries(entity.relations ?? {}).flatMap(
+          ([relationType, fromIdentifier]) => {
+            if (Array.isArray(fromIdentifier)) {
+              return fromIdentifier.map((from) => ({
+                to: from,
+                from: entity.identifier,
+                label: "visible",
+                relations: [relationType],
+              })) as EntityEdge[];
+            }
+            return {
+              to: fromIdentifier ?? serviceName,
+              from: entity.identifier,
+              label: "visible",
+              relations: [relationType],
+            } as EntityEdge;
+          }
+        )
+      ),
+      ...directEdges,
+    ];
+  }, [entitiesData, serviceName, entityData]);
 
   return (
     <InfoCard title="Port Dependency Graph" noPadding>
@@ -136,22 +161,23 @@ function PortDependencyCard() {
           {error}
         </Alert>
       )}
-      <DependencyGraph
-        nodes={nodes}
-        edges={edges}
-        renderNode={DefaultRenderNode}
-        renderLabel={DefaultRenderLabel}
-        direction={DependencyGraphTypes.Direction.LEFT_RIGHT}
-        labelPosition={DependencyGraphTypes.LabelPosition.RIGHT}
-        zoom="enabled"
-        className={classes.graph}
-        fit="grow"
-        edgeWeight={10}
-        showArrowHeads
-        paddingX={theme.spacing(4)}
-        paddingY={theme.spacing(4)}
-        labelOffset={theme.spacing(1)}
-      />
+      {!isLoading && !error && (
+        <DependencyGraph
+          nodes={nodes}
+          edges={edges}
+          renderNode={DefaultRenderNode}
+          renderLabel={DefaultRenderLabel}
+          direction={DependencyGraphTypes.Direction.LEFT_RIGHT}
+          labelPosition={DependencyGraphTypes.LabelPosition.RIGHT}
+          zoom="enabled"
+          className={classes.graph}
+          edgeWeight={10}
+          showArrowHeads
+          paddingX={theme.spacing(4)}
+          paddingY={theme.spacing(4)}
+          labelOffset={theme.spacing(1)}
+        />
+      )}
     </InfoCard>
   );
 }
