@@ -53,7 +53,10 @@
     "@material-ui/core": "^4.9.13",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.61",
+    "@types/dagre": "^0.7.52",
+    "@xyflow/react": "^12.3.1",
     "classnames": "^2.5.1",
+    "dagre": "^0.8.5",
     "lodash": "^4.17.21",
     "react-use": "^17.2.4",
     "validator": "^13.12.0"

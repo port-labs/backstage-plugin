@@ -1,46 +1,66 @@
-import {
-  DependencyGraph,
-  DependencyGraphTypes,
-  InfoCard,
-} from "@backstage/core-components";
-import { makeStyles, useTheme } from "@material-ui/core";
+import { InfoCard } from "@backstage/core-components";
+import { useTheme } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
-import React, { useMemo } from "react";
+import {
+  ReactFlow,
+  ReactFlowProvider,
+  useEdgesState,
+  useNodesState,
+  useReactFlow,
+} from "@xyflow/react";
+import "@xyflow/react/dist/style.css";
+import React, { useEffect, useMemo } from "react";
 import useEntityQuery from "../../hooks/api-hooks/useEntityQuery";
 import useSearchQuery from "../../hooks/api-hooks/useSearchQuery";
 import { useServiceName } from "../../hooks/useServiceName";
-import { DefaultRenderLabel } from "./DefaultRenderLabel";
-import { DefaultRenderNode } from "./DefaultRenderNode";
-import { EntityEdge, EntityNode } from "./types";
-
-const useStyles = makeStyles(
-  (theme) => ({
-    graph: {
-      width: "100%",
-      flex: 1,
-      // Right now there is no good way to style edges between nodes, we have to
-      // fall back to these hacks:
-      "& path": {
-        stroke: "black",
-      },
-      "& path[marker-end]": {
-        transition: "filter 0.1s ease-in-out",
-      },
-      "& path[marker-end]:hover": {
-        filter: `drop-shadow(2px 2px 4px ${theme.palette.primary.dark});`,
-      },
-      "& g[data-testid=label]": {
-        transition: "transform 0s",
-      },
-    },
-  }),
-  { name: "PluginCatalogGraphEntityRelationsGraph" }
-);
+import { Edge, Node } from "./types";
+import { getLayoutedElements } from "./utils";
 
 const SERVICE_BLUEPRINT_ID = "service";
 
+function GraphView({
+  nodes: initialNodes,
+  edges: initialEdges,
+}: {
+  nodes: Node[];
+  edges: Edge[];
+}) {
+  const { fitView } = useReactFlow();
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+  useEffect(() => {
+    const layouted = getLayoutedElements(nodes, edges, {
+      direction: "TB",
+    });
+
+    setNodes([...layouted.nodes]);
+    setEdges([...layouted.edges]);
+
+    window.requestAnimationFrame(() => {
+      fitView();
+    });
+  }, [initialNodes, initialEdges, setNodes, setEdges, fitView, nodes, edges]);
+
+  return (
+    <ReactFlow
+      nodes={nodes}
+      edges={edges}
+      defaultEdgeOptions={{
+        type: "smoothstep",
+      }}
+      onNodesChange={onNodesChange}
+      onEdgesChange={onEdgesChange}
+      proOptions={{ hideAttribution: true }}
+      fitView
+      fitViewOptions={{
+        padding: 0.5,
+      }}
+    />
+  );
+}
+
 function PortDependencyCard() {
-  const classes = useStyles();
   const theme = useTheme();
   const serviceName = useServiceName();
   const { searchQuery } = useMemo(
@@ -66,63 +86,68 @@ function PortDependencyCard() {
     SERVICE_BLUEPRINT_ID
   );
 
-  const nodes = useMemo((): EntityNode[] => {
+  const nodes: Node[] = useMemo((): Node[] => {
     return [
       ...entitiesData.map(
-        (entity) =>
-          ({
-            id: entity.identifier,
-            entity: {
-              apiVersion: "v1",
-              kind: "Port",
-              metadata: {
-                name: entity.title ?? entity.identifier,
-              },
-            },
-            color: "secondary",
-          } as const)
+        (entity): Node => ({
+          id: entity.identifier,
+          position: {
+            x: 0,
+            y: 0,
+          },
+          data: {
+            label: entity.title ?? entity.identifier,
+            blueprint: entity.blueprint,
+            url: `https://app.getport.io/${entity.blueprint}Entity?identifier=${entity.identifier}`,
+          },
+        })
       ),
       {
         id: serviceName ?? "",
-        entity: {
-          apiVersion: "v1",
-          kind: "Port",
-          metadata: {
-            name: serviceName ?? "",
-          },
+        data: {
+          label: serviceName ?? "",
+          blueprint: "Port",
+          url: `https://app.getport.io/PortEntity?identifier=${serviceName}`,
         },
-        color: "primary",
+        position: {
+          x: 0,
+          y: 0,
+        },
       },
     ] as const;
   }, [entitiesData, serviceName]);
 
-  const edges: EntityEdge[] = useMemo((): EntityEdge[] => {
+  const allEdges: Edge[] = useMemo((): Edge[] => {
     if (!serviceName || !entityData?.relations) {
       return [];
     }
 
-    const directEdges: EntityEdge[] = Object.entries(
-      entityData.relations
-    ).flatMap(([relationType, fromIdentifier]) => {
-      if (Array.isArray(fromIdentifier)) {
-        return fromIdentifier.map((from) => ({
-          to: from,
-          from: entityData.identifier,
-          label: "visible",
-          relations: [relationType],
-        }));
-      }
-      if (!fromIdentifier) {
-        return [];
-      }
+    const directEdges: Edge[] = Object.entries(entityData.relations).flatMap(
+      ([relationType, fromIdentifier]) => {
+        if (Array.isArray(fromIdentifier)) {
+          return fromIdentifier.map((from) => ({
+            id: `${entityData.identifier}-${from}-${relationType}`,
+            source: entityData.identifier,
+            target: from,
+            data: {
+              label: relationType,
+            },
+          }));
+        }
+        if (!fromIdentifier) {
+          return [];
+        }
 
-      return {
-        to: fromIdentifier,
-        from: entityData.identifier,
-        label: "visible",
-        relations: [relationType],
-      };
-    });
+        return {
+          id: `${entityData.identifier}-${fromIdentifier}-${relationType}`,
+          source: entityData.identifier,
+          target: fromIdentifier,
+          data: {
+            label: relationType,
+          },
+        };
+      }
+    );
 
     return [
       ...entitiesData.flatMap((entity) =>
@@ -130,18 +155,25 @@ function PortDependencyCard() {
           ([relationType, fromIdentifier]) => {
             if (Array.isArray(fromIdentifier)) {
               return fromIdentifier.map((from) => ({
-                to: from,
-                from: entity.identifier,
-                label: "visible",
-                relations: [relationType],
-              })) as EntityEdge[];
+                id: `${entity.identifier}-${from}-${relationType}`,
+                source: entity.identifier,
+                target: from,
+                data: {
+                  label: relationType,
+                },
+              })) as Edge[];
+            }
+            if (!fromIdentifier) {
+              return [];
             }
             return {
-              to: fromIdentifier ?? serviceName,
-              from: entity.identifier,
-              label: "visible",
-              relations: [relationType],
-            } as EntityEdge;
+              id: `${entity.identifier}-${fromIdentifier}-${relationType}`,
+              source: entity.identifier,
+              target: fromIdentifier,
+              data: {
+                label: relationType,
+              },
+            };
           }
         )
       ),
@@ -162,21 +194,11 @@ function PortDependencyCard() {
         </Alert>
       )}
       {!isLoading && !error && (
-        <DependencyGraph
-          nodes={nodes}
-          edges={edges}
-          renderNode={DefaultRenderNode}
-          renderLabel={DefaultRenderLabel}
-          direction={DependencyGraphTypes.Direction.LEFT_RIGHT}
-          labelPosition={DependencyGraphTypes.LabelPosition.RIGHT}
-          zoom="enabled"
-          className={classes.graph}
-          edgeWeight={10}
-          showArrowHeads
-          paddingX={theme.spacing(4)}
-          paddingY={theme.spacing(4)}
-          labelOffset={theme.spacing(1)}
-        />
+        <ReactFlowProvider>
+          <div style={{ height: 500 }}>
+            <GraphView nodes={nodes} edges={allEdges} />
+          </div>
+        </ReactFlowProvider>
       )}
     </InfoCard>
   );
