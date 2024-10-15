@@ -4,9 +4,10 @@ export {
   Actions,
   EntityTabPortContent,
   HomePage,
+  PortDependencyCard,
   portPlugin,
   ScorecardCard,
-  PortDependencyCard,
+  ScorecardsPage,
 } from "./plugin";
 
 export const isPortDataAvailable = (entity: Entity) => {

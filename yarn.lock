@@ -2602,7 +2602,7 @@
     zen-observable "^0.10.0"
     zod "^3.22.4"
 
-"@backstage/core-plugin-api@^1.9.4":
+"@backstage/core-plugin-api@^1.9.3", "@backstage/core-plugin-api@^1.9.4":
   version "1.9.4"
   resolved "https://registry.yarnpkg.com/@backstage/core-plugin-api/-/core-plugin-api-1.9.4.tgz#3341207f67321f705462d77258ab5ee73e3e8da7"
   integrity sha512-YFQKgGmN8cPsPyBpkELWGajVTfVV99IlcGgjggkGE6Qd9vKLyU1Wj76a8cJC8itcS8gw+BDJQ4AvdTKBuW707Q==

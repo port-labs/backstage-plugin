@@ -15,7 +15,9 @@ export type ScorecardProps = {
   }[];
 };
 
-const getLevelEmoji = (level: "Bronze" | "Silver" | "Gold" | "Basic") => {
+export const getLevelEmoji = (
+  level: "Bronze" | "Silver" | "Gold" | "Basic"
+) => {
   switch (level) {
     case "Bronze":
       return "🥉";

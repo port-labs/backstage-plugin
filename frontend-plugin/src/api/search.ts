@@ -3,10 +3,15 @@ import { PortEntity } from "./types";
 
 export default async function search(
   backendApiUrl: string,
-  searchQuery: object
+  searchQuery: object,
+  include?: string[]
 ): Promise<PortEntity[]> {
   const response = await fetch(
-    `${backendApiUrl}${PORT_PROXY_PATH}/entities/search`,
+    `${backendApiUrl}${PORT_PROXY_PATH}/entities/search${
+      include
+        ? `?${include.map((i) => `include=${encodeURIComponent(i)}`).join("&")}`
+        : ""
+    }`,
     {
       method: "POST",
       credentials: "include",

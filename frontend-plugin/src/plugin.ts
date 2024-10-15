@@ -63,3 +63,13 @@ export const HomePage = portPlugin.provide(
     },
   })
 );
+
+export const ScorecardsPage = portPlugin.provide(
+  createComponentExtension({
+    name: "ScorecardsPage",
+    component: {
+      lazy: () =>
+        import("./pages/scorecards/scorecards").then((m) => m.ScorecardsPage),
+    },
+  })
+);

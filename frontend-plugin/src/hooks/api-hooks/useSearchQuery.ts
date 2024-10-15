@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import search from "../../api/search";
 import { PortEntity } from "../../api/types";
 
-function useSearchQuery(searchQuery: any) {
+function useSearchQuery(searchQuery: any, include?: string[]) {
   const [data, setData] = useState<PortEntity[]>([]);
   const [error, setError] = useState<string | null>();
   const [isLoading, setIsLoading] = useState(false);
@@ -13,7 +13,7 @@ function useSearchQuery(searchQuery: any) {
 
   useEffect(() => {
     setIsLoading(true);
-    search(backendUrl, searchQuery)
+    search(backendUrl, searchQuery, include)
       .then((entities) => {
         setData(entities);
         setError(null);
