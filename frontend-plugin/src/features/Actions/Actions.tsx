@@ -49,9 +49,9 @@ export function Actions() {
       user_input: action.trigger.userInputs,
     }));
 
-  return (
-    <InfoCard title="Actions" noPadding>
-      {!isLoading && !error && tableData && tableData.length > 0 ? (
+  if (!isLoading && !error && tableData && tableData.length > 0) {
+    return (
+      <InfoCard title="Actions" noPadding>
         <Table
           title="Day-2 Actions"
           columns={columns}
@@ -62,9 +62,8 @@ export function Actions() {
             actionsColumnIndex: -1,
           }}
         />
-      ) : (
-        <div>.</div>
-      )}
-    </InfoCard>
-  );
+      </InfoCard>
+    );
+  }
+  return <div />;
 }
