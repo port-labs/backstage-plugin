@@ -43,12 +43,12 @@ export const Actions = portPlugin.provide(
   })
 );
 
-export const PortDependencyCard = portPlugin.provide(
+export const PortInformationCard = portPlugin.provide(
   createComponentExtension({
-    name: "PortDependencyCard",
+    name: "PortInformationCard",
     component: {
       lazy: () =>
-        import("./features/PortDependencyCard/PortDependencyCard").then(
+        import("./features/PortInformationCard/PortInformationCard").then(
           (m) => m.default
         ),
     },

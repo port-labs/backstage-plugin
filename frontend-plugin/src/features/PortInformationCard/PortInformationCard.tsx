@@ -1,9 +1,10 @@
 import {
+  CardTab,
   DependencyGraph,
   DependencyGraphTypes,
-  InfoCard,
+  TabbedCard,
 } from "@backstage/core-components";
-import { makeStyles, useTheme } from "@material-ui/core";
+import { Grid, makeStyles, useTheme } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import React, { useMemo } from "react";
 import useEntityQuery from "../../hooks/api-hooks/useEntityQuery";
@@ -39,7 +40,7 @@ const useStyles = makeStyles(
 
 const SERVICE_BLUEPRINT_ID = "service";
 
-function PortDependencyCard() {
+function PortInformationCard() {
   const classes = useStyles();
   const theme = useTheme();
   const serviceName = useServiceName();
@@ -149,37 +150,59 @@ function PortDependencyCard() {
     ];
   }, [entitiesData, serviceName, entityData]);
 
+  const properties = useMemo(() => {
+    return entityData?.properties ? Object.entries(entityData.properties) : [];
+  }, [entityData]);
+
   return (
-    <InfoCard title="Port Dependency Graph" noPadding>
-      {isLoading && (
-        <Alert severity="info" style={{ margin: theme.spacing(2) }}>
-          Loading...
-        </Alert>
+    <TabbedCard title="Port information">
+      <CardTab label="Dependency Graph">
+        {isLoading && (
+          <Alert severity="info" style={{ margin: theme.spacing(2) }}>
+            Loading...
+          </Alert>
+        )}
+        {error && (
+          <Alert severity="error" style={{ margin: theme.spacing(2) }}>
+            {error}
+          </Alert>
+        )}
+        {!isLoading && !error && (
+          <DependencyGraph
+            nodes={nodes}
+            edges={edges}
+            renderNode={DefaultRenderNode}
+            renderLabel={DefaultRenderLabel}
+            direction={DependencyGraphTypes.Direction.LEFT_RIGHT}
+            labelPosition={DependencyGraphTypes.LabelPosition.RIGHT}
+            zoom="enabled"
+            className={classes.graph}
+            edgeWeight={10}
+            showArrowHeads
+            paddingX={theme.spacing(4)}
+            paddingY={theme.spacing(4)}
+            labelOffset={theme.spacing(1)}
+          />
+        )}
+      </CardTab>
+      {properties.length > 0 ? (
+        <CardTab label="Properties">
+          <Grid container spacing={3} alignItems="stretch">
+            {properties.map(([key, value]) => (
+              <Grid item md={6}>
+                <span>{key}: </span>
+                <span style={{ fontWeight: "bold" }}>
+                  {JSON.stringify(value)}
+                </span>
+              </Grid>
+            ))}
+          </Grid>
+        </CardTab>
+      ) : (
+        <></>
       )}
-      {error && (
-        <Alert severity="error" style={{ margin: theme.spacing(2) }}>
-          {error}
-        </Alert>
-      )}
-      {!isLoading && !error && (
-        <DependencyGraph
-          nodes={nodes}
-          edges={edges}
-          renderNode={DefaultRenderNode}
-          renderLabel={DefaultRenderLabel}
-          direction={DependencyGraphTypes.Direction.LEFT_RIGHT}
-          labelPosition={DependencyGraphTypes.LabelPosition.RIGHT}
-          zoom="enabled"
-          className={classes.graph}
-          edgeWeight={10}
-          showArrowHeads
-          paddingX={theme.spacing(4)}
-          paddingY={theme.spacing(4)}
-          labelOffset={theme.spacing(1)}
-        />
-      )}
-    </InfoCard>
+    </TabbedCard>
   );
 }
 
-export default PortDependencyCard;
+export default PortInformationCard;

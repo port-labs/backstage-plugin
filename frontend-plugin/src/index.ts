@@ -4,7 +4,7 @@ export {
   Actions,
   EntityTabPortContent,
   HomePage,
-  PortDependencyCard,
+  PortInformationCard,
   portPlugin,
   ScorecardCard,
   ScorecardsPage,
