@@ -1,12 +1,12 @@
-# Port Backstage Plugins Workspace
+# Port Backstage Plugins
 
-This workspace contains the Port Backstage plugins, which integrate Port's functionality into your Backstage instance.
+This repo contains the Port Backstage plugins, which integrate Port's functionality into your Backstage instance.
 
 To use these plugins you need to get a license from [Port](https://backstage-plugin.getport.io/)
 
 ## Structure
 
-The workspace is organized into two main packages:
+The repo is organized into two main packages:
 
 1. `backend-plugin`: Contains the backend implementation of the Port Backstage plugin.
 2. `frontend-plugin`: Contains the frontend implementation of the Port Backstage plugin.

@@ -69,20 +69,17 @@ function PortInformationCard() {
 
   const nodes = useMemo((): EntityNode[] => {
     return [
-      ...entitiesData.map(
-        (entity) =>
-          ({
-            id: entity.identifier,
-            entity: {
-              apiVersion: "v1",
-              kind: "Port",
-              metadata: {
-                name: entity.title ?? entity.identifier,
-              },
-            },
-            color: "secondary",
-          } as const)
-      ),
+      ...entitiesData.map((entity) => ({
+        id: entity.identifier,
+        entity: {
+          apiVersion: "v1",
+          kind: "Port",
+          metadata: {
+            name: entity.title ?? entity.identifier,
+          },
+        },
+        color: "secondary",
+      })),
       {
         id: serviceName ?? "",
         entity: {
@@ -94,7 +91,7 @@ function PortInformationCard() {
         },
         color: "primary",
       },
-    ] as const;
+    ] as EntityNode[];
   }, [entitiesData, serviceName]);
 
   const edges: EntityEdge[] = useMemo((): EntityEdge[] => {

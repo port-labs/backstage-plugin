@@ -11,11 +11,15 @@
   },
   "homepage": "https://github.com/port-labs/backstage-plugin",
   "backstage": {
-    "role": "backend-plugin"
+    "role": "backend-plugin",
+    "pluginId": "port-labs-backend",
+    "pluginPackages": [
+      "@port-labs/backstage-plugin-port-backend"
+    ]
   },
   "scripts": {
     "start": "backstage-cli package start",
-    "build": "tsc && backstage-cli package build",
+    "build": "backstage-cli package build",
     "lint": "backstage-cli package lint",
     "test": "backstage-cli package test",
     "clean": "backstage-cli package clean",
