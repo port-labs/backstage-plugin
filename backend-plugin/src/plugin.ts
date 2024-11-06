@@ -25,10 +25,6 @@ export const portPlugin = createBackendPlugin({
             config,
           })
         );
-        httpRouter.addAuthPolicy({
-          path: "/", // TODO: support auth
-          allow: "unauthenticated",
-        });
       },
     });
   },

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { configApiRef, useApi } from "@backstage/core-plugin-api";
+import { configApiRef, fetchApiRef, useApi } from "@backstage/core-plugin-api";
 import { useEffect, useMemo, useState } from "react";
 import search from "../../api/search";
 import { PortEntity } from "../../api/types";
@@ -9,11 +9,12 @@ function useSearchQuery(searchQuery: any, include?: string[]) {
   const [error, setError] = useState<string | null>();
   const [isLoading, setIsLoading] = useState(false);
   const config = useApi(configApiRef);
+  const fetchApi = useApi(fetchApiRef);
   const backendUrl = useMemo(() => config.getString("backend.baseUrl"), []);
 
   useEffect(() => {
     setIsLoading(true);
-    search(backendUrl, searchQuery, include)
+    search(backendUrl, searchQuery, fetchApi.fetch, include)
       .then((entities) => {
         setData(entities);
         setError(null);

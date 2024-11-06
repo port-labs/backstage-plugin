@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { configApiRef, useApi } from "@backstage/core-plugin-api";
+import { configApiRef, fetchApiRef, useApi } from "@backstage/core-plugin-api";
 import { useEffect, useMemo, useState } from "react";
 import getActions from "../../api/action";
 import { Action, GlobalAction } from "../../api/types";
@@ -9,6 +9,7 @@ function useActionsQuery(blueprintId: string) {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const config = useApi(configApiRef);
+  const fetchApi = useApi(fetchApiRef);
   const backendUrl = useMemo(() => config.getString("backend.baseUrl"), []);
 
   useEffect(() => {
@@ -18,7 +19,7 @@ function useActionsQuery(blueprintId: string) {
       return;
     }
 
-    getActions(backendUrl, blueprintId)
+    getActions(backendUrl, blueprintId, fetchApi.fetch)
       .then((actions) => {
         setData(actions);
         setError(null);

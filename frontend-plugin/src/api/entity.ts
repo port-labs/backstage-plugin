@@ -4,9 +4,10 @@ import { PortEntity } from "./types";
 export default async function getEntity(
   backendApiUrl: string,
   entityId: string,
-  blueprintId: string
+  blueprintId: string,
+  fFetch: typeof fetch
 ): Promise<PortEntity> {
-  const response = await fetch(
+  const response = await fFetch(
     `${backendApiUrl}${PORT_PROXY_PATH}/blueprints/${blueprintId}/entities/${entityId}`,
     {
       method: "GET",

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { configApiRef, useApi } from "@backstage/core-plugin-api";
+import { configApiRef, fetchApiRef, useApi } from "@backstage/core-plugin-api";
 import { useEffect, useMemo, useState } from "react";
 import getEntity from "../../api/entity";
 import { PortEntity } from "../../api/types";
@@ -9,6 +9,7 @@ function useEntityQuery(entityId: string | undefined, blueprintId: string) {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const config = useApi(configApiRef);
+  const fetchApi = useApi(fetchApiRef);
   const backendUrl = useMemo(() => config.getString("backend.baseUrl"), []);
 
   useEffect(() => {
@@ -18,7 +19,7 @@ function useEntityQuery(entityId: string | undefined, blueprintId: string) {
       return;
     }
 
-    getEntity(backendUrl, entityId, blueprintId)
+    getEntity(backendUrl, entityId, blueprintId, fetchApi.fetch)
       .then((entity) => {
         setData(entity);
         setError(null);

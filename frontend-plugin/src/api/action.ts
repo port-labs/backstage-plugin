@@ -3,9 +3,10 @@ import { Action, GlobalAction } from "./types";
 
 export default async function getActions(
   backendApiUrl: string,
-  blueprintId: string
+  blueprintId: string,
+  fFetch: typeof fetch
 ): Promise<(GlobalAction | Action)[]> {
-  const response = await fetch(
+  const response = await fFetch(
     `${backendApiUrl}${PORT_PROXY_PATH}/actions?blueprint_identifier=${blueprintId}&version=v2`,
     {
       method: "GET",

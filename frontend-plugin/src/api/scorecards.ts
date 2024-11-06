@@ -1,9 +1,10 @@
 import { PORT_PROXY_PATH } from "./consts";
 
 export async function getAllScorecardDefinitions(
-  backendApiUrl: string
+  backendApiUrl: string,
+  fFetch: typeof fetch
 ): Promise<Response> {
-  const response = await fetch(
+  const response = await fFetch(
     `${backendApiUrl}${PORT_PROXY_PATH}/scorecards`,
     {
       method: "GET",

@@ -68,6 +68,9 @@ function PortInformationCard() {
   );
 
   const nodes = useMemo((): EntityNode[] => {
+    if (!entitiesData) {
+      return [];
+    }
     return [
       ...entitiesData.map((entity) => ({
         id: entity.identifier,

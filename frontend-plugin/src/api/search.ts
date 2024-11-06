@@ -4,9 +4,10 @@ import { PortEntity } from "./types";
 export default async function search(
   backendApiUrl: string,
   searchQuery: object,
+  fFetch: typeof fetch,
   include?: string[]
 ): Promise<PortEntity[]> {
-  const response = await fetch(
+  const response = await fFetch(
     `${backendApiUrl}${PORT_PROXY_PATH}/entities/search${
       include
         ? `?${include.map((i) => `include=${encodeURIComponent(i)}`).join("&")}`
