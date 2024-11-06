@@ -3,7 +3,6 @@ import { Entity } from "@backstage/catalog-model";
 export {
   Actions,
   EntityTabPortContent,
-  HomePage,
   PortInformationCard,
   portPlugin,
   ScorecardCard,

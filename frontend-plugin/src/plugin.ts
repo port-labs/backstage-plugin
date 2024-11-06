@@ -55,15 +55,6 @@ export const PortInformationCard = portPlugin.provide(
   })
 );
 
-export const HomePage = portPlugin.provide(
-  createComponentExtension({
-    name: "HomePage",
-    component: {
-      lazy: () => import("./features/HomePage").then((m) => m.HomePage),
-    },
-  })
-);
-
 export const ScorecardsPage = portPlugin.provide(
   createComponentExtension({
     name: "ScorecardsPage",
