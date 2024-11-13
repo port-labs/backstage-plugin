@@ -188,14 +188,16 @@ function PortInformationCard() {
       {properties.length > 0 ? (
         <CardTab label="Properties">
           <Grid container spacing={3} alignItems="stretch">
-            {properties.map(([key, value]) => (
-              <Grid item md={6}>
-                <span>{key}: </span>
-                <span style={{ fontWeight: "bold" }}>
-                  {JSON.stringify(value)}
-                </span>
-              </Grid>
-            ))}
+            {properties
+              .filter(([_, value]) => value !== undefined && value !== null)
+              .map(([key, value]) => (
+                <Grid item md={6}>
+                  <span>{key}: </span>
+                  <span style={{ fontWeight: "bold" }}>
+                    {JSON.stringify(value)}
+                  </span>
+                </Grid>
+              ))}
           </Grid>
         </CardTab>
       ) : (
