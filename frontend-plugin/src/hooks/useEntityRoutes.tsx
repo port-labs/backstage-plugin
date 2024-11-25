@@ -1,7 +1,7 @@
 import { EntityLayout } from "@backstage/plugin-catalog";
 import { groupBy } from "lodash";
 import React, { useMemo } from "react";
-import { EntityTabPortContent } from "..";
+import { EntityTabPortContent } from "../features/EntityTabPortContent/EntityTabPortContent";
 import useSearchQuery from "./api-hooks/useSearchQuery";
 import { useServiceName } from "./useServiceName";
 
