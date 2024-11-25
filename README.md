@@ -1,5 +1,5 @@
 <p align="center">
-<img src="docs/icon.svg" alt="Combine all your integrations in one plugin" width="80"/>
+<img src="docs/site/static/img/icon.svg" alt="Combine all your integrations in one plugin" width="80"/>
 </p>
 
 # Port Backstage Plugin
@@ -18,12 +18,12 @@ No more wrestling with endless plugin setups, constant upgrades, and cluttered d
 1. Service view - Added scorecards, actions, and information from integrations.
 <p align="center">
 
-<img src="docs/service-view.png" alt="Service view" />
+<img src="docs/site/static/img/service-view.png" alt="Service view" />
 </p>
 
 2. Scorecards view
 <p align="center">
-<img src="docs/scorecards.png" alt="Scorecards page" />
+<img src="docs/site/static/img/scorecards.png" alt="Scorecards page" />
 </p>
 
 ---
@@ -33,7 +33,7 @@ With Port's data modeling, you can shape and trim data to focus only on what mat
 [Model your data in Port](https://docs.getport.io/build-your-software-catalog/customize-integrations/configure-data-model/)
 
 <p align="center">
-<img src="docs/plugin-base.png" alt="Combine all your integrations in one plugin" height="400" />
+<img src="docs/site/static/img/plugin-base.png" alt="Combine all your integrations in one plugin" height="400" />
 </p>
 
 Integrate your portal with data sources like Jira, PagerDuty, Snyk, AWS, and more in minutes, not months.
@@ -107,7 +107,7 @@ For more than 15 users you need to get a license from [Port](https://backstage-p
    <SidebarItem icon={DoneAllIcon} to="scorecards" text="Scorecards" />
    ```
 
-   ![Scorecards page](docs/scorecards.png)
+   ![Scorecards page](docs/site/static/img/scorecards.png)
 
 4. **Explore Port's API Integration**
    - Review the frontend plugin documentation for examples
