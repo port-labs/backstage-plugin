@@ -8,7 +8,7 @@ const config: Config = {
   favicon: "img/icon.svg",
 
   url: "https://backstage-plugin.getport.io/",
-  baseUrl: "/",
+  baseUrl: "/backstage-plugin/",
 
   organizationName: "port-labs",
   projectName: "backstage-plugin",
