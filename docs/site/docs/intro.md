@@ -1,81 +1,39 @@
 ---
 sidebar_position: 1
+slug: /
 ---
 
-# Getting Started
+# Introduction
 
-Let's discover **Port's Backstage plugin in less than 5 minutes**.
+The Port Backstage plugin allows you to ramp up your Backstage instance quickly.
+Building a developer portal from scratch can be a daunting task, but with the Port Backstage plugin, you can have a **fully functional portal in days not months**.
 
-### Prerequisites
+<div style={{ textAlign: "center" }}>
+  <img src="img/plugin-base.png" alt="Port Backstage plugin" height="500" />
+</div>
 
-- A Backstage instance
-- A Port account
-  - Visit [Port's website](https://www.getport.io) to create your **free** account.
-  - Follow the onboarding process to set up your organization.
+With this plugin, you can:
 
-### Configure Credentials
+- Build new plugin with **PortSDK** in days and not months
+- Consolidate data from multiple sources into a single, unified view
+- Implement governance and compliance through Port's rules engine and scorecards
+- Enable self-service actions for developers
+- Integrate with 50+ tools and services through Port's extensive integration library
 
-1. In Port, on the top right, click on the `...` (three dots) and select **Credentials**.
-2. Generate API credentials (Client ID and Client Secret)
-3. Add these credentials to your Backstage's `app-config.yaml`:
+## Key benefits
 
-   ```yaml
-   port:
-     api:
-       baseUrl: https://api.getport.io
-       auth:
-         clientId: YOUR_CLIENT_ID
-         clientSecret: YOUR_CLIENT_SECRET
-   ```
+1. **Simplified Integration**: Connect to dozens of data sources through a single plugin, eliminating the need to manage multiple individual Backstage plugins.
 
-<br />
+2. **Flexible Data Modeling**: Shape and customize your data model in Port to display exactly the information your teams need in Backstage.
 
-Read more [find your Port credentials](https://docs.getport.io/build-your-software-catalog/custom-integration/api/#find-your-port-credentials)
+3. **Governance & Compliance**: Use Port's rules engine and scorecards to define, measure, and enforce standards across your software catalog.
 
-### Install Plugins
+4. **Enhanced Developer Experience**: Provide developers with a more comprehensive and actionable view of their services, including compliance scores, actions, and data from various integrations.
 
-Install frontend and backend plugins using yarn:
+5. **Rapid Setup**: Get up and running quickly with Port's easy-to-use interface for configuring integrations and data models.
 
-```bash
-# Install backend plugin
-yarn add --cwd packages/backend @port-labs/backstage-plugin-port-backend
+6. **Continuous Updates**: Benefit from Port's ongoing development of new integrations and features without waiting for individual Backstage plugin updates.
 
-# Install frontend plugin
-yarn add --cwd packages/app @port-labs/backstage-plugin-port-frontend
-```
+This plugin is designed to complement and enhance your existing Backstage setup, allowing you to build a more powerful and tailored developer portal efficiently. Whether you're just getting started with Backstage or looking to take your existing instance to the next level, the Port plugin offers a flexible and scalable solution for your software catalog and developer portal needs.
 
-Then register the backend plugin in `packages/backend/src/index.ts`:
-
-```typescript
-backend.add(import("@port-labs/backstage-plugin-port-backend"));
-```
-
-Finally, add components as you like from the frontend plugin to your Backstage instance.
-
-For example, let's add the Scorecard component to the NavBar:
-
-in the file: `packages/app/src/App.tsx`, add the route:
-
-```typescript
-<Route path="/scorecards" element={<ScorecardsPage />} />
-```
-
-and then add the link to the NavBar, in the file: `packages/app/src/components/Root/Root.tsx`:
-
-```typescript
-<SidebarItem icon={DoneAllIcon} to="scorecards" text="Scorecards" />
-```
-
-![Scorecards page](/img/scorecards.png)
-
-## Extend your Backstage instance
-
-Take your Backstage instance to the next level by integrating with Port's powerful API.
-
-Start by reviewing our frontend plugin documentation to see what's possible. You can:
-
-- Query Port's API to bring rich data into your Backstage views
-- Create custom visualizations using Port's flexible data models
-- Build tailored experiences for your teams
-
-For complete API capabilities, check out our comprehensive [API documentation](https://docs.getport.io/api-reference/port-api).
+Let's get started with setting up the Port Backstage plugin and exploring its capabilities!
