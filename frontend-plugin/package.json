@@ -54,7 +54,7 @@
     "@material-ui/lab": "^4.0.0-alpha.61",
     "classnames": "^2.5.1",
     "lodash": "^4.17.21",
-    "react-use": "^17.2.4",
+    "react-use": "^17.5.1",
     "validator": "^13.12.0"
   },
   "peerDependencies": {

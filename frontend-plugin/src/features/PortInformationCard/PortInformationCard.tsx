@@ -61,7 +61,7 @@ function PortInformationCard() {
     }),
     [serviceName]
   );
-  const { data: entitiesData, error, isLoading } = useSearchQuery(searchQuery);
+  const { data: entitiesData, error, loading } = useSearchQuery(searchQuery);
   const { data: entityData } = useEntityQuery(
     serviceName,
     SERVICE_BLUEPRINT_ID
@@ -125,6 +125,10 @@ function PortInformationCard() {
       };
     });
 
+    if (!entitiesData) {
+      return [];
+    }
+
     return [
       ...entitiesData.flatMap((entity) =>
         Object.entries(entity.relations ?? {}).flatMap(
@@ -157,17 +161,17 @@ function PortInformationCard() {
   return (
     <TabbedCard title="Port information">
       <CardTab label="Dependency Graph">
-        {isLoading && (
+        {loading && (
           <Alert severity="info" style={{ margin: theme.spacing(2) }}>
             Loading...
           </Alert>
         )}
         {error && (
           <Alert severity="error" style={{ margin: theme.spacing(2) }}>
-            {error}
+            {error.message}
           </Alert>
         )}
-        {!isLoading && !error && (
+        {!loading && !error && (
           <DependencyGraph
             nodes={nodes}
             edges={edges}

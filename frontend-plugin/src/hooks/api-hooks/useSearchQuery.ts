@@ -1,37 +1,33 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { configApiRef, fetchApiRef, useApi } from "@backstage/core-plugin-api";
-import { useEffect, useMemo, useState } from "react";
-import search from "../../api/search";
-import { PortEntity } from "../../api/types";
+import { useApi } from "@backstage/core-plugin-api";
+import { useEffect } from "react";
+import { useAsyncFn } from "react-use";
+import { PortAPI, portApiRef } from "../../api";
+import { UsePortResult } from "./types";
 
-function useSearchQuery(searchQuery: any, include?: string[]) {
-  const [data, setData] = useState<PortEntity[]>([]);
-  const [error, setError] = useState<string | null>();
-  const [isLoading, setIsLoading] = useState(false);
-  const config = useApi(configApiRef);
-  const fetchApi = useApi(fetchApiRef);
-  const backendUrl = useMemo(() => config.getString("backend.baseUrl"), []);
+function useSearchQuery(
+  searchQuery: any,
+  include?: string[]
+): UsePortResult<PortAPI["search"]> {
+  const portApi = useApi(portApiRef);
+  const [state, searchEntities] = useAsyncFn(
+    async (searchQuery: any, include?: string[]) => {
+      return portApi.search(searchQuery, include);
+    }
+  );
 
   useEffect(() => {
-    setIsLoading(true);
-    search(backendUrl, searchQuery, fetchApi.fetch, include)
-      .then((entities) => {
-        setData(entities);
-        setError(null);
-      })
-      .catch(() => {
-        setError("Failed fetching related entities");
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    if (searchQuery) {
+      searchEntities(searchQuery, include);
+    }
   }, [JSON.stringify(searchQuery)]);
 
-  if (!searchQuery) {
-    return { data: [], error: null, isLoading: false };
-  }
-
-  return { data, error, isLoading };
+  return {
+    execute: searchEntities,
+    data: state.value,
+    error: state.error,
+    loading: state.loading,
+  };
 }
 
 export default useSearchQuery;

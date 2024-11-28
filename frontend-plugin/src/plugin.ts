@@ -1,15 +1,26 @@
 import {
+  configApiRef,
+  createApiFactory,
   createComponentExtension,
   createPlugin,
+  fetchApiRef,
 } from "@backstage/core-plugin-api";
 
-import { rootRouteRef } from "./routes";
+import { PortAPI, portApiRef } from "./api";
 
 export const portPlugin = createPlugin({
   id: "port",
-  routes: {
-    root: rootRouteRef,
-  },
+  apis: [
+    createApiFactory({
+      api: portApiRef,
+      deps: {
+        fetchApi: fetchApiRef,
+        configApi: configApiRef,
+      },
+      factory: ({ fetchApi, configApi }) =>
+        new PortAPI({ fetchApi, configApi }),
+    }),
+  ],
 });
 
 export const EntityTabPortContent = portPlugin.provide(
