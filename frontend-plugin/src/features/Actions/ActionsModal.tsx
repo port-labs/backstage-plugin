@@ -1,5 +1,5 @@
 import { LinkButton } from "@backstage/core-components";
-import { alertApiRef, configApiRef, useApi } from "@backstage/core-plugin-api";
+import { alertApiRef, useApi } from "@backstage/core-plugin-api";
 import {
   Button,
   Dialog,
@@ -10,9 +10,9 @@ import {
   LinearProgress,
   TextField,
 } from "@material-ui/core";
-import React, { useMemo } from "react";
-import { executeAction } from "../../api/action";
+import React from "react";
 import { UserInputs } from "../../api/types";
+import { useActionRun } from "../../hooks/api-hooks";
 import { useServiceName } from "../../hooks/useServiceName";
 
 export function ActionsModal({
@@ -27,16 +27,10 @@ export function ActionsModal({
   description: string;
 }) {
   const [open, setOpen] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
+  const { execute: executeAction, loading } = useActionRun();
 
   const serviceName = useServiceName();
-
   const alertApi = useApi(alertApiRef);
-  const config = useApi(configApiRef);
-  const backendUrl = useMemo(
-    () => config.getString("backend.baseUrl"),
-    [config]
-  );
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -62,26 +56,22 @@ export function ActionsModal({
           component: "form",
           onSubmit: (event) => {
             event.preventDefault();
-            setLoading(true);
             const formData = new FormData(event.target as HTMLFormElement);
             const formJson = Object.fromEntries((formData as any).entries());
-            executeAction(backendUrl, id, serviceName ?? "", formJson).then(
-              (response) => {
-                setLoading(false);
-                if (response.ok) {
-                  alertApi.post({
-                    message: "Action sent to queue successfully",
-                    severity: "success",
-                  });
-                  handleClose();
-                } else {
-                  alertApi.post({
-                    message: "Failed to execute action",
-                    severity: "error",
-                  });
-                }
+            executeAction(id, serviceName ?? "", formJson).then((response) => {
+              if (response.ok) {
+                alertApi.post({
+                  message: "Action sent to queue successfully",
+                  severity: "success",
+                });
+                handleClose();
+              } else {
+                alertApi.post({
+                  message: "Failed to execute action",
+                  severity: "error",
+                });
               }
-            );
+            });
           },
         }}
       >

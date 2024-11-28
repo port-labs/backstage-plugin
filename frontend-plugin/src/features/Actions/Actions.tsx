@@ -6,7 +6,11 @@ import { ActionsModal } from "./ActionsModal";
 const SERVICE_BLUEPRINT_ID = "service";
 
 export function Actions() {
-  const { data, isLoading, error } = useActionsQuery(SERVICE_BLUEPRINT_ID);
+  const {
+    data,
+    loading: isLoading,
+    error,
+  } = useActionsQuery(SERVICE_BLUEPRINT_ID);
 
   const columns: TableColumn[] = [
     {
