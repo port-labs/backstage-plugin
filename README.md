@@ -47,6 +47,10 @@ For up to 15 users you can use the free open source version of the plugin and cr
 
 For more than 15 users you need to get a license from [Port](https://backstage-plugin.getport.io/).
 
+## Documentation
+
+Please refer to our [docs](https://port-labs.github.io/backstage-plugin/docs) for installation, usage, customization and tips.
+
 ## Getting Started
 
 > [!WARNING]\
