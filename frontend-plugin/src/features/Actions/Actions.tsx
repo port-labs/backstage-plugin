@@ -1,6 +1,6 @@
 import { InfoCard, Table, TableColumn } from "@backstage/core-components";
 import React from "react";
-import useActionsQuery from "../../hooks/api-hooks/useActionsQuery";
+import { useActionsQuery } from "../../hooks/api-hooks";
 import { ActionsModal } from "./ActionsModal";
 
 const SERVICE_BLUEPRINT_ID = "service";

@@ -1,6 +1,7 @@
 import { ConfigApi, createApiRef, FetchApi } from "@backstage/core-plugin-api";
-import { PORT_PROXY_PATH } from "./consts";
-import { Action, GlobalAction } from "./types";
+import { Action, GlobalAction, PortEntity } from "./types";
+
+export const PORT_PROXY_PATH = "/api/port/proxy";
 
 export const portApiRef = createApiRef<PortAPI>({
   id: "plugin.port.service",
@@ -75,5 +76,64 @@ export class PortAPI {
     );
 
     return response;
+  }
+
+  async getEntity(entityId: string, blueprintId: string): Promise<PortEntity> {
+    const response = await this.fetchApi.fetch(
+      this.getUrl(`/blueprints/${blueprintId}/entities/${entityId}`),
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch entity (${response.status}): ${response.statusText}`
+      );
+    }
+
+    const json = await response.json();
+    return json.entity;
+  }
+
+  async getAllScorecardDefinitions(): Promise<Response> {
+    const response = await this.fetchApi.fetch(this.getUrl(`/scorecards`), {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response;
+  }
+
+  async search(searchQuery: object, include?: string[]): Promise<PortEntity[]> {
+    const response = await this.fetchApi.fetch(
+      this.getUrl(
+        `/entities/search${
+          include
+            ? `?${include
+                .map((i) => `include=${encodeURIComponent(i)}`)
+                .join("&")}`
+            : ""
+        }`
+      ),
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(searchQuery),
+      }
+    );
+    const json = await response.json();
+
+    return json.entities;
   }
 }
