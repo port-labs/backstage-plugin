@@ -28,7 +28,7 @@ export const useEntityRoutes = () => {
     [serviceName]
   );
 
-  const { data, isLoading } = useSearchQuery(searchQuery);
+  const { data, loading } = useSearchQuery(searchQuery);
   const groupedData = useMemo(() => {
     return groupBy(data, "blueprint");
   }, [data]);
@@ -41,11 +41,11 @@ export const useEntityRoutes = () => {
           <EntityTabPortContent
             blueprint={blueprint}
             entities={entities}
-            isLoading={isLoading}
+            isLoading={loading}
           />
         </EntityLayout.Route>
       ));
-  }, [groupedData, isLoading]);
+  }, [groupedData, loading]);
 
   return routes;
 };

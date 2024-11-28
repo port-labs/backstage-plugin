@@ -57,7 +57,7 @@ const useStyles = makeStyles({
 });
 
 export const ScorecardsSummaryPage = () => {
-  const { data, isLoading, error } = useSearchQuery({
+  const { data, loading, error } = useSearchQuery({
     combinator: "and",
     rules: [
       {
@@ -96,9 +96,9 @@ export const ScorecardsSummaryPage = () => {
 
   return (
     <Content noPadding>
-      {isLoading && <Progress />}
-      {error && <Alert severity="error">{error}</Alert>}
-      {!isLoading && !error && data && (
+      {loading && <Progress />}
+      {error && <Alert severity="error">{error.message}</Alert>}
+      {!loading && !error && data && (
         <TableContainer component={Paper}>
           <Table>
             <TableBody>
