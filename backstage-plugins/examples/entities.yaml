@@ -1,41 +1,43 @@
----
-# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-system
-apiVersion: backstage.io/v1alpha1
-kind: System
-metadata:
-  name: examples
-spec:
-  owner: guests
----
-# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-component
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: example-website
+  name: pricing
+  annotations:
+    getport.io/service-name: pricing
 spec:
-  type: website
-  lifecycle: experimental
-  owner: guests
-  system: examples
-  providesApis: [example-grpc-api]
+  type: service
+  lifecycle: production
+  owner: team-a
 ---
-# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-api
 apiVersion: backstage.io/v1alpha1
-kind: API
+kind: Component
 metadata:
-  name: example-grpc-api
+  name: authentication
+  annotations:
+    getport.io/service-name: authentication
 spec:
-  type: grpc
-  lifecycle: experimental
-  owner: guests
-  system: examples
-  definition: |
-    syntax = "proto3";
-
-    service Exampler {
-      rpc Example (ExampleMessage) returns (ExampleMessage) {};
-    }
-
-    message ExampleMessage {
-      string example = 1;
-    };
+  type: service
+  lifecycle: production
+  owner: team-b
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: user-management
+  annotations:
+    getport.io/service-name: user-management
+spec:
+  type: service
+  lifecycle: production
+  owner: team-a
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: billing
+  annotations:
+    getport.io/service-name: billing
+spec:
+  type: service
+  lifecycle: production
+  owner: team-a
