@@ -3,10 +3,12 @@ import {
   createApiFactory,
   createComponentExtension,
   createPlugin,
+  createRoutableExtension,
   fetchApiRef,
 } from "@backstage/core-plugin-api";
 
 import { PortAPI, portApiRef } from "./api";
+import { rootRouteRef } from "./routes";
 
 export const portPlugin = createPlugin({
   id: "port",
@@ -21,6 +23,9 @@ export const portPlugin = createPlugin({
         new PortAPI({ fetchApi, configApi }),
     }),
   ],
+  routes: {
+    root: rootRouteRef,
+  },
 });
 
 export const EntityTabPortContent = portPlugin.provide(
@@ -67,11 +72,9 @@ export const PortInformationCard = portPlugin.provide(
 );
 
 export const ScorecardsPage = portPlugin.provide(
-  createComponentExtension({
+  createRoutableExtension({
     name: "ScorecardsPage",
-    component: {
-      lazy: () =>
-        import("./pages/scorecards/scorecards").then((m) => m.ScorecardsPage),
-    },
+    component: () => import("./pages/scorecards").then((m) => m.ScorecardsPage),
+    mountPoint: rootRouteRef,
   })
 );

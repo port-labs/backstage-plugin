@@ -1,12 +1,11 @@
 import { Header, Page, RoutedTabs } from "@backstage/core-components";
 import React from "react";
+import { useOutlet } from "react-router-dom";
 import { ScorecardsInitiativesPage } from "./initiatives";
 import { ScorecardsSummaryPage } from "./summary";
 
-type SubRoute = Parameters<typeof RoutedTabs>[0]["routes"];
-
-export const ScorecardsPage = () => {
-  const routes: SubRoute = [
+const ScorecardsPageInner = () => {
+  const routes = [
     {
       path: "/",
       title: "Summary",
@@ -25,4 +24,10 @@ export const ScorecardsPage = () => {
       <RoutedTabs routes={routes} />
     </Page>
   );
+};
+
+export const ScorecardsPage = () => {
+  const outlet = useOutlet();
+
+  return <>{outlet || <ScorecardsPageInner />}</>;
 };
