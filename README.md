@@ -83,10 +83,10 @@ Please refer to our [docs](https://port-labs.github.io/backstage-plugin/docs) fo
 
    ```bash
    # Install backend plugin
-   yarn add --cwd packages/backend @port-labs/backstage-plugin-port-backend
+   yarn --cwd packages/backend add @port-labs/backstage-plugin-port-backend
 
    # Install frontend plugin
-   yarn add --cwd packages/app @port-labs/backstage-plugin-port-frontend
+   yarn --cwd packages/app add @port-labs/backstage-plugin-port-frontend
    ```
 
    Then register the backend plugin in `packages/backend/src/index.ts`:

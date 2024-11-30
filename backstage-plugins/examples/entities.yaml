@@ -1,0 +1,43 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: pricing
+  annotations:
+    getport.io/service-name: pricing
+spec:
+  type: service
+  lifecycle: production
+  owner: team-a
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: authentication
+  annotations:
+    getport.io/service-name: authentication
+spec:
+  type: service
+  lifecycle: production
+  owner: team-b
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: user-management
+  annotations:
+    getport.io/service-name: user-management
+spec:
+  type: service
+  lifecycle: production
+  owner: team-a
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: billing
+  annotations:
+    getport.io/service-name: billing
+spec:
+  type: service
+  lifecycle: production
+  owner: team-a
