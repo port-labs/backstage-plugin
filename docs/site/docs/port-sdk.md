@@ -1,42 +1,114 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 ---
 
-# Customize UI
+# Port SDK
 
 The Port Backstage plugin is designed with flexibility in mind, allowing you to fully customize how data is presented in your Backstage instance. Since the Port SDK returns standard JavaScript objects, you have complete control over the presentation layer.
 
 ## Understanding the Data Structure
 
-When you fetch data using the Port SDK, you receive plain JavaScript objects that you can manipulate and render however you prefer. For example:
+When you fetch data using the Port SDK, you receive plain JavaScript objects that you can manipulate and render however you prefer.
+
+For example the following code fetches an entity from Port of type `SERVICE_BLUEPRINT_ID` with the identifier `SERVICE_NAME`:
 
 ```typescript
 // Example of data returned from Port SDK
-const entityData = {
-  id: "entity-123",
-  title: "My Service",
+const { data: entityData } = useEntityQuery(SERVICE_NAME, SERVICE_BLUEPRINT_ID);
+```
+
+<details>
+<summary>The data structure returned from the Port SDK hook</summary>
+
+```typescript
+const examplePortEntity: PortEntity = {
+  identifier: "backend-service-001",
+  title: "Backend Service API",
+  team: ["backend-team", "platform-team"],
+  icon: "api",
+  blueprint: "microservice-blueprint",
   properties: {
-    owner: "team-a",
-    status: "production",
-    scorecard: {
-      score: 85,
+    language: "typescript",
+    version: "1.2.0",
+    deploymentRegion: "us-east-1",
+    isPublic: false,
+  },
+  relations: {
+    "depends-on": ["database-001", "cache-service"],
+    "maintained-by": "backend-team",
+    "monitored-by": null,
+  },
+  scorecards: {
+    "security-checks": {
       rules: [
-        /* ... */
+        {
+          identifier: "dependency-scan",
+          status: "SUCCESS",
+          level: "critical",
+          ruleResults: [
+            {
+              result: true,
+              condition: {
+                property: "vulnerabilities",
+                operator: "=",
+                value: 0,
+              },
+            },
+          ],
+        },
+        {
+          identifier: "authentication-check",
+          status: "FAILURE",
+          level: "high",
+          ruleResults: [
+            {
+              result: false,
+              condition: {
+                property: "auth-method",
+                operator: "contains",
+                value: "oauth2",
+              },
+            },
+          ],
+        },
       ],
+      level: "critical",
+    },
+    "performance-checks": {
+      rules: [
+        {
+          identifier: "response-time",
+          status: "SUCCESS",
+          level: "medium",
+          ruleResults: [
+            {
+              result: true,
+              condition: {
+                property: "avg-response-time",
+                operator: "<",
+                value: 200,
+              },
+            },
+          ],
+        },
+      ],
+      level: "medium",
     },
   },
 };
 ```
+
+</details>
 
 ## Creating Custom Components
 
 You can create your own components to display Port data in ways that match your organization's needs:
 
 ```typescript
-import { usePortEntity } from "@port-labs/backstage-plugin-port-frontend";
+import { useEntityQuery } from "@port-labs/backstage-plugin-port-frontend";
 
 const CustomEntityCard = () => {
-  const { entity, loading } = usePortEntity("entity-id");
+  const { data: entity, loading } = useEntityQuery("entity-id", "blueprint-id");
 
   if (loading) return <LoadingComponent />;
 
@@ -146,8 +218,8 @@ const PortDataTable = () => {
 
 The Port frontend plugin provides several hooks to help you access and manipulate data:
 
-- `usePortEntity`: Fetch a single entity
-- `usePortEntities`: Fetch multiple entities
-- `usePortScorecard`: Fetch scorecard data
-- `usePortActions`: Access available actions
+- `useEntityQuery`: Fetch a single entity. API Reference: [Get an Entity](https://docs.getport.io/api-reference/get-an-entity)
+- `useSearchQuery`: Search for entities with a given query. API Reference: [Search Entities](https://docs.getport.io/api-reference/search-entities)
+- `useActionRun`: Executes an action. API Reference: [Execute a Self-Service Action](https://docs.getport.io/api-reference/execute-a-self-service-action)
+- `useActionsQuery`: Fetch available actions. API Reference: [List Actions](https://docs.getport.io/api-reference/get-actions-automations)
 - And more...

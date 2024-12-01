@@ -13,6 +13,10 @@ No more wrestling with endless plugin setups, constant upgrades, and cluttered d
 
 ---
 
+## Documentation
+
+Please refer to our [docs](https://port-labs.github.io/backstage-plugin/docs) for installation, usage, customization and tips.
+
 ## Screenshots
 
 1. Service view - Added scorecards, actions, and information from integrations.
@@ -46,10 +50,6 @@ Cutting setup and build time from months to days.
 For up to 15 users you can use the free open source version of the plugin and create an account in Port.
 
 For more than 15 users you need to get a license from [Port](https://backstage-plugin.getport.io/).
-
-## Documentation
-
-Please refer to our [docs](https://port-labs.github.io/backstage-plugin/docs) for installation, usage, customization and tips.
 
 ## Getting Started
 
@@ -125,37 +125,6 @@ The repo is organized into two main packages:
 
 1. `backend-plugin`: Contains the backend implementation of the Port Backstage plugin.
 2. `frontend-plugin`: Contains the frontend inspiration for what you can build with the Port Backstage plugin, but you can and **should** build your own components.
-
-## Development
-
-To integrate the Port Backstage plugins into your Backstage deployment, follow these steps:
-
-1. Install the backend and frontend plugins:
-
-   ```bash
-   # In your Backstage root directory
-   yarn add --cwd packages/backend @port-labs/backstage-plugin-port-backend
-   yarn add --cwd packages/app @port-labs/backstage-plugin-frontend-port
-   ```
-
-2. Configure the `app-config.yaml` file:
-
-   Add the following configuration to your `app-config.yaml`:
-
-   ```yaml
-   port:
-     api:
-       baseUrl: https://api.getport.io # Replace with your Port API base URL if different
-       auth:
-         clientId: YOUR_CLIENT_ID
-         clientSecret: YOUR_CLIENT_SECRET
-   ```
-
-   Replace `YOUR_CLIENT_ID` and `YOUR_CLIENT_SECRET` with the actual credentials provided by Port.
-
-3. Follow the specific setup instructions in the README files of the backend and frontend plugins for additional configuration steps.
-
-Please refer to the individual README files in each plugin directory for specific instructions on how to develop, build, and test each plugin.
 
 ## Support
 

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 # Getting Started
@@ -19,10 +19,10 @@ Install frontend and backend plugins using yarn:
 
 ```bash
 # Install backend plugin
-yarn add --cwd packages/backend @port-labs/backstage-plugin-port-backend
+yarn --cwd packages/backend add @port-labs/backstage-plugin-port-backend
 
 # Install frontend plugin
-yarn add --cwd packages/app @port-labs/backstage-plugin-port-frontend
+yarn --cwd packages/app add @port-labs/backstage-plugin-port-frontend
 ```
 
 Then register the backend plugin in `packages/backend/src/index.ts`:
