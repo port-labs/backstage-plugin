@@ -10,7 +10,10 @@ module.exports = {
   content: ["./src/**/*.{jsx,tsx,html}"],
   theme: {
     extend: {
-      fontFamily: {},
+      fontFamily: {
+        sans: ["Inter", "sans-serif"],
+        marketing: ["Space Grotesk", "sans-serif"],
+      },
       borderRadius: {
         sm: "4px",
       },
