@@ -50,6 +50,7 @@ const config: Config = {
         alt: "Port Logo",
         src: "img/icon.svg",
         href: "https://backstage-plugin.getport.io/",
+        target: "_self",
       },
       items: [
         {
