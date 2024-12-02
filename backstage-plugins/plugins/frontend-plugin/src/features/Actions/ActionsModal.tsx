@@ -1,5 +1,4 @@
-import { LinkButton } from "@backstage/core-components";
-import { alertApiRef, useApi } from "@backstage/core-plugin-api";
+import { alertApiRef, useApi } from '@backstage/core-plugin-api';
 import {
   Button,
   Dialog,
@@ -9,11 +8,11 @@ import {
   DialogTitle,
   LinearProgress,
   TextField,
-} from "@material-ui/core";
-import React from "react";
-import { UserInputs } from "../../api/types";
-import { useActionRun } from "../../hooks/api-hooks";
-import { useServiceName } from "../../hooks/useServiceName";
+} from '@material-ui/core';
+import React from 'react';
+import { UserInputs } from '../../api/types';
+import { useActionRun } from '../../hooks/api-hooks';
+import { useServiceName } from '../../hooks/useServiceName';
 
 export function ActionsModal({
   user_input,
@@ -46,29 +45,29 @@ export function ActionsModal({
 
   return (
     <>
-      <LinkButton variant="contained" color="primary" onClick={handleClickOpen}>
+      <Button variant="contained" color="primary" onClick={handleClickOpen}>
         Execute
-      </LinkButton>
+      </Button>
       <Dialog
         open={open}
         onClose={handleClose}
         PaperProps={{
-          component: "form",
-          onSubmit: (event) => {
+          component: 'form',
+          onSubmit: event => {
             event.preventDefault();
             const formData = new FormData(event.target as HTMLFormElement);
             const formJson = Object.fromEntries((formData as any).entries());
-            executeAction(id, serviceName ?? "", formJson).then((response) => {
+            executeAction(id, serviceName ?? '', formJson).then(response => {
               if (response.ok) {
                 alertApi.post({
-                  message: "Action sent to queue successfully",
-                  severity: "success",
+                  message: 'Action sent to queue successfully',
+                  severity: 'success',
                 });
                 handleClose();
               } else {
                 alertApi.post({
-                  message: "Failed to execute action",
-                  severity: "error",
+                  message: 'Failed to execute action',
+                  severity: 'error',
                 });
               }
             });
@@ -91,7 +90,7 @@ export function ActionsModal({
                 variant="standard"
                 label={value.title}
               />
-            )
+            ),
           )}
         </DialogContent>
         <DialogActions>
