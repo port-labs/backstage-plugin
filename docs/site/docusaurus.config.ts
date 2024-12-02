@@ -49,6 +49,7 @@ const config: Config = {
       logo: {
         alt: "Port Logo",
         src: "img/icon.svg",
+        href: "https://backstage-plugin.getport.io/",
       },
       items: [
         {
@@ -84,11 +85,11 @@ const config: Config = {
           items: [
             {
               label: "Getting Started",
-              to: "/docs/getting-started",
+              to: "/getting-started",
             },
             {
               label: "Introduction",
-              to: "/docs/",
+              to: "/",
             },
           ],
         },
