@@ -8,7 +8,7 @@ const config: Config = {
   tagline: "Combine all your integrations in one plugin",
   favicon: "img/icon.svg",
 
-  url: "https://backstage-plugin.getport.io",
+  url: "https://docs.backstage-plugin.getport.io",
   baseUrl: "/",
 
   organizationName: "port-labs",
@@ -31,17 +31,9 @@ const config: Config = {
           sidebarPath: "./sidebars.ts",
           editUrl:
             "https://github.com/port-labs/backstage-plugin/tree/main/docs/site/",
+          routeBasePath: "/",
         },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ["rss", "atom"],
-            xslt: true,
-          },
-          onInlineTags: "warn",
-          onInlineAuthors: "warn",
-          onUntruncatedBlogPosts: "warn",
-        },
+        blog: false,
         theme: {
           customCss: "./src/css/custom.css",
         },
