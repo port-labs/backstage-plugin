@@ -5,6 +5,9 @@
  */
 
 @import url("https://fonts.googleapis.com/css2?family=Lexend&family=Inter&family=DM+Sans&family=Space+Grotesk");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* You can override the default Infima variables here. */
 :root {

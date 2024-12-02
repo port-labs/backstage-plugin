@@ -1,14 +1,15 @@
 import type * as Preset from "@docusaurus/preset-classic";
 import type { Config } from "@docusaurus/types";
 import { themes as prismThemes } from "prism-react-renderer";
+import tailwindPlugin from "./src/plugins/tailwind-config.cjs";
 
 const config: Config = {
   title: "Port Backstage Plugin",
   tagline: "Combine all your integrations in one plugin",
   favicon: "img/icon.svg",
 
-  url: "https://backstage-plugin.getport.io/",
-  baseUrl: "/backstage-plugin/",
+  url: "https://backstage-plugin.getport.io",
+  baseUrl: "/",
 
   organizationName: "port-labs",
   projectName: "backstage-plugin",
@@ -75,6 +76,13 @@ const config: Config = {
           position: "right",
         },
       ],
+    },
+    zoom: {
+      selector: ".markdown img:not(.not-zoom)",
+      background: {
+        light: "rgb(255, 255, 255)",
+        dark: "rgb(50, 50, 50)",
+      },
     },
     footer: {
       style: "dark",
@@ -151,6 +159,15 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
     },
   } satisfies Preset.ThemeConfig,
+  themes: [
+    [
+      "@easyops-cn/docusaurus-search-local",
+      {
+        hashed: true,
+      },
+    ],
+  ],
+  plugins: ["docusaurus-plugin-image-zoom", tailwindPlugin],
 };
 
 export default config;
