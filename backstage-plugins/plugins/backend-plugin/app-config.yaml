@@ -12,7 +12,7 @@ backend:
 
 port:
   api:
-    baseUrl: https://api.getport.io
+    baseUrl: https://api.getport.io/
     auth:
       clientId:
       clientSecret:

@@ -70,7 +70,7 @@ For more than 15 users you need to get a license from [Port](https://backstage-p
      ```yaml
      port:
        api:
-         baseUrl: https://api.getport.io
+         baseUrl: https://api.getport.io/
          auth:
            clientId: YOUR_CLIENT_ID
            clientSecret: YOUR_CLIENT_SECRET

@@ -58,7 +58,7 @@ and then add the link to the NavBar, in the file: `packages/app/src/components/R
    ```yaml
    port:
      api:
-       baseUrl: https://api.getport.io
+       baseUrl: https://api.getport.io/
        auth:
          clientId: YOUR_CLIENT_ID
          clientSecret: YOUR_CLIENT_SECRET
