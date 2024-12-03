@@ -32,7 +32,7 @@ With this plugin, you can:
 
 5. **Rapid Setup**: Get up and running quickly with Port's easy-to-use interface for configuring integrations and data models.
 
-6. **Continuous Updates**: Benefit from Port's ongoing development of new integrations and features without waiting for individual Backstage plugin updates.
+6. **Combine open source & Port**: Keep full control over your existing Backstage frontend customizations and data models while enhancing them with Port's capabilities.
 
 This plugin is designed to complement and enhance your existing Backstage setup, allowing you to build a more powerful and tailored developer portal efficiently. Whether you're just getting started with Backstage or looking to take your existing instance to the next level, the Port plugin offers a flexible and scalable solution for your software catalog and developer portal needs.
 

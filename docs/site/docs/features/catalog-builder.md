@@ -38,4 +38,6 @@ resources:
             defaultBranch: ".default_branch"
 ```
 
+![Catalog builder](/img/service-view.png)
+
 Read more about the catalog builder in the [Port's documentation](https://docs.getport.io/build-your-software-catalog/).
