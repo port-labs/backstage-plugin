@@ -71,6 +71,9 @@ const config: Config = {
         },
       ],
     },
+    hotjar: {
+      applicationId: 5229272,
+    },
     zoom: {
       selector: ".markdown img:not(.not-zoom)",
       background: {
@@ -161,7 +164,11 @@ const config: Config = {
       },
     ],
   ],
-  plugins: ["docusaurus-plugin-image-zoom", tailwindPlugin],
+  plugins: [
+    "docusaurus-plugin-hotjar",
+    "docusaurus-plugin-image-zoom",
+    tailwindPlugin,
+  ],
 };
 
 export default config;
