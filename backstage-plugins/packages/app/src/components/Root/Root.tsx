@@ -18,6 +18,7 @@ import {
 } from '@backstage/plugin-user-settings';
 import { makeStyles } from '@material-ui/core';
 import CreateComponentIcon from '@material-ui/icons/AddCircleOutline';
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import DoneAll from '@material-ui/icons/DoneAll';
 import ExtensionIcon from '@material-ui/icons/Extension';
 import HomeIcon from '@material-ui/icons/Home';
@@ -81,6 +82,11 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         <SidebarScrollWrapper>
           {/* Port Scorecards */}
           <SidebarItem icon={DoneAll} to="scorecards" text="Scorecards" />
+          <SidebarItem
+            icon={AssignmentTurnedInIcon}
+            to="dev-daily"
+            text="Plan My Day"
+          />
         </SidebarScrollWrapper>
       </SidebarGroup>
       <SidebarSpace />

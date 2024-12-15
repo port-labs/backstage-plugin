@@ -36,6 +36,7 @@ import {
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
 import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { RequirePermission } from '@backstage/plugin-permission-react';
+import { DevDailyPluginPage } from '@port-labs/backstage-plugin-dev-daily-plugin';
 import { ScorecardsPage } from '@port-labs/backstage-plugin-port-frontend';
 
 const app = createApp({
@@ -97,8 +98,9 @@ const routes = (
     <Route path="/settings" element={<UserSettingsPage />} />
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
 
-    {/* Port Scorecards */}
+    {/* Port Labs */}
     <Route path="/scorecards" element={<ScorecardsPage />} />
+    <Route path="/dev-daily" element={<DevDailyPluginPage />} />
   </FlatRoutes>
 );
 

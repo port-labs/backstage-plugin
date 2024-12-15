@@ -3840,58 +3840,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/core-components@npm:^0.15.0":
-  version: 0.15.1
-  resolution: "@backstage/core-components@npm:0.15.1"
-  dependencies:
-    "@backstage/config": "npm:^1.2.0"
-    "@backstage/core-plugin-api": "npm:^1.10.0"
-    "@backstage/errors": "npm:^1.2.4"
-    "@backstage/theme": "npm:^0.6.0"
-    "@backstage/version-bridge": "npm:^1.0.10"
-    "@date-io/core": "npm:^1.3.13"
-    "@material-table/core": "npm:^3.1.0"
-    "@material-ui/core": "npm:^4.12.2"
-    "@material-ui/icons": "npm:^4.9.1"
-    "@material-ui/lab": "npm:4.0.0-alpha.61"
-    "@react-hookz/web": "npm:^24.0.0"
-    "@types/react-sparklines": "npm:^1.7.0"
-    ansi-regex: "npm:^6.0.1"
-    classnames: "npm:^2.2.6"
-    d3-selection: "npm:^3.0.0"
-    d3-shape: "npm:^3.0.0"
-    d3-zoom: "npm:^3.0.0"
-    dagre: "npm:^0.8.5"
-    linkify-react: "npm:4.1.3"
-    linkifyjs: "npm:4.1.3"
-    lodash: "npm:^4.17.21"
-    pluralize: "npm:^8.0.0"
-    qs: "npm:^6.9.4"
-    rc-progress: "npm:3.5.1"
-    react-helmet: "npm:6.1.0"
-    react-hook-form: "npm:^7.12.2"
-    react-idle-timer: "npm:5.7.2"
-    react-markdown: "npm:^8.0.0"
-    react-sparklines: "npm:^1.7.0"
-    react-syntax-highlighter: "npm:^15.4.5"
-    react-use: "npm:^17.3.2"
-    react-virtualized-auto-sizer: "npm:^1.0.11"
-    react-window: "npm:^1.8.6"
-    remark-gfm: "npm:^3.0.1"
-    zen-observable: "npm:^0.10.0"
-    zod: "npm:^3.22.4"
-  peerDependencies:
-    "@types/react": ^16.13.1 || ^17.0.0 || ^18.0.0
-    react: ^16.13.1 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.13.1 || ^17.0.0 || ^18.0.0
-    react-router-dom: 6.0.0-beta.0 || ^6.3.0
-  peerDependenciesMeta:
-    "@types/react":
-      optional: true
-  checksum: 10c0/93e85b32db69ee50e5814a5c2d9a5a874f15ed9647896eb2099511c31f7609551abc5d70eb14dd78f4b7580fbb53f255d07119958b142ce9e90517a8c0334838
-  languageName: node
-  linkType: hard
-
 "@backstage/core-components@npm:^0.16.0, @backstage/core-components@npm:^0.16.1":
   version: 0.16.1
   resolution: "@backstage/core-components@npm:0.16.1"
@@ -3945,7 +3893,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/core-plugin-api@npm:^1.10.0, @backstage/core-plugin-api@npm:^1.10.1":
+"@backstage/core-plugin-api@npm:^1.10.1":
   version: 1.10.1
   resolution: "@backstage/core-plugin-api@npm:1.10.1"
   dependencies:
@@ -5188,27 +5136,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/plugin-home-react@npm:^0.1.15":
-  version: 0.1.20
-  resolution: "@backstage/plugin-home-react@npm:0.1.20"
-  dependencies:
-    "@backstage/core-components": "npm:^0.16.1"
-    "@backstage/core-plugin-api": "npm:^1.10.1"
-    "@material-ui/core": "npm:^4.12.2"
-    "@material-ui/icons": "npm:^4.9.1"
-    "@rjsf/utils": "npm:5.21.2"
-  peerDependencies:
-    "@types/react": ^16.13.1 || ^17.0.0 || ^18.0.0
-    react: ^16.13.1 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.13.1 || ^17.0.0 || ^18.0.0
-    react-router-dom: 6.0.0-beta.0 || ^6.3.0
-  peerDependenciesMeta:
-    "@types/react":
-      optional: true
-  checksum: 10c0/9d0c59bfc5c17bb4fe0d2ab42e04610ad0f23754c4970ae93bc90753280224949fd9c239a69238532482aafa0b9775211ba02afa2fdf19ca57fad4611909c710
-  languageName: node
-  linkType: hard
-
 "@backstage/plugin-kubernetes-backend@npm:^0.19.0":
   version: 0.19.0
   resolution: "@backstage/plugin-kubernetes-backend@npm:0.19.0"
@@ -6302,7 +6229,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@backstage/theme@npm:^0.6.0, @backstage/theme@npm:^0.6.1, @backstage/theme@npm:^0.6.2":
+"@backstage/theme@npm:^0.6.1, @backstage/theme@npm:^0.6.2":
   version: 0.6.2
   resolution: "@backstage/theme@npm:0.6.2"
   dependencies:
@@ -8151,6 +8078,31 @@ __metadata:
   checksum: 10c0/c8612362d382114a318dbb523de7b1f54dc6bc6d3016c6eaf299b6a32486b92b0dfb1b4cfc6fe9d99496d15fbb721873a1bd66819f796c8bb09853a3b808812d
   languageName: node
   linkType: hard
+
+"@internal/backstage-plugin-aaaaaaa@npm:^0.1.0, @internal/backstage-plugin-aaaaaaa@workspace:plugins/aaaaaaa":
+  version: 0.0.0-use.local
+  resolution: "@internal/backstage-plugin-aaaaaaa@workspace:plugins/aaaaaaa"
+  dependencies:
+    "@backstage/cli": "npm:^0.29.0"
+    "@backstage/core-app-api": "npm:^1.15.2"
+    "@backstage/core-components": "npm:^0.16.1"
+    "@backstage/core-plugin-api": "npm:^1.10.1"
+    "@backstage/dev-utils": "npm:^1.0.35"
+    "@backstage/test-utils": "npm:^1.7.2"
+    "@backstage/theme": "npm:^0.6.2"
+    "@material-ui/core": "npm:^4.9.13"
+    "@material-ui/icons": "npm:^4.9.1"
+    "@material-ui/lab": "npm:^4.0.0-alpha.61"
+    "@testing-library/jest-dom": "npm:^6.0.0"
+    "@testing-library/react": "npm:^14.0.0"
+    "@testing-library/user-event": "npm:^14.0.0"
+    msw: "npm:^1.0.0"
+    react: "npm:^16.13.1 || ^17.0.0 || ^18.0.0"
+    react-use: "npm:^17.2.4"
+  peerDependencies:
+    react: ^16.13.1 || ^17.0.0 || ^18.0.0
+  languageName: unknown
+  linkType: soft
 
 "@ioredis/commands@npm:^1.1.1":
   version: 1.2.0
@@ -10583,6 +10535,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@port-labs/backstage-plugin-dev-daily-plugin@npm:^0.1.0, @port-labs/backstage-plugin-dev-daily-plugin@workspace:plugins/dev-daily-plugin":
+  version: 0.0.0-use.local
+  resolution: "@port-labs/backstage-plugin-dev-daily-plugin@workspace:plugins/dev-daily-plugin"
+  dependencies:
+    "@backstage/cli": "npm:^0.29.0"
+    "@backstage/core-app-api": "npm:^1.15.2"
+    "@backstage/core-components": "npm:^0.16.1"
+    "@backstage/core-plugin-api": "npm:^1.10.1"
+    "@backstage/dev-utils": "npm:^1.0.35"
+    "@backstage/test-utils": "npm:^1.7.2"
+    "@backstage/theme": "npm:^0.6.2"
+    "@material-ui/core": "npm:^4.9.13"
+    "@material-ui/icons": "npm:^4.9.1"
+    "@material-ui/lab": "npm:^4.0.0-alpha.61"
+    "@testing-library/jest-dom": "npm:^6.0.0"
+    "@testing-library/react": "npm:^14.0.0"
+    "@testing-library/user-event": "npm:^14.0.0"
+    msw: "npm:^1.0.0"
+    react: "npm:^16.13.1 || ^17.0.0 || ^18.0.0"
+    react-use: "npm:^17.2.4"
+  peerDependencies:
+    react: ^16.13.1 || ^17.0.0 || ^18.0.0
+  languageName: unknown
+  linkType: soft
+
 "@port-labs/backstage-plugin-port-backend@workspace:^, @port-labs/backstage-plugin-port-backend@workspace:plugins/backend-plugin":
   version: 0.0.0-use.local
   resolution: "@port-labs/backstage-plugin-port-backend@workspace:plugins/backend-plugin"
@@ -10613,13 +10590,11 @@ __metadata:
     "@backstage/catalog-model": "npm:^1.5.0"
     "@backstage/cli": "npm:^0.26.11"
     "@backstage/core-app-api": "npm:^1.14.0"
-    "@backstage/core-components": "npm:^0.15.0"
-    "@backstage/core-plugin-api": "npm:^1.10.0"
+    "@backstage/core-components": "npm:^0.16.1"
+    "@backstage/core-plugin-api": "npm:^1.10.1"
     "@backstage/dev-utils": "npm:^1.0.35"
-    "@backstage/errors": "npm:^1.2.4"
     "@backstage/plugin-catalog": "npm:^1.22.0"
     "@backstage/plugin-catalog-react": "npm:^1.12.3"
-    "@backstage/plugin-home-react": "npm:^0.1.15"
     "@backstage/test-utils": "npm:^1.5.8"
     "@backstage/theme": "npm:^0.5.6"
     "@commitlint/cli": "npm:^17.7.1"
@@ -15611,9 +15586,11 @@ __metadata:
     "@backstage/plugin-user-settings": "npm:^0.8.15"
     "@backstage/test-utils": "npm:^1.7.1"
     "@backstage/theme": "npm:^0.6.1"
+    "@internal/backstage-plugin-aaaaaaa": "npm:^0.1.0"
     "@material-ui/core": "npm:^4.12.2"
     "@material-ui/icons": "npm:^4.9.1"
     "@playwright/test": "npm:^1.32.3"
+    "@port-labs/backstage-plugin-dev-daily-plugin": "npm:^0.1.0"
     "@port-labs/backstage-plugin-port-frontend": "workspace:^"
     "@testing-library/dom": "npm:^9.0.0"
     "@testing-library/jest-dom": "npm:^6.0.0"
@@ -30343,7 +30320,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^18.0.2":
+"react@npm:^16.13.1 || ^17.0.0 || ^18.0.0, react@npm:^18.0.2":
   version: 18.3.1
   resolution: "react@npm:18.3.1"
   dependencies:
