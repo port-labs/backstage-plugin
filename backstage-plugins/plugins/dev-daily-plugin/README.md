@@ -1,13 +1,45 @@
-# dev-daily-plugin
+# Dev Daily Plugin for Backstage
 
-Welcome to the dev-daily-plugin plugin!
+The Dev Daily Plugin provides developers with a consolidated dashboard of their daily development activities, including pull requests, tasks, and reviews. This plugin helps developers efficiently plan and manage their day by bringing together key information in one place.
 
-_This plugin was created through the Backstage CLI_
+![Dev Daily Plugin Dashboard](./docs/plan-my-day.png)
 
-## Getting started
+## Features
 
-Your plugin has been added to the example app in this repository, meaning you'll be able to access it by running `yarn start` in the root directory, and then navigating to [/dev-daily-plugin](http://localhost:3000/dev-daily-plugin).
+### My Open PRs
 
-You can also serve the plugin in isolation by running `yarn start` in the plugin directory.
-This method of serving the plugin provides quicker iteration speed and a faster startup and hot reloads.
-It is only meant for local development, and the setup for it can be found inside the [/dev](./dev) directory.
+Track all your open pull requests in one place, with the ability to:
+
+- View PR titles and links
+- See assigned reviewers
+- Send reviewer reminders (coming soon)
+
+![My Open PRs Dashboard](./docs/my-open-prs.png)
+
+### PRs Waiting for Review
+
+Keep track of pull requests that need your review:
+
+- See PR titles and creators
+- Quick-access links to PR pages
+- One-click approve action (coming soon)
+
+### My Open Tasks
+
+Monitor your active tasks:
+
+- View task titles and current status
+- Visual status indicators
+- Filter by status (Open/In Progress)
+
+### Recent Completed Tasks
+
+Track your completed work:
+
+- See recently finished tasks
+- Completion status indicators
+- Quick access to task details
+
+## Installation & Configuration
+
+For detailed installation and configuration instructions, please refer to [Port's official plugin documentation](https://docs.backstage-plugin.getport.io/).
