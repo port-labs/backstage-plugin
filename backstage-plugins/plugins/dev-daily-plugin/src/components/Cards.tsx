@@ -23,7 +23,7 @@ export type Task = {
   title: string;
   link: string;
   assignee: string;
-  status: string;
+  status: 'Done' | 'In Progress' | 'Open';
 };
 
 function Cards({ email }: CardsProps) {
@@ -65,12 +65,15 @@ function Cards({ email }: CardsProps) {
   }));
 
   const parsedTasks: Task[] = (tasksRawData ?? [])
-    .map(item => ({
-      title: item.title ?? '',
-      link: (item.properties.link ?? '') as string,
-      assignee: (item.properties.assignee ?? '') as string,
-      status: (item.properties.status ?? '') as string,
-    }))
+    .map(
+      item =>
+        ({
+          title: item.title ?? '',
+          link: item.properties.link ?? '',
+          assignee: item.properties.assignee ?? '',
+          status: item.properties.status ?? '',
+        } as Task),
+    )
     .filter(task => task.assignee === email);
 
   const myOpenPRs = parsedPRs.filter(pr => pr.creator === email);

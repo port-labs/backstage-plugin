@@ -1,16 +1,26 @@
-import { Table, TableColumn } from '@backstage/core-components';
+import { Table } from '@backstage/core-components';
+import { Chip } from '@material-ui/core';
 import React from 'react';
 import { Task } from './Cards';
 
 function MyOpenTasks({ tasks }: { tasks: Task[] }) {
-  const columns: TableColumn[] = [
-    { title: 'Title', field: 'title' },
-    { title: 'Status', field: 'status' },
-  ];
-
   return (
     <Table
-      columns={columns}
+      columns={[
+        { title: 'Title', field: 'title' },
+        {
+          title: 'Status',
+          field: 'status',
+          render: (row: any) => (
+            <Chip
+              label={row.status}
+              style={{
+                backgroundColor: row.status === 'Open' ? '' : 'lightyellow',
+              }}
+            />
+          ),
+        },
+      ]}
       data={tasks}
       options={{
         paging: false,
