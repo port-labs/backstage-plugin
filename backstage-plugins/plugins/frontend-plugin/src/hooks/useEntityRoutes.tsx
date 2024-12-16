@@ -1,11 +1,11 @@
-import { EntityLayout } from "@backstage/plugin-catalog";
-import { groupBy } from "lodash";
-import React, { useMemo } from "react";
-import { EntityTabPortContent } from "../features/EntityTabPortContent/EntityTabPortContent";
-import useSearchQuery from "./api-hooks/useSearchQuery";
-import { useServiceName } from "./useServiceName";
+import { EntityLayout } from '@backstage/plugin-catalog';
+import { groupBy } from 'lodash';
+import React, { useMemo } from 'react';
+import { EntityTabPortContent } from '../features/EntityTabPortContent/EntityTabPortContent';
+import { useSearchQuery } from './api-hooks';
+import { useServiceName } from './useServiceName';
 
-const SERVICE_BLUEPRINT_ID = "service";
+const SERVICE_BLUEPRINT_ID = 'service';
 
 export const useEntityRoutes = () => {
   const serviceName = useServiceName();
@@ -14,10 +14,10 @@ export const useEntityRoutes = () => {
     () => ({
       searchQuery: serviceName
         ? {
-            combinator: "and",
+            combinator: 'and',
             rules: [
               {
-                operator: "relatedTo",
+                operator: 'relatedTo',
                 blueprint: SERVICE_BLUEPRINT_ID,
                 value: serviceName,
               },
@@ -25,12 +25,12 @@ export const useEntityRoutes = () => {
           }
         : {},
     }),
-    [serviceName]
+    [serviceName],
   );
 
   const { data, loading } = useSearchQuery(searchQuery);
   const groupedData = useMemo(() => {
-    return groupBy(data, "blueprint");
+    return groupBy(data, 'blueprint');
   }, [data]);
 
   const routes = useMemo(() => {

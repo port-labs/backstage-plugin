@@ -3,42 +3,41 @@ import {
   DependencyGraph,
   DependencyGraphTypes,
   TabbedCard,
-} from "@backstage/core-components";
-import { Grid, makeStyles, useTheme } from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
-import React, { useMemo } from "react";
-import useEntityQuery from "../../hooks/api-hooks/useEntityQuery";
-import useSearchQuery from "../../hooks/api-hooks/useSearchQuery";
-import { useServiceName } from "../../hooks/useServiceName";
-import { DefaultRenderLabel } from "./DefaultRenderLabel";
-import { DefaultRenderNode } from "./DefaultRenderNode";
-import { EntityEdge, EntityNode } from "./types";
+} from '@backstage/core-components';
+import { Grid, makeStyles, useTheme } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
+import React, { useMemo } from 'react';
+import { useEntityQuery, useSearchQuery } from '../../hooks/api-hooks';
+import { useServiceName } from '../../hooks/useServiceName';
+import { DefaultRenderLabel } from './DefaultRenderLabel';
+import { DefaultRenderNode } from './DefaultRenderNode';
+import { EntityEdge, EntityNode } from './types';
 
 const useStyles = makeStyles(
-  (theme) => ({
+  theme => ({
     graph: {
-      width: "100%",
+      width: '100%',
       flex: 1,
       // Right now there is no good way to style edges between nodes, we have to
       // fall back to these hacks:
-      "& path": {
-        stroke: "black",
+      '& path': {
+        stroke: 'black',
       },
-      "& path[marker-end]": {
-        transition: "filter 0.1s ease-in-out",
+      '& path[marker-end]': {
+        transition: 'filter 0.1s ease-in-out',
       },
-      "& path[marker-end]:hover": {
+      '& path[marker-end]:hover': {
         filter: `drop-shadow(2px 2px 4px ${theme.palette.primary.dark});`,
       },
-      "& g[data-testid=label]": {
-        transition: "transform 0s",
+      '& g[data-testid=label]': {
+        transition: 'transform 0s',
       },
     },
   }),
-  { name: "PluginCatalogGraphEntityRelationsGraph" }
+  { name: 'PluginCatalogGraphEntityRelationsGraph' },
 );
 
-const SERVICE_BLUEPRINT_ID = "service";
+const SERVICE_BLUEPRINT_ID = 'service';
 
 function PortInformationCard() {
   const classes = useStyles();
@@ -48,10 +47,10 @@ function PortInformationCard() {
     () => ({
       searchQuery: serviceName
         ? {
-            combinator: "and",
+            combinator: 'and',
             rules: [
               {
-                operator: "relatedTo",
+                operator: 'relatedTo',
                 blueprint: SERVICE_BLUEPRINT_ID,
                 value: serviceName,
               },
@@ -59,12 +58,12 @@ function PortInformationCard() {
           }
         : {},
     }),
-    [serviceName]
+    [serviceName],
   );
   const { data: entitiesData, error, loading } = useSearchQuery(searchQuery);
   const { data: entityData } = useEntityQuery(
     serviceName,
-    SERVICE_BLUEPRINT_ID
+    SERVICE_BLUEPRINT_ID,
   );
 
   const nodes = useMemo((): EntityNode[] => {
@@ -72,27 +71,27 @@ function PortInformationCard() {
       return [];
     }
     return [
-      ...entitiesData.map((entity) => ({
+      ...entitiesData.map(entity => ({
         id: entity.identifier,
         entity: {
-          apiVersion: "v1",
-          kind: "Port",
+          apiVersion: 'v1',
+          kind: 'Port',
           metadata: {
             name: entity.title ?? entity.identifier,
           },
         },
-        color: "secondary",
+        color: 'secondary',
       })),
       {
-        id: serviceName ?? "",
+        id: serviceName ?? '',
         entity: {
-          apiVersion: "v1",
-          kind: "Port",
+          apiVersion: 'v1',
+          kind: 'Port',
           metadata: {
-            name: serviceName ?? "",
+            name: serviceName ?? '',
           },
         },
-        color: "primary",
+        color: 'primary',
       },
     ] as EntityNode[];
   }, [entitiesData, serviceName]);
@@ -103,13 +102,13 @@ function PortInformationCard() {
     }
 
     const directEdges: EntityEdge[] = Object.entries(
-      entityData.relations
+      entityData.relations,
     ).flatMap(([relationType, fromIdentifier]) => {
       if (Array.isArray(fromIdentifier)) {
-        return fromIdentifier.map((from) => ({
+        return fromIdentifier.map(from => ({
           to: from,
           from: entityData.identifier,
-          label: "visible",
+          label: 'visible',
           relations: [relationType],
         }));
       }
@@ -120,7 +119,7 @@ function PortInformationCard() {
       return {
         to: fromIdentifier,
         from: entityData.identifier,
-        label: "visible",
+        label: 'visible',
         relations: [relationType],
       };
     });
@@ -130,25 +129,25 @@ function PortInformationCard() {
     }
 
     return [
-      ...entitiesData.flatMap((entity) =>
+      ...entitiesData.flatMap(entity =>
         Object.entries(entity.relations ?? {}).flatMap(
           ([relationType, fromIdentifier]) => {
             if (Array.isArray(fromIdentifier)) {
-              return fromIdentifier.map((from) => ({
+              return fromIdentifier.map(from => ({
                 to: from,
                 from: entity.identifier,
-                label: "visible",
+                label: 'visible',
                 relations: [relationType],
               })) as EntityEdge[];
             }
             return {
               to: fromIdentifier ?? serviceName,
               from: entity.identifier,
-              label: "visible",
+              label: 'visible',
               relations: [relationType],
             } as EntityEdge;
-          }
-        )
+          },
+        ),
       ),
       ...directEdges,
     ];
@@ -197,7 +196,7 @@ function PortInformationCard() {
               .map(([key, value]) => (
                 <Grid item md={6}>
                   <span>{key}: </span>
-                  <span style={{ fontWeight: "bold" }}>
+                  <span style={{ fontWeight: 'bold' }}>
                     {JSON.stringify(value)}
                   </span>
                 </Grid>

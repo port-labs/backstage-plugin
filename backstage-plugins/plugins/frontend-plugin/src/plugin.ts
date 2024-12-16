@@ -5,22 +5,25 @@ import {
   createPlugin,
   createRoutableExtension,
   fetchApiRef,
-} from "@backstage/core-plugin-api";
-
-import { PortAPI, portApiRef } from "./api";
-import { rootRouteRef } from "./routes";
+  identityApiRef,
+} from '@backstage/core-plugin-api';
+import { catalogApiRef } from '@backstage/plugin-catalog-react';
+import { PortAPI, portApiRef } from './api';
+import { rootRouteRef } from './routes';
 
 export const portPlugin = createPlugin({
-  id: "port",
+  id: 'port',
   apis: [
     createApiFactory({
       api: portApiRef,
       deps: {
         fetchApi: fetchApiRef,
         configApi: configApiRef,
+        identityApi: identityApiRef,
+        catalogApi: catalogApiRef,
       },
-      factory: ({ fetchApi, configApi }) =>
-        new PortAPI({ fetchApi, configApi }),
+      factory: ({ fetchApi, configApi, identityApi, catalogApi }) =>
+        new PortAPI({ fetchApi, configApi, identityApi, catalogApi }),
     }),
   ],
   routes: {
@@ -30,51 +33,51 @@ export const portPlugin = createPlugin({
 
 export const EntityTabPortContent = portPlugin.provide(
   createComponentExtension({
-    name: "EntityTabPortContent",
+    name: 'EntityTabPortContent',
     component: {
       lazy: () =>
-        import("./features/EntityTabPortContent/EntityTabPortContent").then(
-          (m) => m.EntityTabPortContent
+        import('./features/EntityTabPortContent/EntityTabPortContent').then(
+          m => m.EntityTabPortContent,
         ),
     },
-  })
+  }),
 );
 
 export const ScorecardCard = portPlugin.provide(
   createComponentExtension({
-    name: "ScorecardCard",
+    name: 'ScorecardCard',
     component: {
       lazy: () =>
-        import("./features/Scorecards/ScorecardCard").then((m) => m.default),
+        import('./features/Scorecards/ScorecardCard').then(m => m.default),
     },
-  })
+  }),
 );
 
 export const Actions = portPlugin.provide(
   createComponentExtension({
-    name: "Actions",
+    name: 'Actions',
     component: {
-      lazy: () => import("./features/Actions/Actions").then((m) => m.Actions),
+      lazy: () => import('./features/Actions/Actions').then(m => m.Actions),
     },
-  })
+  }),
 );
 
 export const PortInformationCard = portPlugin.provide(
   createComponentExtension({
-    name: "PortInformationCard",
+    name: 'PortInformationCard',
     component: {
       lazy: () =>
-        import("./features/PortInformationCard/PortInformationCard").then(
-          (m) => m.default
+        import('./features/PortInformationCard/PortInformationCard').then(
+          m => m.default,
         ),
     },
-  })
+  }),
 );
 
 export const ScorecardsPage = portPlugin.provide(
   createRoutableExtension({
-    name: "ScorecardsPage",
-    component: () => import("./pages/scorecards").then((m) => m.ScorecardsPage),
+    name: 'ScorecardsPage',
+    component: () => import('./pages/scorecards').then(m => m.ScorecardsPage),
     mountPoint: rootRouteRef,
-  })
+  }),
 );

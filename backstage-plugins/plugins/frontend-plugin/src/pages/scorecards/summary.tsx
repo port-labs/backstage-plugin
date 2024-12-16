@@ -1,4 +1,4 @@
-import { Content, Progress } from "@backstage/core-components";
+import { Content, Progress } from '@backstage/core-components';
 import {
   Paper,
   Table,
@@ -6,25 +6,25 @@ import {
   TableCell,
   TableContainer,
   TableRow,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import Cancel from "@material-ui/icons/Cancel";
-import CheckCircle from "@material-ui/icons/CheckCircle";
-import { Alert } from "@material-ui/lab";
-import React, { useMemo } from "react";
-import { getLevelEmoji } from "../../features/Scorecards/scorecards";
-import useSearchQuery from "../../hooks/api-hooks/useSearchQuery";
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import Cancel from '@material-ui/icons/Cancel';
+import CheckCircle from '@material-ui/icons/CheckCircle';
+import { Alert } from '@material-ui/lab';
+import React, { useMemo } from 'react';
+import { getLevelEmoji } from '../../features/Scorecards/scorecards';
+import { useSearchQuery } from '../../hooks/api-hooks';
 
-const SERVICE_BLUEPRINT_ID = "service";
+const SERVICE_BLUEPRINT_ID = 'service';
 export type ScorecardRow = {
-  type: "scorecard";
+  type: 'scorecard';
   scorecard: string;
   level: string;
 };
 export type RuleRow = {
-  type: "rule";
+  type: 'rule';
   rule: string;
-  status: "SUCCESS" | "FAILURE";
+  status: 'SUCCESS' | 'FAILURE';
   scorecard: string;
   level: string;
 };
@@ -32,37 +32,37 @@ export type OverviewRow = ScorecardRow | RuleRow;
 
 const useStyles = makeStyles({
   scorecardRow: {
-    backgroundColor: "#F0F0F0",
-    fontWeight: "bold",
-    fontSize: "1.1em",
-    color: "#333333",
-    padding: "12px 8px",
-    borderBottom: "2px solid #1976d2",
-    textTransform: "uppercase",
-    letterSpacing: "0.5px",
+    backgroundColor: '#F0F0F0',
+    fontWeight: 'bold',
+    fontSize: '1.1em',
+    color: '#333333',
+    padding: '12px 8px',
+    borderBottom: '2px solid #1976d2',
+    textTransform: 'uppercase',
+    letterSpacing: '0.5px',
   },
   scorecardRowMedal: {
-    backgroundColor: "#F0F0F0",
-    fontSize: "1.5em",
+    backgroundColor: '#F0F0F0',
+    fontSize: '1.5em',
   },
   nameRow: {
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
   },
   nameCell: {
-    backgroundColor: "transparent",
-    fontStyle: "italic",
-    whiteSpace: "nowrap",
-    maxWidth: "50px",
+    backgroundColor: 'transparent',
+    fontStyle: 'italic',
+    whiteSpace: 'nowrap',
+    maxWidth: '50px',
   },
 });
 
 export const ScorecardsSummaryPage = () => {
   const { data, loading, error } = useSearchQuery({
-    combinator: "and",
+    combinator: 'and',
     rules: [
       {
-        property: "$blueprint",
-        operator: "=",
+        property: '$blueprint',
+        operator: '=',
         value: SERVICE_BLUEPRINT_ID,
       },
     ],
@@ -78,12 +78,12 @@ export const ScorecardsSummaryPage = () => {
       .map(([scorecardName, scorecard]) => {
         return [
           {
-            type: "scorecard",
+            type: 'scorecard',
             scorecard: scorecardName,
             level: scorecard.level,
           },
-          ...scorecard.rules.map((rule) => ({
-            type: "rule",
+          ...scorecard.rules.map(rule => ({
+            type: 'rule',
             scorecard: scorecardName,
             rule: rule.identifier,
             status: rule.status,
@@ -104,7 +104,7 @@ export const ScorecardsSummaryPage = () => {
             <TableBody>
               <TableRow>
                 <TableCell className={classes.nameRow}>Services</TableCell>
-                {data.map((entity) => {
+                {data.map(entity => {
                   return (
                     <TableCell className={classes.nameCell}>
                       {entity.title}
@@ -113,8 +113,8 @@ export const ScorecardsSummaryPage = () => {
                 })}
               </TableRow>
 
-              {transposedData.map((row) => {
-                if (row.type === "scorecard") {
+              {transposedData.map(row => {
+                if (row.type === 'scorecard') {
                   return (
                     <TableRow
                       key={`scorecard-${row.scorecard}`}
@@ -123,7 +123,7 @@ export const ScorecardsSummaryPage = () => {
                       <TableCell className={classes.scorecardRow}>
                         {row.scorecard}
                       </TableCell>
-                      {data.map((entity) => {
+                      {data.map(entity => {
                         const entityLevel =
                           entity.scorecards?.[row.scorecard]?.level;
                         return (
@@ -141,16 +141,16 @@ export const ScorecardsSummaryPage = () => {
                     <TableCell>
                       <div>{row.rule}</div>
                     </TableCell>
-                    {data.map((entity) => {
+                    {data.map(entity => {
                       const entityStatus = entity.scorecards?.[
                         row.scorecard
                       ]?.rules?.find(
-                        (rule) => rule.identifier === row.rule
+                        rule => rule.identifier === row.rule,
                       )?.status;
 
                       return (
                         <TableCell>
-                          {entityStatus === "SUCCESS" ? (
+                          {entityStatus === 'SUCCESS' ? (
                             <CheckCircle color="primary" />
                           ) : (
                             <Cancel color="secondary" />

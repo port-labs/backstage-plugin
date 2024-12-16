@@ -1,19 +1,18 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useApi } from "@backstage/core-plugin-api";
-import { useEffect } from "react";
-import { useAsyncFn } from "react-use";
-import { PortAPI, portApiRef } from "../../api";
-import { UsePortResult } from "./types";
+import { useApi } from '@backstage/core-plugin-api';
+import { useEffect } from 'react';
+import { useAsyncFn } from 'react-use';
+import { PortAPI, portApiRef } from '../../api';
+import { UsePortResult } from './types';
 
-function useSearchQuery(
+export function useSearchQuery(
   searchQuery: any,
-  include?: string[]
-): UsePortResult<PortAPI["search"]> {
+  include?: string[],
+): UsePortResult<PortAPI['search']> {
   const portApi = useApi(portApiRef);
   const [state, searchEntities] = useAsyncFn(
     async (searchQuery: any, include?: string[]) => {
       return portApi.search(searchQuery, include);
-    }
+    },
   );
 
   useEffect(() => {

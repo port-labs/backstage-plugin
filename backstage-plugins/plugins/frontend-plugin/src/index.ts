@@ -1,5 +1,6 @@
 import { Entity } from '@backstage/catalog-model';
 import { PortAPI, portApiRef } from './api';
+import * as ApiHooks from './hooks/api-hooks';
 
 export {
   Actions,
@@ -16,4 +17,4 @@ export const isPortDataAvailable = (entity: Entity) => {
 
 export { useEntityRoutes } from './hooks/useEntityRoutes';
 
-export { PortAPI, portApiRef };
+export { ApiHooks, PortAPI, portApiRef };
