@@ -1,8 +1,9 @@
 import { Table, TableColumn, TableProps } from '@backstage/core-components';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 import React from 'react';
+import { PR } from './Cards';
 
-function PRsWaiting() {
+function PRsWaiting({ prs }: { prs: PR[] }) {
   const actions: TableProps['actions'] = [
     {
       tooltip: 'Approve',
@@ -14,17 +15,13 @@ function PRsWaiting() {
   const columns: TableColumn[] = [
     { title: 'Title', field: 'title' },
     { title: 'Link', field: 'link' },
-  ];
-
-  const data = [
-    { title: 'PR 1', link: 'https://github.com/org/repo/pull/1' },
-    { title: 'PR 2', link: 'https://github.com/org/repo/pull/2' },
+    { title: 'Creator', field: 'creator' },
   ];
 
   return (
     <Table
       columns={columns}
-      data={data}
+      data={prs}
       actions={actions}
       options={{
         paging: false,

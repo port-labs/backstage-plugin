@@ -1,21 +1,17 @@
 import { Table, TableColumn } from '@backstage/core-components';
 import React from 'react';
+import { Task } from './Cards';
 
-function RecentCompletedTasks() {
+function RecentCompletedTasks({ tasks }: { tasks: Task[] }) {
   const columns: TableColumn[] = [
     { title: 'Title', field: 'title' },
-    { title: 'Link', field: 'link' },
-  ];
-
-  const data = [
-    { title: 'Issue 1', link: 'https://github.com/org/repo/issues/1' },
-    { title: 'Issue 2', link: 'https://github.com/org/repo/issues/2' },
+    { title: 'Status', field: 'status' },
   ];
 
   return (
     <Table
       columns={columns}
-      data={data}
+      data={tasks}
       options={{
         paging: false,
       }}
