@@ -1,21 +1,4 @@
 ---
-# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-user
-apiVersion: backstage.io/v1alpha1
-kind: User
-metadata:
-  name: guest
-spec:
-  memberOf: [guests]
----
-# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-group
-apiVersion: backstage.io/v1alpha1
-kind: Group
-metadata:
-  name: guests
-spec:
-  type: team
-  children: []
----
 apiVersion: backstage.io/v1alpha1
 kind: Location
 metadata:
@@ -23,3 +6,4 @@ metadata:
 spec:
   targets:
     - ./team-a-group.yaml
+    - ./entities.local.yaml

@@ -51,6 +51,8 @@ backend.add(import('@backstage/plugin-search-backend-module-techdocs'));
 // kubernetes
 backend.add(import('@backstage/plugin-kubernetes-backend'));
 
+backend.add(import('@backstage/plugin-auth-backend-module-github-provider'));
+
 // port plugin
 backend.add(import('@port-labs/backstage-plugin-port-backend'));
 

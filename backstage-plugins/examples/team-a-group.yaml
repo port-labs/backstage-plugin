@@ -57,22 +57,6 @@ spec:
     picture: https://api.dicebear.com/7.x/avataaars/svg?seed=Midnight&backgroundColor=transparent
   memberOf: [team-a]
 ---
-# This user is added as an example, to make it more easy for the "Guest"
-# sign-in option to demonstrate some entities being owned. In a regular org,
-# a guest user would probably not be registered like this.
-apiVersion: backstage.io/v1alpha1
-kind: User
-metadata:
-  name: guest
-spec:
-  profile:
-    displayName: Guest User
-    email: guest@example.com
-  memberOf: [team-a]
----
-# This user is added as an example, to make it more easy for the "Guest"
-# sign-in option to demonstrate some entities being owned. In a regular org,
-# a guest user would probably not be registered like this.
 apiVersion: backstage.io/v1alpha1
 kind: User
 metadata:
