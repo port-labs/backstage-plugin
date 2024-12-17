@@ -1,8 +1,8 @@
 import {
   coreServices,
   createBackendPlugin,
-} from "@backstage/backend-plugin-api";
-import { createRouter } from "./service/router";
+} from '@backstage/backend-plugin-api';
+import { createRouter } from './service/router';
 
 /**
  * portPlugin backend plugin
@@ -10,7 +10,7 @@ import { createRouter } from "./service/router";
  * @public
  */
 export const portPlugin = createBackendPlugin({
-  pluginId: "port",
+  pluginId: 'port',
   register(env) {
     env.registerInit({
       deps: {
@@ -23,7 +23,7 @@ export const portPlugin = createBackendPlugin({
           await createRouter({
             logger,
             config,
-          })
+          }),
         );
       },
     });

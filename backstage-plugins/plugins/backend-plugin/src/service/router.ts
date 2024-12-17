@@ -1,14 +1,14 @@
-import { MiddlewareFactory } from "@backstage/backend-defaults/rootHttpRouter";
+import { MiddlewareFactory } from '@backstage/backend-defaults/rootHttpRouter';
 import {
   LoggerService,
   RootConfigService,
-} from "@backstage/backend-plugin-api";
-import express from "express";
-import Router from "express-promise-router";
-import { createProxyMiddleware, fixRequestBody } from "http-proxy-middleware";
-import jwt from "jsonwebtoken";
-import { createAccessToken } from "../lib/api/auth";
-import { getBaseUrl } from "../lib/api/consts";
+} from '@backstage/backend-plugin-api';
+import express from 'express';
+import Router from 'express-promise-router';
+import { createProxyMiddleware, fixRequestBody } from 'http-proxy-middleware';
+import jwt from 'jsonwebtoken';
+import { createAccessToken } from '../lib/api/auth';
+import { getBaseUrl } from '../lib/api/consts';
 
 export interface RouterOptions {
   logger: LoggerService;
@@ -22,7 +22,7 @@ function isTokenExpired(token: string): boolean {
 
   const decodedToken = jwt.decode(token);
   const currentTime = Math.floor(Date.now() / 1000);
-  if (typeof decodedToken === "string") {
+  if (typeof decodedToken === 'string') {
     return true;
   }
   if (!decodedToken?.exp) {
@@ -36,18 +36,18 @@ export function createAuthMiddleware(options: {
   config: RootConfigService;
 }) {
   const { logger, config } = options;
-  const baseUrl = config.getString("port.api.baseUrl");
-  const clientId = config.getString("port.api.auth.clientId");
-  const clientSecret = config.getString("port.api.auth.clientSecret");
+  const baseUrl = config.getString('port.api.baseUrl');
+  const clientId = config.getString('port.api.auth.clientId');
+  const clientSecret = config.getString('port.api.auth.clientSecret');
 
   const router = Router();
-  logger.info("Creating auth middleware");
+  logger.info('Creating auth middleware');
 
   let accessToken: string | null = null;
 
   router.use(async (req, _, next) => {
     if (!accessToken || isTokenExpired(accessToken)) {
-      logger.info("Creating access token");
+      logger.info('Creating access token');
       accessToken = await createAccessToken({
         clientId,
         clientSecret,
@@ -67,7 +67,7 @@ export function createPortProxyMiddleware(options: {
   config: RootConfigService;
 }) {
   const { logger, config } = options;
-  const baseUrl = config.getString("port.api.baseUrl");
+  const baseUrl = config.getString('port.api.baseUrl');
 
   const target = getBaseUrl(baseUrl);
 
@@ -82,22 +82,22 @@ export function createPortProxyMiddleware(options: {
 }
 
 export async function createRouter(
-  options: RouterOptions
-): Promise<express.Router> {
+  options: RouterOptions,
+): Promise<express.Handler> {
   const { logger, config } = options;
-  const baseUrl = config.getString("port.api.baseUrl");
-  const clientId = config.getString("port.api.auth.clientId");
-  const clientSecret = config.getString("port.api.auth.clientSecret");
+  const baseUrl = config.getString('port.api.baseUrl');
+  const clientId = config.getString('port.api.auth.clientId');
+  const clientSecret = config.getString('port.api.auth.clientSecret');
 
   const router = Router();
   router.use(express.json());
 
-  router.get("/health", (_, response) => {
-    logger.info("PONG!");
-    response.json({ status: "ok" });
+  router.get('/health', (_, response) => {
+    logger.info('PONG!');
+    response.json({ status: 'ok' });
   });
 
-  router.post("/auth/token", async (_, response) => {
+  router.post('/auth/token', async (_, response) => {
     const accessToken = await createAccessToken({
       clientId,
       clientSecret,
@@ -111,9 +111,9 @@ export async function createRouter(
   router.use(middleware.error());
 
   router.use(
-    "/proxy",
+    '/proxy',
     createAuthMiddleware(options),
-    createPortProxyMiddleware(options)
+    createPortProxyMiddleware(options),
   );
   return router;
 }
