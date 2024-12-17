@@ -53,15 +53,16 @@ and then add the link to the NavBar, in the file: `packages/app/src/components/R
 
 1. In Port, on the top right, click on the `...` (three dots) and select **Credentials**.
 2. Generate API credentials (Client ID and Client Secret)
-3. Add these credentials to your Backstage's `app-config.yaml`:
+3. Add these credentials to your Backstage's `app-config.yaml` under the `backend`:
 
    ```yaml
-   port:
-     api:
-       baseUrl: https://api.getport.io/
-       auth:
-         clientId: YOUR_CLIENT_ID
-         clientSecret: YOUR_CLIENT_SECRET
+   backend:
+     port:
+       api:
+         baseUrl: https://api.getport.io/
+         auth:
+           clientId: YOUR_CLIENT_ID
+           clientSecret: YOUR_CLIENT_SECRET
    ```
 
 <br />

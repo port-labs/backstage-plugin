@@ -33,12 +33,11 @@ function isTokenExpired(token: string): boolean {
 
 export function createAuthMiddleware(options: {
   logger: LoggerService;
-  config: RootConfigService;
+  baseUrl: string;
+  clientId: string;
+  clientSecret: string;
 }) {
-  const { logger, config } = options;
-  const baseUrl = config.getString('port.api.baseUrl');
-  const clientId = config.getString('port.api.auth.clientId');
-  const clientSecret = config.getString('port.api.auth.clientSecret');
+  const { logger, baseUrl, clientId, clientSecret } = options;
 
   const router = Router();
   logger.info('Creating auth middleware');
@@ -64,10 +63,9 @@ export function createAuthMiddleware(options: {
 
 export function createPortProxyMiddleware(options: {
   logger: LoggerService;
-  config: RootConfigService;
+  baseUrl: string;
 }) {
-  const { logger, config } = options;
-  const baseUrl = config.getString('port.api.baseUrl');
+  const { logger, baseUrl } = options;
 
   const target = getBaseUrl(baseUrl);
 
@@ -85,9 +83,10 @@ export async function createRouter(
   options: RouterOptions,
 ): Promise<express.Handler> {
   const { logger, config } = options;
-  const baseUrl = config.getString('port.api.baseUrl');
-  const clientId = config.getString('port.api.auth.clientId');
-  const clientSecret = config.getString('port.api.auth.clientSecret');
+  const portConfig = config.getConfig('backend.port');
+  const baseUrl = portConfig.getString('api.baseUrl');
+  const clientId = portConfig.getString('api.auth.clientId');
+  const clientSecret = portConfig.getString('api.auth.clientSecret');
 
   const router = Router();
   router.use(express.json());
@@ -112,8 +111,8 @@ export async function createRouter(
 
   router.use(
     '/proxy',
-    createAuthMiddleware(options),
-    createPortProxyMiddleware(options),
+    createAuthMiddleware({ logger, baseUrl, clientId, clientSecret }),
+    createPortProxyMiddleware({ logger, baseUrl }),
   );
   return router;
 }
