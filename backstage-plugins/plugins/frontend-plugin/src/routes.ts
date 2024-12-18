@@ -1,11 +1,15 @@
-import { createRouteRef, createSubRouteRef } from "@backstage/core-plugin-api";
+import { createRouteRef, createSubRouteRef } from '@backstage/core-plugin-api';
 
 export const rootRouteRef = createRouteRef({
-  id: "port-scorecards",
+  id: 'port-scorecards',
 });
 
 export const scorecardsInitiativesRouteRef = createSubRouteRef({
-  id: "scorecards-initiatives",
+  id: 'scorecards-initiatives',
   parent: rootRouteRef,
-  path: "/initiatives",
+  path: '/initiatives',
+});
+
+export const settingsRouteRef = createRouteRef({
+  id: 'port-settings',
 });

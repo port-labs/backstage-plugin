@@ -20,7 +20,10 @@ import {
 
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
-import { UserSettingsPage } from '@backstage/plugin-user-settings';
+import {
+  SettingsLayout,
+  UserSettingsPage,
+} from '@backstage/plugin-user-settings';
 import React from 'react';
 import { Navigate, Route } from 'react-router-dom';
 import { apis } from './apis';
@@ -40,7 +43,10 @@ import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/
 import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { RequirePermission } from '@backstage/plugin-permission-react';
 import { DevDailyPluginPage } from '@port-labs/backstage-plugin-dev-daily-plugin';
-import { ScorecardsPage } from '@port-labs/backstage-plugin-port-frontend';
+import {
+  ScorecardsPage,
+  SettingsPage,
+} from '@port-labs/backstage-plugin-port-frontend';
 
 const app = createApp({
   apis,
@@ -112,8 +118,18 @@ const routes = (
     <Route path="/search" element={<SearchPage />}>
       {searchPage}
     </Route>
-    <Route path="/settings" element={<UserSettingsPage />} />
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
+
+    {/* Port Labs */}
+    <Route path="/settings" element={<UserSettingsPage />}>
+      <RequirePermission permission={catalogEntityCreatePermission}>
+        <SettingsLayout.Route
+          path="/port"
+          title="Port"
+          children={<SettingsPage />}
+        />
+      </RequirePermission>
+    </Route>
 
     {/* Port Labs */}
     <Route path="/scorecards" element={<ScorecardsPage />} />

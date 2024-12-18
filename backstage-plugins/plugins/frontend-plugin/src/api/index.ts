@@ -6,7 +6,13 @@ import {
   IdentityApi,
 } from '@backstage/core-plugin-api';
 import { CatalogApi } from '@backstage/plugin-catalog-react';
-import { Action, GlobalAction, PortEntity } from './types';
+import {
+  Action,
+  Blueprint,
+  GlobalAction,
+  Integration,
+  PortEntity,
+} from './types';
 
 export const PORT_PROXY_PATH = '/api/port/proxy';
 
@@ -162,5 +168,55 @@ export class PortAPI {
     const json = await response.json();
 
     return json.entities;
+  }
+
+  async createBlueprint(blueprint: string): Promise<any> {
+    const response = await this.fetchApi.fetch(this.getUrl(`/blueprints/`), {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: blueprint,
+    });
+
+    if (!response.ok) {
+      console.log(response.statusText);
+      throw new Error(response.statusText, {
+        cause: response.status,
+      });
+    }
+
+    const json = await response.json();
+
+    return json.ok;
+  }
+
+  async getBlueprints(): Promise<Blueprint[]> {
+    const response = await this.fetchApi.fetch(this.getUrl(`/blueprints/`), {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const json = await response.json();
+
+    return json.blueprints;
+  }
+
+  async getIntegrations(): Promise<Integration[]> {
+    const response = await this.fetchApi.fetch(this.getUrl(`/integration/`), {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const json = await response.json();
+
+    return json.integrations;
   }
 }

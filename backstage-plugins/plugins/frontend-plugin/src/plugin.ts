@@ -9,7 +9,7 @@ import {
 } from '@backstage/core-plugin-api';
 import { catalogApiRef } from '@backstage/plugin-catalog-react';
 import { PortAPI, portApiRef } from './api';
-import { rootRouteRef } from './routes';
+import { rootRouteRef, settingsRouteRef } from './routes';
 
 export const portPlugin = createPlugin({
   id: 'port',
@@ -79,5 +79,13 @@ export const ScorecardsPage = portPlugin.provide(
     name: 'ScorecardsPage',
     component: () => import('./pages/scorecards').then(m => m.ScorecardsPage),
     mountPoint: rootRouteRef,
+  }),
+);
+
+export const SettingsPage = portPlugin.provide(
+  createRoutableExtension({
+    name: 'SettingsPage',
+    component: () => import('./pages/settings/').then(m => m.SettingsPage),
+    mountPoint: settingsRouteRef,
   }),
 );

@@ -9,36 +9,36 @@ export type EntityRelations = Record<string, string | string[] | null>;
 export type ScorecardRuleCondition =
   | {
       property: string;
-      operator: "=" | "!=" | ">" | "<" | ">=" | "<=";
+      operator: '=' | '!=' | '>' | '<' | '>=' | '<=';
       value: number;
     }
   | (({ property: string } | { relation: string }) & {
       property: string;
       operator:
-        | "="
-        | "!="
-        | ">"
-        | "<"
-        | ">="
-        | "<="
-        | "contains"
-        | "containsAny"
-        | "beginsWith"
-        | "endsWith"
-        | "doesNotContains"
-        | "doesNotBeginsWith"
-        | "doesNotEndsWith"
-        | "between"
-        | "notBetween";
+        | '='
+        | '!='
+        | '>'
+        | '<'
+        | '>='
+        | '<='
+        | 'contains'
+        | 'containsAny'
+        | 'beginsWith'
+        | 'endsWith'
+        | 'doesNotContains'
+        | 'doesNotBeginsWith'
+        | 'doesNotEndsWith'
+        | 'between'
+        | 'notBetween';
       value: string | any[];
     })
   | {
       property: string;
-      operator: "=" | "!=";
+      operator: '=' | '!=';
       value: boolean;
     }
   | (({ property: string } | { relation: string }) & {
-      operator: "isEmpty" | "isNotEmpty";
+      operator: 'isEmpty' | 'isNotEmpty';
     });
 
 export type PortEntity = {
@@ -54,7 +54,7 @@ export type PortEntity = {
     {
       rules: {
         identifier: string;
-        status: "SUCCESS" | "FAILURE";
+        status: 'SUCCESS' | 'FAILURE';
         level: string;
         ruleResults: Array<{
           result: boolean;
@@ -78,10 +78,10 @@ export type CalculatedUserInputs = {
   required?: unknown;
 };
 
-type NotificationFormat = "json" | "slack";
+type NotificationFormat = 'json' | 'slack';
 
 export type ActionTrigger = {
-  operation: "CREATE" | "DELETE" | "DAY-2";
+  operation: 'CREATE' | 'DELETE' | 'DAY-2';
   userInputs: UserInputs;
 };
 
@@ -92,21 +92,21 @@ export type Action = {
   trigger: ActionTrigger;
   description?: string;
   approvalNotification?:
-    | { type: "email" }
-    | { type: "webhook"; url: string; format?: NotificationFormat };
+    | { type: 'email' }
+    | { type: 'webhook'; url: string; format?: NotificationFormat };
   userInputs: UserInputs;
-  requiredApproval?: boolean | { type: "ANY" | "ALL" };
+  requiredApproval?: boolean | { type: 'ANY' | 'ALL' };
   invocationMethod:
-    | { type: "KAFKA" }
+    | { type: 'KAFKA' }
     | {
-        type: "WEBHOOK";
+        type: 'WEBHOOK';
         agent?: boolean;
         url: string;
         synchronized?: boolean;
-        method?: "POST" | "DELETE" | "PATCH" | "PUT";
+        method?: 'POST' | 'DELETE' | 'PATCH' | 'PUT';
       }
     | {
-        type: "GITHUB";
+        type: 'GITHUB';
         org: string;
         repo: string;
         workflow: string;
@@ -115,7 +115,7 @@ export type Action = {
         reportWorkflowStatus?: boolean;
       }
     | {
-        type: "GITLAB";
+        type: 'GITLAB';
         projectName: string;
         groupName: string;
         omitPayload?: boolean;
@@ -124,84 +124,84 @@ export type Action = {
         agent: boolean;
       }
     | {
-        type: "AZURE-DEVOPS";
+        type: 'AZURE-DEVOPS';
         webhook: string;
         org: string;
       }
-    | { type: "MOCK" };
+    | { type: 'MOCK' };
   title?: string;
   icon?: string;
 } & IWithChangeLog;
 
 export type GlobalActionSelfServiceTrigger = {
-  type: "self-service";
+  type: 'self-service';
   blueprintIdentifier?: string;
   userInputs: UserInputs;
 } & (
   | {
-      operation: "CREATE";
+      operation: 'CREATE';
     }
   | {
-      operation: "DELETE" | "DAY-2";
+      operation: 'DELETE' | 'DAY-2';
       condition?: {
-        type: "SEARCH";
-        combinator: "and" | "or";
+        type: 'SEARCH';
+        combinator: 'and' | 'or';
         rules: any;
       };
     }
 );
 
 export type GlobalActionAutomationTrigger = {
-  type: "automation";
+  type: 'automation';
   event: StrictUnion<
     | {
-        type: "ENTITY_CREATED";
+        type: 'ENTITY_CREATED';
         blueprintIdentifier: string;
       }
     | {
-        type: "ENTITY_UPDATED";
+        type: 'ENTITY_UPDATED';
         blueprintIdentifier: string;
       }
     | {
-        type: "ENTITY_DELETED";
+        type: 'ENTITY_DELETED';
         blueprintIdentifier: string;
       }
     | {
-        type: "TIMER_PROPERTY_EXPIRED";
+        type: 'TIMER_PROPERTY_EXPIRED';
         blueprintIdentifier: string;
         propertyIdentifier: string;
       }
     | {
-        type: "ANY_ENTITY_CHANGE";
+        type: 'ANY_ENTITY_CHANGE';
         blueprintIdentifier: string;
       }
     | {
-        type: "RUN_CREATED";
+        type: 'RUN_CREATED';
         actionIdentifier: string;
       }
     | {
-        type: "RUN_UPDATED";
+        type: 'RUN_UPDATED';
         actionIdentifier: string;
       }
     | {
-        type: "ANY_RUN_CHANGE";
+        type: 'ANY_RUN_CHANGE';
         actionIdentifier: string;
       }
   >;
   condition?: {
-    type: "JQ";
+    type: 'JQ';
     expressions: string[];
-    combinator?: "and" | "or";
+    combinator?: 'and' | 'or';
   };
 };
 
 type KafkaInvocationAction = {
-  type: "KAFKA";
+  type: 'KAFKA';
   payload?: string | unknown[] | Record<string, any>;
 };
 
 type WebhookInvocationAction = {
-  type: "WEBHOOK";
+  type: 'WEBHOOK';
   url: string;
   agent?: boolean | string;
   synchronized?: boolean | string;
@@ -211,7 +211,7 @@ type WebhookInvocationAction = {
 };
 
 type GithubInvocationAction = {
-  type: "GITHUB";
+  type: 'GITHUB';
   org: string;
   repo: string;
   workflow: string;
@@ -220,7 +220,7 @@ type GithubInvocationAction = {
 };
 
 type GitlabInvocationAction = {
-  type: "GITLAB";
+  type: 'GITLAB';
   projectName: string;
   groupName: string;
   defaultRef?: string;
@@ -228,14 +228,14 @@ type GitlabInvocationAction = {
 };
 
 type AzureDevopsInvocationAction = {
-  type: "AZURE_DEVOPS";
+  type: 'AZURE_DEVOPS';
   webhook: string;
   org: string;
   payload?: string | unknown[] | Record<string, any>;
 };
 
 export type UpsertEntityInvocationAction = {
-  type: "UPSERT_ENTITY";
+  type: 'UPSERT_ENTITY';
   blueprintIdentifier: string;
   mapping: {
     identifier?: string;
@@ -263,15 +263,15 @@ type StrictUnionHelper<T, TAll> = T extends any
 export type StrictUnion<T> = StrictUnionHelper<T, T>;
 
 export type GlobalAction<
-  T extends StrictUnion<ActionInvocationType> = ActionInvocationType
+  T extends StrictUnion<ActionInvocationType> = ActionInvocationType,
 > = Pick<
   Action,
-  | "identifier"
-  | "title"
-  | "icon"
-  | "description"
-  | "requiredApproval"
-  | "approvalNotification"
+  | 'identifier'
+  | 'title'
+  | 'icon'
+  | 'description'
+  | 'requiredApproval'
+  | 'approvalNotification'
 > & {
   id: string;
   trigger: StrictUnion<
@@ -280,3 +280,189 @@ export type GlobalAction<
   invocationMethod: T;
   publish?: boolean;
 } & IWithChangeLog;
+
+export type FormulaProperty = {
+  title?: string;
+  icon?: string;
+  formula: string;
+};
+
+export type MirrorProperty = {
+  title?: string;
+  path: string;
+};
+
+export type CalculationProperty = {
+  title?: string;
+  icon?: string;
+  type: any;
+  format?: string;
+  calculation: string;
+  spec?: string;
+  description?: string;
+  specAuthentication?: {
+    clientId: string;
+    authorizationUrl: string;
+    tokenUrl: string;
+    authorizationScope?: string[];
+  };
+  colorized?: boolean;
+  colors?: string;
+  items?: Record<string, string>;
+};
+
+type AggregationAverageOf = 'hour' | 'day' | 'week' | 'month' | 'total';
+
+export type AggregationAverageByEntities = {
+  calculationBy: 'entities';
+  func: 'average';
+  averageOf: AggregationAverageOf;
+  measureTimeBy?: string;
+};
+
+export type AggregationCountByEntities = {
+  calculationBy: 'entities';
+  func: 'count';
+};
+
+export type AggregationByEntities =
+  | AggregationAverageByEntities
+  | AggregationCountByEntities;
+
+export type AggregationAveragePropertyCalc = {
+  property: string;
+  func: 'average';
+  averageOf: AggregationAverageOf;
+  measureTimeBy?: string;
+  calculationBy: 'property';
+};
+
+export type AggregationPropertyCalc = {
+  calculationBy: 'property';
+  func: 'sum' | 'min' | 'max' | 'median';
+  property: string;
+};
+
+export type AggregationByProperties =
+  | AggregationAveragePropertyCalc
+  | AggregationPropertyCalc;
+
+export type CalculationSpec = AggregationByEntities | AggregationByProperties;
+
+export type AggregationProperty = {
+  title?: string;
+  icon?: string;
+  type: any;
+  description?: string;
+  target: string;
+  calculationSpec: CalculationSpec;
+  query?: any;
+};
+
+export type Relation = {
+  title?: string;
+  description?: string;
+  target: string;
+  many: boolean;
+  required: boolean;
+};
+
+export type BlueprintSchemaProperty = any;
+
+export type BlueprintSchema = any;
+
+export type BlueprintDirectOwnership = {
+  type: any;
+};
+
+export type BlueprintInheritedOwnership = {
+  type: any;
+  path: string;
+};
+
+export type BlueprintOwnership =
+  | BlueprintDirectOwnership
+  | BlueprintInheritedOwnership;
+
+export type Blueprint = {
+  identifier: string;
+  title: string;
+  description?: string;
+  icon?: string;
+  schema: BlueprintSchema;
+  formulaProperties?: {
+    [key: string]: FormulaProperty;
+  };
+  mirrorProperties?: {
+    [key: string]: MirrorProperty;
+  };
+  calculationProperties?: {
+    [key: string]: CalculationProperty;
+  };
+  aggregationProperties?: {
+    [key: string]: AggregationProperty;
+  };
+  relations?: {
+    [key: string]: Relation;
+  };
+  changelogDestination?:
+    | { type: 'KAFKA' }
+    | { type: 'WEBHOOK'; agent?: boolean; url: string };
+  teamInheritance?: {
+    path: string;
+  };
+  ownership?: BlueprintOwnership;
+};
+
+export type CreateBlueprintDTO = Omit<Blueprint, keyof IWithChangeLog>;
+
+export type UpdateBlueprintDTO = Omit<
+  Blueprint,
+  'identifier' | keyof IWithChangeLog
+> &
+  Partial<Pick<Blueprint, 'identifier'>>;
+
+export type PatchBlueprintDTO = Partial<UpdateBlueprintDTO>;
+
+export type PatchBlueprintPermissionsDTO = {
+  entities?: {
+    read?: any;
+    register?: any;
+    unregister?: any;
+    update?: any;
+    updateProperties?: {
+      [x: string]: any;
+    };
+    updateRelations?: {
+      [x: string]: any;
+    };
+  };
+};
+
+export type BlueprintPermissions = {
+  entities: {
+    register: any;
+    unregister: any;
+    update: any;
+    updateProperties: {
+      [x: string]: any;
+    };
+    updateRelations: {
+      [x: string]: any;
+    };
+  };
+};
+
+export type RawBlueprintAggregationProperties = {
+  identifier: string;
+  rawAggregationProperties: Record<string, string>;
+};
+
+export type Integration = {
+  installationId: string;
+  installationAppType: string;
+  resyncState?: {
+    lastResyncEnd: string;
+    status: 'completed' | 'failed' | 'running';
+  };
+};
