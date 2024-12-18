@@ -12,20 +12,22 @@ export function BlueprintsTable() {
   const alertApi = useApi(alertApiRef);
 
   const handleAddBlueprint = async (blueprintJson: string) => {
-    try {
-      await createBlueprint(blueprintJson);
-      alertApi.post({
-        message: 'Blueprint created successfully!',
-        severity: 'success',
+    await createBlueprint(blueprintJson)
+      .then(() => {
+        alertApi.post({
+          message: 'Blueprint created successfully!',
+          severity: 'success',
+        });
+      })
+      .catch(err => {
+        alertApi.post({
+          message: `Failed to create blueprint: ${err.message}`,
+          severity: 'error',
+        });
+      })
+      .finally(() => {
+        setIsModalOpen(false);
       });
-    } catch (err) {
-      alertApi.post({
-        message: 'Failed to create blueprint',
-        severity: 'error',
-      });
-    } finally {
-      setIsModalOpen(false);
-    }
   };
 
   if (loading) {

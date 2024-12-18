@@ -219,4 +219,29 @@ export class PortAPI {
 
     return json.integrations;
   }
+
+  async updateIntegration(identifier: string, config: string): Promise<any> {
+    const response = await this.fetchApi.fetch(
+      this.getUrl(`/integration/${identifier}/config`),
+      {
+        method: 'PATCH',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: config,
+      },
+    );
+
+    if (!response.ok) {
+      console.log(response.statusText);
+      throw new Error(response.statusText, {
+        cause: response.status,
+      });
+    }
+
+    const json = await response.json();
+
+    return json.ok;
+  }
 }

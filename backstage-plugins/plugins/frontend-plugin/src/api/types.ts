@@ -461,6 +461,7 @@ export type RawBlueprintAggregationProperties = {
 export type Integration = {
   installationId: string;
   installationAppType: string;
+  config: any;
   resyncState?: {
     lastResyncEnd: string;
     status: 'completed' | 'failed' | 'running';

@@ -35,10 +35,7 @@ export const TextModal: React.FC<TextModalProps> = ({
   return (
     <Dialog
       open={open}
-      onClose={() => {
-        setText('');
-        onClose();
-      }}
+      onClose={onClose}
       aria-labelledby="text-modal-title"
       maxWidth="md"
       fullWidth
@@ -58,14 +55,7 @@ export const TextModal: React.FC<TextModalProps> = ({
         />
       </DialogContent>
       <DialogActions>
-        <Button
-          onClick={() => {
-            setText('');
-            onClose();
-          }}
-          color="primary"
-          disabled={isLoading}
-        >
+        <Button onClick={onClose} color="primary" disabled={isLoading}>
           Cancel
         </Button>
         <Button
