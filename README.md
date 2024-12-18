@@ -66,15 +66,14 @@ For more than 15 users you need to get a license from [Port](https://backstage-p
 
    - In Port, on the top right, click on the three dots and select **Credentials**
    - Generate API credentials (Client ID and Client Secret)
-   - Add these credentials to your Backstage's `app-config.yaml` under the `backend`:
+   - Add these credentials to your Backstage's `app-config.yaml`:
      ```yaml
-     backend:
-       port:
-         api:
-           baseUrl: https://api.getport.io/
-           auth:
-             clientId: YOUR_CLIENT_ID
-             clientSecret: YOUR_CLIENT_SECRET
+     port:
+       api:
+         baseUrl: https://api.getport.io/
+         auth:
+           clientId: YOUR_CLIENT_ID
+           clientSecret: YOUR_CLIENT_SECRET
      ```
    - [Find your Port credentials](https://docs.getport.io/build-your-software-catalog/custom-integration/api/#find-your-port-credentials)
 

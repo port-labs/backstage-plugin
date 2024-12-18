@@ -19,6 +19,7 @@ import {
 import { makeStyles } from '@material-ui/core';
 import CreateComponentIcon from '@material-ui/icons/AddCircleOutline';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
+import BuildIcon from '@material-ui/icons/Build';
 import DoneAll from '@material-ui/icons/DoneAll';
 import ExtensionIcon from '@material-ui/icons/Extension';
 import HomeIcon from '@material-ui/icons/Home';
@@ -97,6 +98,7 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         to="/settings"
       >
         <SidebarSettings />
+        <SidebarItem icon={BuildIcon} to="devtools" text="DevTools" />
       </SidebarGroup>
     </Sidebar>
     {children}

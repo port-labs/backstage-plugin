@@ -8,6 +8,7 @@ import {
   CatalogImportPage,
   catalogImportPlugin,
 } from '@backstage/plugin-catalog-import';
+import { DevToolsPage } from '@backstage/plugin-devtools';
 import { orgPlugin } from '@backstage/plugin-org';
 import { ScaffolderPage, scaffolderPlugin } from '@backstage/plugin-scaffolder';
 import { SearchPage } from '@backstage/plugin-search';
@@ -16,6 +17,7 @@ import {
   techdocsPlugin,
   TechDocsReaderPage,
 } from '@backstage/plugin-techdocs';
+
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { UserSettingsPage } from '@backstage/plugin-user-settings';
@@ -116,6 +118,7 @@ const routes = (
     {/* Port Labs */}
     <Route path="/scorecards" element={<ScorecardsPage />} />
     <Route path="/dev-daily" element={<DevDailyPluginPage />} />
+    <Route path="/devtools" element={<DevToolsPage />} />
   </FlatRoutes>
 );
 

@@ -1,12 +1,13 @@
 export interface Config {
-  backend: {
-    port: {
-      api: {
-        baseUrl: string;
-        auth: {
-          clientId: string;
-          clientSecret: string;
-        };
+  port: {
+    api: {
+      baseUrl: string;
+      /**
+       * @deepVisibility secret
+       */
+      auth: {
+        clientId: string;
+        clientSecret: string;
       };
     };
   };

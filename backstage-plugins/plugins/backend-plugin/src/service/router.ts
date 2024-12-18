@@ -83,7 +83,7 @@ export async function createRouter(
   options: RouterOptions,
 ): Promise<express.Handler> {
   const { logger, config } = options;
-  const portConfig = config.getConfig('backend.port');
+  const portConfig = config.getConfig('port');
   const baseUrl = portConfig.getString('api.baseUrl');
   const clientId = portConfig.getString('api.auth.clientId');
   const clientSecret = portConfig.getString('api.auth.clientSecret');

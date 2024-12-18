@@ -7,9 +7,9 @@ backend:
   listen:
     port: 7007
 
-  port:
-    api:
-      baseUrl: https://api.getport.io/
-      auth:
-        clientId:
-        clientSecret:
+port:
+  api:
+    baseUrl: https://api.getport.io/
+    auth:
+      clientId:
+      clientSecret:
