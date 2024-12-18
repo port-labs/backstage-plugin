@@ -52,12 +52,20 @@ export function IntegrationsTable() {
           <ListItemSecondaryAction>
             <Grid container spacing={2}>
               <Grid item>
-                <Button variant="contained" color="primary">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => alert('TODO')}
+                >
                   Mapping
                 </Button>
               </Grid>
               <Grid item>
-                <Button variant="contained" color="primary">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => alert('TODO')}
+                >
                   Resync
                 </Button>
               </Grid>
