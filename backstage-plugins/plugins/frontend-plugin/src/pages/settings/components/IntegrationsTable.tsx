@@ -1,20 +1,14 @@
-import { Box, List } from '@material-ui/core';
-import { Skeleton } from '@material-ui/lab';
+import { List } from '@material-ui/core';
 import React from 'react';
 import { ApiHooks } from '../../../index';
 import { IntegrationListItem } from './IntegrationListItem';
+import { ListLoadingSkeleton } from './ListLoadingSkeleton';
 
 export function IntegrationsTable() {
   const { data, loading, error } = ApiHooks.useIntegrationsList();
 
   if (loading) {
-    return (
-      <Box p={2} sx={{ width: '100%' }}>
-        <Skeleton variant="text" height={50} />
-        <Skeleton variant="text" height={50} />
-        <Skeleton variant="text" height={50} />
-      </Box>
-    );
+    return <ListLoadingSkeleton />;
   }
 
   if (error || !data) {
