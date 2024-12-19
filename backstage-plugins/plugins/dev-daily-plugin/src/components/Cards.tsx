@@ -77,7 +77,6 @@ function Cards({ email, name }: CardsProps) {
     )
     .filter(task => task.assignee === email);
 
-  console.log(parsedTasks);
   const myOpenPRs = parsedPRs.filter(
     pr => pr.creator === email || pr.creator === name,
   );
