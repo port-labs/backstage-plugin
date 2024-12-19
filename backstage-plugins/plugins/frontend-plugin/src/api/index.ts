@@ -51,10 +51,7 @@ export class PortAPI {
     if (!user) {
       return null;
     }
-    return {
-      email: user.spec.profile?.email,
-      name: user.spec.profile?.displayName,
-    };
+    return user;
   }
 
   private getUrl(path: string) {

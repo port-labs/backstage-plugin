@@ -7,7 +7,8 @@ import Cards from '../components/Cards';
 
 const DevDailyPageInner = () => {
   const { data: userInfo, loading } = ApiHooks.useUserInfo();
-  const email = userInfo?.email;
+  const email = userInfo?.spec.profile?.email;
+  const name = userInfo?.metadata.name;
 
   return (
     <Page themeId="tool">
@@ -16,9 +17,10 @@ const DevDailyPageInner = () => {
         subtitle="Information to help developers plan their day"
       >
         <HeaderLabel label="Viewer Email" value={email} />
+        <HeaderLabel label="Viewer Name" value={name} />
       </Header>
       <Content>
-        {email && <Cards email={email} />}
+        {email && name && <Cards email={email} name={name} />}
         {loading && <LinearProgress />}
       </Content>
     </Page>

@@ -10,6 +10,7 @@ import RecentCompletedTasks from './RecentCompletedTasks';
 
 type CardsProps = {
   email: string;
+  name: string;
 };
 
 export type PR = {
@@ -26,7 +27,7 @@ export type Task = {
   status: 'Done' | 'In Progress' | 'To Do';
 };
 
-function Cards({ email }: CardsProps) {
+function Cards({ email, name }: CardsProps) {
   const {
     data: prsRawData,
     loading: prsLoading,
@@ -37,7 +38,7 @@ function Cards({ email }: CardsProps) {
       {
         property: '$blueprint',
         operator: '=',
-        value: 'githubPullRequest',
+        value: 'dev-daily-pull-request',
       },
     ],
   });
@@ -76,8 +77,13 @@ function Cards({ email }: CardsProps) {
     )
     .filter(task => task.assignee === email);
 
-  const myOpenPRs = parsedPRs.filter(pr => pr.creator === email);
-  const myPRsWaiting = parsedPRs.filter(pr => pr.assignees.includes(email));
+  console.log(parsedTasks);
+  const myOpenPRs = parsedPRs.filter(
+    pr => pr.creator === email || pr.creator === name,
+  );
+  const myPRsWaiting = parsedPRs.filter(
+    pr => pr.assignees.includes(email) || pr.assignees.includes(name),
+  );
   const myOpenTasks = parsedTasks.filter(task => task.status !== 'Done');
   const recentCompletedTasks = parsedTasks.filter(
     task => task.status === 'Done',
