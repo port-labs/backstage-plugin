@@ -47,6 +47,7 @@ import {
   ScorecardsPage,
   SettingsPage,
 } from '@port-labs/backstage-plugin-port-frontend';
+import { NewPluginPage } from '@internal/backstage-plugin-new-plugin';
 
 const app = createApp({
   apis,
@@ -135,6 +136,7 @@ const routes = (
     <Route path="/scorecards" element={<ScorecardsPage />} />
     <Route path="/dev-daily" element={<DevDailyPluginPage />} />
     <Route path="/devtools" element={<DevToolsPage />} />
+    <Route path="/new-plugin" element={<NewPluginPage />} />
   </FlatRoutes>
 );
 

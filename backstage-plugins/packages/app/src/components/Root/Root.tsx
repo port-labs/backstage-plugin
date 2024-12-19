@@ -19,6 +19,7 @@ import {
 import { makeStyles } from '@material-ui/core';
 import CreateComponentIcon from '@material-ui/icons/AddCircleOutline';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
+import BlockIcon from '@material-ui/icons/Block';
 import BuildIcon from '@material-ui/icons/Build';
 import DoneAll from '@material-ui/icons/DoneAll';
 import ExtensionIcon from '@material-ui/icons/Extension';
@@ -88,6 +89,7 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
             to="dev-daily"
             text="Plan My Day"
           />
+          <SidebarItem icon={BlockIcon} to="new-plugin" text="Empty plugin" />
         </SidebarScrollWrapper>
       </SidebarGroup>
       <SidebarSpace />
