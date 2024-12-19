@@ -15,7 +15,7 @@ function MyOpenTasks({ tasks }: { tasks: Task[] }) {
             <Chip
               label={row.status}
               style={{
-                backgroundColor: row.status === 'Open' ? '' : 'lightyellow',
+                backgroundColor: row.status === 'To Do' ? '' : 'lightyellow',
               }}
             />
           ),

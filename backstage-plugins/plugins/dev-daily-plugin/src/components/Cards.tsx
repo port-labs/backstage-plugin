@@ -23,7 +23,7 @@ export type Task = {
   title: string;
   link: string;
   assignee: string;
-  status: 'Done' | 'In Progress' | 'Open';
+  status: 'Done' | 'In Progress' | 'To Do';
 };
 
 function Cards({ email }: CardsProps) {
@@ -52,7 +52,7 @@ function Cards({ email }: CardsProps) {
       {
         property: '$blueprint',
         operator: '=',
-        value: 'tasks',
+        value: 'dev-daily-task',
       },
     ],
   });
