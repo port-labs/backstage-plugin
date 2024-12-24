@@ -12,7 +12,7 @@ Let's discover **Port's Backstage plugin in less than 5 minutes**.
 
 - A Backstage instance
 - A Port account
-  - Visit [Port's website](https://www.getport.io) to create your **free** account.
+  - Visit [Port's website](https://app.getport.io) to create your **free** account.
   - Follow the onboarding process to set up your organization.
 
 ### Install Plugins
@@ -74,6 +74,10 @@ import { SettingsPage } from "@port-labs/backstage-plugin-framework";
   </RequirePermission>
 </Route>;
 ```
+
+To view the settings page, click the **Settings** button on the bottom left and click on the **Port** tab.
+
+![Port Settings](/img/settings-page.png)
 
 ## Example out-of-the-box plugin - Dev Daily
 
