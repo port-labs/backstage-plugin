@@ -55,6 +55,6 @@ backend.add(import('@backstage/plugin-devtools-backend'));
 backend.add(import('@backstage/plugin-auth-backend-module-github-provider'));
 
 // port plugin
-backend.add(import('@port-labs/backstage-plugin-port-backend'));
+backend.add(import('@port-labs/backstage-plugin-framework-backend'));
 
 backend.start();

@@ -92,7 +92,7 @@ You can create your own components to display and execute actions:
 import {
   useActionsQuery,
   useActionRun,
-} from "@port-labs/backstage-plugin-port-frontend";
+} from "@port-labs/backstage-plugin-framework";
 
 const CustomActionButton = ({ blueprintId, actionId }) => {
   const { data: actions } = useActionsQuery(blueprintId);

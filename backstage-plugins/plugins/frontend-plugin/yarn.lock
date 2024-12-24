@@ -4283,9 +4283,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@port-labs/backstage-plugin-port-frontend@workspace:.":
+"@port-labs/backstage-plugin-framework@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@port-labs/backstage-plugin-port-frontend@workspace:."
+  resolution: "@port-labs/backstage-plugin-framework@workspace:."
   dependencies:
     "@backstage/catalog-model": "npm:^1.5.0"
     "@backstage/cli": "npm:^0.26.11"

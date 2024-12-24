@@ -105,7 +105,7 @@ const examplePortEntity: PortEntity = {
 You can create your own components to display Port data in ways that match your organization's needs:
 
 ```typescript
-import { useEntityQuery } from "@port-labs/backstage-plugin-port-frontend";
+import { useEntityQuery } from "@port-labs/backstage-plugin-framework";
 
 const CustomEntityCard = () => {
   const { data: entity, loading } = useEntityQuery("entity-id", "blueprint-id");

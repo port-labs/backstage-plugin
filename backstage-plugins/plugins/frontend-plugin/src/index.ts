@@ -1,7 +1,6 @@
 import { Entity } from '@backstage/catalog-model';
 import { PortAPI, portApiRef } from './api';
 import * as ApiHooks from './hooks/api-hooks';
-import { SettingsPage } from './pages/settings';
 
 export {
   Actions,
@@ -10,6 +9,7 @@ export {
   portPlugin,
   ScorecardCard,
   ScorecardsPage,
+  SettingsPage,
 } from './plugin';
 
 export const isPortDataAvailable = (entity: Entity) => {
@@ -17,7 +17,5 @@ export const isPortDataAvailable = (entity: Entity) => {
 };
 
 export { useEntityRoutes } from './hooks/useEntityRoutes';
-
-export { SettingsPage };
 
 export { ApiHooks, PortAPI, portApiRef };

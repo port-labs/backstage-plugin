@@ -42,12 +42,12 @@ import { githubAuthApiRef } from '@backstage/core-plugin-api';
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
 import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { RequirePermission } from '@backstage/plugin-permission-react';
-import { DevDailyPluginPage } from '@port-labs/backstage-plugin-dev-daily-plugin';
+import { NewPluginPage } from '@internal/backstage-plugin-new-plugin';
+import { DevDailyPluginPage } from '@port-labs/backstage-plugin-dev-daily';
 import {
   ScorecardsPage,
   SettingsPage,
-} from '@port-labs/backstage-plugin-port-frontend';
-import { NewPluginPage } from '@internal/backstage-plugin-new-plugin';
+} from '@port-labs/backstage-plugin-framework';
 
 const app = createApp({
   apis,

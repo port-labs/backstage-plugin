@@ -83,16 +83,16 @@ For more than 15 users you need to get a license from [Port](https://backstage-p
 
    ```bash
    # Install backend plugin
-   yarn --cwd packages/backend add @port-labs/backstage-plugin-port-backend
+   yarn --cwd packages/backend add @port-labs/backstage-plugin-framework-backend
 
    # Install frontend plugin
-   yarn --cwd packages/app add @port-labs/backstage-plugin-port-frontend
+   yarn --cwd packages/app add @port-labs/backstage-plugin-framework
    ```
 
    Then register the backend plugin in `packages/backend/src/index.ts`:
 
    ```typescript
-   backend.add(import("@port-labs/backstage-plugin-port-backend"));
+   backend.add(import("@port-labs/backstage-plugin-framework-backend"));
    ```
 
    Finally, add components as you like from the frontend plugin to your Backstage instance.

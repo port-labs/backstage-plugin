@@ -61,7 +61,7 @@ import {
   PortInformationCard,
   ScorecardCard,
   useEntityRoutes,
-} from '@port-labs/backstage-plugin-port-frontend';
+} from '@port-labs/backstage-plugin-framework';
 
 const techdocsContent = (
   <EntityTechdocsContent>

@@ -1,6 +1,6 @@
 import { Content, Header, HeaderLabel, Page } from '@backstage/core-components';
 import { LinearProgress } from '@material-ui/core';
-import { ApiHooks } from '@port-labs/backstage-plugin-port-frontend';
+import { ApiHooks } from '@port-labs/backstage-plugin-framework';
 import React from 'react';
 import { useOutlet } from 'react-router-dom';
 import Cards from '../components/Cards';

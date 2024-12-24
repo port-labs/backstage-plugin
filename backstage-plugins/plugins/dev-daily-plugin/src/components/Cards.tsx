@@ -1,6 +1,6 @@
 import { InfoCard } from '@backstage/core-components';
 import { Grid, Typography } from '@material-ui/core';
-import { ApiHooks } from '@port-labs/backstage-plugin-port-frontend';
+import { ApiHooks } from '@port-labs/backstage-plugin-framework';
 import React from 'react';
 import { LoadingSkeleton } from './LoadingSkeleton';
 import MyOpenTasks from './MyOpenTasks';

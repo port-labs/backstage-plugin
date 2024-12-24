@@ -4,7 +4,7 @@ import {
   createRoutableExtension,
 } from '@backstage/core-plugin-api';
 
-import { PortAPI } from '@port-labs/backstage-plugin-port-frontend';
+import { PortAPI } from '@port-labs/backstage-plugin-framework';
 import { rootRouteRef } from './routes';
 
 export const portApiRef = createApiRef<PortAPI>({
