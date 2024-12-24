@@ -237,3 +237,21 @@ import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 // ...
 <SidebarItem icon={AssignmentTurnedInIcon} to="dev-daily" text="Plan My Day" />;
 ```
+
+## See the plugin in action
+
+![Dev Daily Plugin Dashboard](/img/dev-daily/plan-my-day.png)
+
+:::note
+You might need to wait 5-10 minutes for the integration setup to complete before you see the data in the plugin.
+:::
+
+## Troubleshooting
+
+If you don't see the data in the plugin, you can check the following:
+
+- Check if the integration setup is complete.
+  - Login to Port dashboard, and check [data sources page](https://app.getport.io/settings/data-sources).
+  - You will see a green checkmark next to the integration name.
+- It could be that the plugin does not recognize the user you are logged in with.
+  - Check on the top right corner of the page, under the **Viewer email** if the user is logged in with the correct account.
