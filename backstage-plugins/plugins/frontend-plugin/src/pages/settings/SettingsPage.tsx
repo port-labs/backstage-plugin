@@ -1,4 +1,4 @@
-import { Content, InfoCard } from '@backstage/core-components';
+import { Content } from '@backstage/core-components';
 import { Grid } from '@material-ui/core';
 import React from 'react';
 import { BlueprintCard } from './components/BlueprintsTable';
@@ -12,9 +12,7 @@ export const SettingsPage = () => {
           <BlueprintCard />
         </Grid>
         <Grid item xs={12} md={6}>
-          <InfoCard title="Integrations list" noPadding>
-            <IntegrationsTable />
-          </InfoCard>
+          <IntegrationsTable />
         </Grid>
       </Grid>
     </Content>

@@ -64,7 +64,7 @@ export function IntegrationListItem({ integration }: IntegrationListItemProps) {
               <Button
                 variant="contained"
                 color="primary"
-                onClick={() => alert('TODO')}
+                onClick={() => console.log('Work in progress')}
               >
                 Resync
               </Button>
