@@ -3,22 +3,32 @@ sidebar_position: 1
 slug: /
 ---
 
+import Cards from './examples/\_cards.mdx';
+
 # Introduction
 
-The Port Backstage plugin allows you to ramp up your Backstage instance quickly.
-Building a developer portal from scratch can be a daunting task, but with the Port Backstage plugin, you can have a **fully functional portal in days not months**.
+The **Backstage Plugin Framework** by Port will help you build plugins for your Backstage instance faster.
+
+We are also providing a few enterprise-ready example plugins to help you get started.
+
+Building a developer portal from scratch can be a daunting task, but with the **Backstage Plugin Framework** by Port, you can have a **fully functional portal in days not months**.
 
 <div style={{ textAlign: "center" }}>
-  <img src="img/plugin-base.png" alt="Port Backstage plugin" height="500" />
+  <img src="img/plugin-base.png" alt="Port Backstage plugin" />
 </div>
 
-With this plugin, you can:
+With this framework, you can:
 
-- Build new plugin with **PortSDK** in days and not months
-- Consolidate data from multiple sources into a single, unified view
-- Implement governance and compliance through Port's rules engine and scorecards
-- Enable self-service actions for developers
+- Build a new plugin with the framework in days and not months
+- Use our enterprise-ready [out-of-the-box plugins](/examples) to get started faster
 - Integrate with 50+ tools and services through Port's extensive integration library
+- Use our rules engine to build scorecards which promote standards across your software catalog
+
+## Enterprise-Ready Plugins
+
+Port's plugin framework for Backstage empowers you to build custom plugins that perfectly match your organization's needs. To help you get started, we provide free, enterprise-grade example plugins.
+
+<Cards />
 
 ## Key benefits
 

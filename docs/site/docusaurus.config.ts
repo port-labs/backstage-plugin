@@ -4,8 +4,8 @@ import { themes as prismThemes } from "prism-react-renderer";
 import tailwindPlugin from "./src/plugins/tailwind-config.cjs";
 
 const config: Config = {
-  title: "Port Backstage Plugin",
-  tagline: "Combine all your integrations in one plugin",
+  title: "Port Plugin Framework for Backstage",
+  tagline: "Build plugins for your Backstage instance faster",
   favicon: "img/icon.svg",
 
   url: "https://docs.backstage-plugin.getport.io",
@@ -45,7 +45,7 @@ const config: Config = {
     // Replace with your project's social card
     image: "img/icon.svg",
     navbar: {
-      title: "Port Backstage Plugin",
+      title: "Backstage Plugin Framework",
       logo: {
         alt: "Port Logo",
         src: "img/icon.svg",

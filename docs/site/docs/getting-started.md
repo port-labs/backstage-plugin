@@ -6,6 +6,8 @@ sidebar_position: 2
 
 Let's discover **Port's Backstage plugin in less than 5 minutes**.
 
+![Dev Daily Plugin Dashboard](/img/dev-daily/plan-my-day.png)
+
 ### Prerequisites
 
 - A Backstage instance
@@ -31,24 +33,6 @@ Then register the backend plugin in `packages/backend/src/index.ts`:
 backend.add(import("@port-labs/backstage-plugin-framework-backend"));
 ```
 
-Finally, add components as you like from the frontend plugin to your Backstage instance.
-
-For example, let's add the Scorecard component to the NavBar:
-
-in the file: `packages/app/src/App.tsx`, add the route:
-
-```typescript
-<Route path="/scorecards" element={<ScorecardsPage />} />
-```
-
-and then add the link to the NavBar, in the file: `packages/app/src/components/Root/Root.tsx`:
-
-```typescript
-<SidebarItem icon={DoneAllIcon} to="scorecards" text="Scorecards" />
-```
-
-![Scorecards page](/img/scorecards.png)
-
 ### Configure Credentials
 
 1. In Port, on the top right, click on the `...` (three dots) and select **Credentials**.
@@ -67,6 +51,35 @@ and then add the link to the NavBar, in the file: `packages/app/src/components/R
 <br />
 
 Read more [find your Port credentials](https://docs.getport.io/build-your-software-catalog/custom-integration/api/#find-your-port-credentials)
+
+## Adding the settings page
+
+The settings page is a page that allows you to configure the plugin.
+
+To add the settings page, you need to add the `SettingsPage` component to your Backstage instance.
+
+In the file `packages/app/src/App.tsx`, replace the `<Route path="/settings" element={<UserSettingsPage />}>` with the following code:
+
+```tsx
+import { SettingsPage } from "@port-labs/backstage-plugin-framework";
+
+// ...
+<Route path="/settings" element={<UserSettingsPage />}>
+  <RequirePermission permission={catalogEntityCreatePermission}>
+    <SettingsLayout.Route
+      path="/port"
+      title="Port"
+      children={<SettingsPage />}
+    />
+  </RequirePermission>
+</Route>;
+```
+
+## Example out-of-the-box plugin - Dev Daily
+
+Follow the [Dev Daily Plugin documentation](./examples/dev-daily.md) to learn how to use the Dev Daily Plugin.
+
+![Dev Daily Plugin Dashboard](/img/dev-daily/plan-my-day.png)
 
 ## Extend your Backstage instance
 
