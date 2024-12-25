@@ -2,30 +2,47 @@
 <img src="docs/site/static/img/icon.svg" alt="Combine all your integrations in one plugin" width="80"/>
 </p>
 
-# Port Backstage Plugin
+# Backstage Plugin Framework by Port
 
-The Port Backstage plugin allows you to use **one plugin** for all your data sources into your Backstage instance.
+The **Backstage Plugin Framework** by [Port](https://www.getport.io) will help you build plugins for your Backstage instance faster.
 
-No more wrestling with endless plugin setups, constant upgrades, and cluttered dashboards that slow you as a portal builder and your developers down.
+We are also providing a few enterprise-ready example plugins to help you get started.
 
-> [!NOTE]
-> This is designed to enhance your Backstage setup, helping you build a better portal more efficiently—not to replace your existing Backstage plugins or Backstage itself.
+Building a developer portal from scratch can be a daunting task, but with the **Backstage Plugin Framework** by [Port](https://www.getport.io), you can have a **fully functional portal in days not months**.
+
+<div style={{ textAlign: "center" }}>
+  <img src="docs/site/static/img/plugin-base.png" alt="Port Backstage plugin" />
+</div>
+
+With this framework, you can:
+
+- Build a new plugin with the framework in days and not months
+- Use our enterprise-ready [out-of-the-box plugins](https://docs.backstage-plugin.getport.io/examples) to get started faster
+- Integrate with 50+ tools and services through Port's extensive integration library
+- Use our rules engine to build scorecards which promote standards across your software catalog
 
 ---
 
-## Documentation
+## Official Documentation
 
-Please refer to our [docs](https://port-labs.github.io/backstage-plugin/docs) for installation, usage, customization and tips.
+> [!WARNING]\
+> The Backstage plugin framework by Port is currently in beta and may not be fully stable. Please report any issues or suggestions through our GitHub repository.
+
+Please refer to our [docs](https://docs.backstage-plugin.getport.io) for installation, usage, customization and tips.
 
 ## Screenshots
 
 1. Service view - Added scorecards, actions, and information from integrations.
 <p align="center">
-
 <img src="docs/site/static/img/service-view.png" alt="Service view" />
 </p>
 
-2. Scorecards view
+2. Dev Daily plugin
+<p align="center">
+<img src="docs/site/static/img/dev-daily/plan-my-day.png" alt="Dev Daily plugin" />
+</p>
+
+3. Scorecards view
 <p align="center">
 <img src="docs/site/static/img/scorecards.png" alt="Scorecards page" />
 </p>
@@ -47,84 +64,14 @@ Integrate your portal with data sources like Jira, PagerDuty, Snyk, AWS, and mor
 Backstage plugin development often lags behind the needs of modern teams, turning what should be a powerful portal into a messy data dump. Port's plugin changes that by letting you manage everything through a single, flexible plugin.
 Cutting setup and build time from months to days.
 
-For up to 15 users you can use the free open source version of the plugin and create an account in Port.
-
-For more than 15 users you need to get a license from [Port](https://backstage-plugin.getport.io/).
-
 ## Getting Started
 
-> [!WARNING]\
-> The Port Backstage plugins are currently in beta and may not be fully stable. Please report any issues or suggestions through our GitHub repository.
+To start using the Backstage Plugin Framework by Port, see the [Getting Started](https://docs.backstage-plugin.getport.io/getting-started) documentation.
 
-1. **Create a Port Account**
+## Pricing
 
-   - Visit [Port's website](https://www.getport.io) to create your free account
-   - Follow the onboarding process to set up your organization
-   - For up to 15 users, you can use the free version.
-
-2. **Configure Port Credentials**
-
-   - In Port, on the top right, click on the three dots and select **Credentials**
-   - Generate API credentials (Client ID and Client Secret)
-   - Add these credentials to your Backstage's `app-config.yaml`:
-     ```yaml
-     port:
-       api:
-         baseUrl: https://api.getport.io/
-         auth:
-           clientId: YOUR_CLIENT_ID
-           clientSecret: YOUR_CLIENT_SECRET
-     ```
-   - [Find your Port credentials](https://docs.getport.io/build-your-software-catalog/custom-integration/api/#find-your-port-credentials)
-
-3. **Install the Backend and Frontend Plugins**
-
-   Install both plugins using yarn:
-
-   ```bash
-   # Install backend plugin
-   yarn --cwd packages/backend add @port-labs/backstage-plugin-framework-backend
-
-   # Install frontend plugin
-   yarn --cwd packages/app add @port-labs/backstage-plugin-framework
-   ```
-
-   Then register the backend plugin in `packages/backend/src/index.ts`:
-
-   ```typescript
-   backend.add(import("@port-labs/backstage-plugin-framework-backend"));
-   ```
-
-   Finally, add components as you like from the frontend plugin to your Backstage instance.
-
-   For example, let's add the Scorecard component to the NavBar:
-
-   in the file: `packages/app/src/App.tsx`, add the route:
-
-   ```typescript
-   <Route path="/scorecards" element={<ScorecardsPage />} />
-   ```
-
-   and then add the link to the NavBar, in the file: `packages/app/src/components/Root/Root.tsx`:
-
-   ```typescript
-   <SidebarItem icon={DoneAllIcon} to="scorecards" text="Scorecards" />
-   ```
-
-   ![Scorecards page](docs/site/static/img/scorecards.png)
-
-4. **Explore Port's API Integration**
-   - Review the frontend plugin documentation for examples
-   - Use Port's API to fetch and display data in your Backstage instance
-   - Leverage Port's data models to customize your views
-   - Check out our [API documentation](https://docs.getport.io/api-reference/port-api) for more details
-
-## Repository Structure
-
-The repo is organized into two main packages:
-
-1. `backend-plugin`: Contains the backend implementation of the Port Backstage plugin.
-2. `frontend-plugin`: Contains the frontend inspiration for what you can build with the Port Backstage plugin, but you can and **should** build your own components.
+The Backstage Plugin Framework by Port has a free forever plan and a paid plan for enterprise use.
+Visit [Port Pricing](https://backstage-plugin.getport.io/pricing) for more information.
 
 ## Support
 

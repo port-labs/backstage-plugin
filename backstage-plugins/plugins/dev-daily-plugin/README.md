@@ -42,4 +42,4 @@ Track your completed work:
 
 ## Installation & Configuration
 
-For detailed installation and configuration instructions, please refer to [Port's official plugin documentation](https://docs.backstage-plugin.getport.io/).
+For detailed installation and configuration instructions, please refer to [Port's official plugin documentation](https://docs.backstage-plugin.getport.io/examples/dev-daily).

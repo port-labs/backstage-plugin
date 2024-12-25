@@ -6,6 +6,8 @@ sidebar_position: 2
 
 Let's discover **Port's Backstage plugin in less than 5 minutes**.
 
+By the end of this guide, you will have integrated Jira & Github pull requests into your Backstage instance.
+
 ![Dev Daily Plugin Dashboard](/img/dev-daily/plan-my-day.png)
 
 ### Prerequisites
