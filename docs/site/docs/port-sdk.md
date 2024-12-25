@@ -6,6 +6,15 @@ sidebar_position: 4
 
 The Port Backstage plugin is designed with flexibility in mind, allowing you to fully customize how data is presented in your Backstage instance. Since the Port SDK returns standard JavaScript objects, you have complete control over the presentation layer.
 
+![Port SDK](/img/port-engine-inside.png)
+
+## The 4 Pillars of the Port SDK
+
+1. **Data model**: Integrations are mapped (using JQ) to Blueprints, which are similar to tables in a database.
+2. **Scorecards**: Scorecards are JSON rules that are executed on the data model and return a score.
+3. **Actions**: Actions are JSON defined UI forms that execute your prebuilt workflows or call your internal APIs. supports REST API, Github actions, CircleCI and more.
+4. **Automations**: Automations are workflows (CI, REST API and more...) that are executed upon data model changes or time-based events.
+
 ## Understanding the Data Structure
 
 When you fetch data using the Port SDK, you receive plain JavaScript objects that you can manipulate and render however you prefer.
