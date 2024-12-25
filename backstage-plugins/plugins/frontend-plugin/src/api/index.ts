@@ -6,6 +6,7 @@ import {
   IdentityApi,
 } from '@backstage/core-plugin-api';
 import { CatalogApi } from '@backstage/plugin-catalog-react';
+import yaml from 'yaml';
 import {
   Action,
   Blueprint,
@@ -217,7 +218,11 @@ export class PortAPI {
     return json.integrations;
   }
 
-  async updateIntegration(identifier: string, config: string): Promise<any> {
+  async updateIntegration(
+    identifier: string,
+    configYAML: string,
+  ): Promise<any> {
+    const config = yaml.parse(configYAML);
     const response = await this.fetchApi.fetch(
       this.getUrl(`/integration/${identifier}/config`),
       {
@@ -226,7 +231,7 @@ export class PortAPI {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: config,
+        body: JSON.stringify({ config }),
       },
     );
 

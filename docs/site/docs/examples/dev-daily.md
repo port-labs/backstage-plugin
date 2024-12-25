@@ -183,6 +183,11 @@ Now click on the `MAPPING` button near the **Jira** integration. and paste the f
 <details>
 <summary>Task Mapping</summary>
 
+:::note
+The `jql` query (in line 8) is used to filter the issues that will be mapped to the blueprint.
+Feel free to change it to your needs. in this example we are mapping issues that were created or updated in the last 3 weeks.
+:::
+
 ```yaml
 deleteDependentEntities: true
 createMissingRelatedEntities: true
@@ -191,7 +196,7 @@ resources:
   - kind: issue
     selector:
       query: "true"
-      jql: (created >= -1w) OR (updated >= -1w)
+      jql: (created >= -3w) OR (updated >= -3w)
     port:
       entity:
         mappings:
