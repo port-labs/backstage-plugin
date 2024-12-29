@@ -4,11 +4,11 @@
 
 # Backstage Plugin Framework by Port
 
-The **Backstage Plugin Framework** by [Port](https://www.getport.io) will help you build plugins for your Backstage instance faster.
+The **Backstage Plugin Framework** by [Port](https://backstage-plugin.getport.io) will help you build plugins for your Backstage instance faster.
 
 We are also providing a few enterprise-ready example plugins to help you get started.
 
-Building a developer portal from scratch can be a daunting task, but with the **Backstage Plugin Framework** by [Port](https://www.getport.io), you can have a **fully functional portal in days not months**.
+Building a developer portal from scratch can be a daunting task, but with the **Backstage Plugin Framework** by [Port](https://backstage-plugin.getport.io), you can have a **fully functional portal in days not months**.
 
 <div style={{ textAlign: "center" }}>
   <img src="docs/site/static/img/plugin-base.png" alt="Port Backstage plugin" />
@@ -24,9 +24,6 @@ With this framework, you can:
 ---
 
 ## Official Documentation
-
-> [!WARNING]\
-> The Backstage plugin framework by Port is currently in beta and may not be fully stable. Please report any issues or suggestions through our GitHub repository.
 
 Please refer to our [docs](https://docs.backstage-plugin.getport.io) for installation, usage, customization and tips.
 
@@ -49,22 +46,10 @@ Please refer to our [docs](https://docs.backstage-plugin.getport.io) for install
 
 ---
 
-With Port's data modeling, you can shape and trim data to focus only on what matters.
-
-[Model your data in Port](https://docs.getport.io/build-your-software-catalog/customize-integrations/configure-data-model/)
-
-<p align="center">
-<img src="docs/site/static/img/plugin-base.png" alt="Combine all your integrations in one plugin" height="400" />
-</p>
-
-Integrate your portal with data sources like Jira, PagerDuty, Snyk, AWS, and more in minutes, not months.
-
-[Integrate in minutes, not months](https://docs.getport.io/build-your-software-catalog/sync-data-to-catalog/)
-
-Backstage plugin development often lags behind the needs of modern teams, turning what should be a powerful portal into a messy data dump. Port's plugin changes that by letting you manage everything through a single, flexible plugin.
-Cutting setup and build time from months to days.
-
 ## Getting Started
+
+> [!WARNING]\
+> The Backstage plugin framework by Port is currently in beta and may not be fully stable. Please report any issues or suggestions through our GitHub repository.
 
 To start using the Backstage Plugin Framework by Port, see the [Getting Started](https://docs.backstage-plugin.getport.io/getting-started) documentation.
 
