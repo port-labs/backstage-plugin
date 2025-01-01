@@ -2,6 +2,11 @@ import { Content, Header, HeaderLabel, Page } from '@backstage/core-components';
 import { Typography } from '@material-ui/core';
 import React from 'react';
 
+/**
+ * ExampleComponent serves as a template for creating new plugin components.
+ * It demonstrates the basic structure of a Backstage page with a header and content.
+ * @returns A basic Backstage page component with header and content sections
+ */
 export function ExampleComponent() {
   return (
     <Page themeId="tool">
