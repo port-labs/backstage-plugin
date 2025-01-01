@@ -1,5 +1,5 @@
 app:
-  title: Scaffolded Backstage App
+  title: Port Labs catalog
   baseUrl: http://localhost:3000
 
 organization:

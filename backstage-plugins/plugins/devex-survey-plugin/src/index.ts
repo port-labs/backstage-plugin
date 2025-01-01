@@ -1,0 +1,1 @@
+export { devexSurveyPlugin } from './plugin';
