@@ -10,6 +10,7 @@ const useStyles = makeStyles(theme => ({
     maxWidth: 800,
     margin: '0 auto',
     padding: theme.spacing(3),
+    height: 'calc(100vh - 140px)',
   },
 }));
 

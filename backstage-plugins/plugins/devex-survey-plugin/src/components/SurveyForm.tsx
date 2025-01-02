@@ -5,6 +5,7 @@ import {
   FormControl,
   FormControlLabel,
   FormLabel,
+  LinearProgress,
   makeStyles,
   Radio,
   RadioGroup,
@@ -14,6 +15,34 @@ import {
 import React, { useMemo } from 'react';
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+  },
+  progressContainer: {
+    marginBottom: theme.spacing(4),
+  },
+  formContainer: {
+    flex: 1,
+    overflowY: 'auto',
+    marginBottom: theme.spacing(2),
+    padding: theme.spacing(0, 2),
+    '&::-webkit-scrollbar': {
+      width: '0.4em',
+    },
+    '&::-webkit-scrollbar-track': {
+      background: theme.palette.background.default,
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: theme.palette.divider,
+    },
+  },
+  progressLabel: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginBottom: theme.spacing(1),
+  },
   formControl: {
     marginBottom: theme.spacing(3),
     width: '100%',
@@ -163,6 +192,18 @@ export const SurveyForm = ({
 }: SurveyFormProps) => {
   const classes = useStyles();
 
+  const { totalRequired, answeredRequired, progress } = useMemo(() => {
+    const requiredQuestions = survey.questions.filter(q => q.required);
+    const totalRequired = requiredQuestions.length;
+    const answeredRequired = requiredQuestions.filter(question => {
+      const value = formData[question.id];
+      return value !== undefined && value !== '';
+    }).length;
+    const progress = (answeredRequired / totalRequired) * 100;
+
+    return { totalRequired, answeredRequired, progress };
+  }, [survey.questions, formData]);
+
   const isFormValid = useMemo(() => {
     return survey.questions.every(question => {
       if (!question.required) return true;
@@ -172,16 +213,35 @@ export const SurveyForm = ({
   }, [survey.questions, formData]);
 
   return (
-    <form onSubmit={onSubmit}>
-      {survey.questions.map(question => (
-        <Box key={question.id} className={classes.questionBox}>
-          <QuestionField
-            question={question}
-            value={formData[question.id]}
-            onChange={onChange}
-          />
+    <form onSubmit={onSubmit} className={classes.root}>
+      <Box className={classes.progressContainer}>
+        <Box className={classes.progressLabel}>
+          <Typography variant="body2" color="textSecondary">
+            Progress
+          </Typography>
+          <Typography variant="body2" color="textSecondary">
+            {answeredRequired} of {totalRequired} questions answered
+          </Typography>
         </Box>
-      ))}
+        <LinearProgress
+          variant="determinate"
+          value={progress}
+          color={isFormValid ? 'primary' : 'secondary'}
+        />
+      </Box>
+
+      <Box className={classes.formContainer}>
+        {survey.questions.map(question => (
+          <Box key={question.id} className={classes.questionBox}>
+            <QuestionField
+              question={question}
+              value={formData[question.id]}
+              onChange={onChange}
+            />
+          </Box>
+        ))}
+      </Box>
+
       <Button
         type="submit"
         variant="contained"
