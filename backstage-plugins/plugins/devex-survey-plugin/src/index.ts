@@ -1,1 +1,1 @@
-export { devexSurveyPlugin } from './plugin';
+export { DevexSurveyPage, devexSurveyPlugin } from './plugin';

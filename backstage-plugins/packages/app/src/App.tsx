@@ -44,6 +44,7 @@ import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { RequirePermission } from '@backstage/plugin-permission-react';
 import { NewPluginPage } from '@internal/backstage-plugin-new-plugin';
 import { DevDailyPluginPage } from '@port-labs/backstage-plugin-dev-daily';
+import { DevexSurveyPage } from '@port-labs/backstage-plugin-devex-survey';
 import {
   ScorecardsPage,
   SettingsPage,
@@ -136,6 +137,7 @@ const routes = (
     <Route path="/scorecards" element={<ScorecardsPage />} />
     <Route path="/dev-daily" element={<DevDailyPluginPage />} />
     <Route path="/devtools" element={<DevToolsPage />} />
+    <Route path="/devex-survey" element={<DevexSurveyPage />} />
     <Route path="/new-plugin" element={<NewPluginPage />} />
   </FlatRoutes>
 );

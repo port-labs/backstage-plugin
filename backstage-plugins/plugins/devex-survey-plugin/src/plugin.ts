@@ -1,4 +1,8 @@
-import { createApiRef, createPlugin } from '@backstage/core-plugin-api';
+import {
+  createApiRef,
+  createPlugin,
+  createRoutableExtension,
+} from '@backstage/core-plugin-api';
 
 import { PortAPI } from '@port-labs/backstage-plugin-framework';
 import { rootRouteRef } from './routes';
@@ -13,3 +17,11 @@ export const devexSurveyPlugin = createPlugin({
     root: rootRouteRef,
   },
 });
+
+export const DevexSurveyPage = devexSurveyPlugin.provide(
+  createRoutableExtension({
+    name: 'DevexSurveyPage',
+    component: () => import('./pages/survey').then(m => m.SurveyPage),
+    mountPoint: rootRouteRef,
+  }),
+);
