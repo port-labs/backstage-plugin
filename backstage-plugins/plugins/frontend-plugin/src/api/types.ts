@@ -46,6 +46,8 @@ export type PortEntity = {
   title?: string;
   team?: string[];
   icon?: string;
+  createdAt: string;
+  updatedAt: string;
   blueprint: string;
   properties: Record<string, unknown>;
   relations?: EntityRelations;

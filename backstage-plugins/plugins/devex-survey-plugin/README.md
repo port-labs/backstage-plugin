@@ -110,6 +110,7 @@ Blueprint:
       "work_planning_challenges",
       "development_process_challenges",
       "shipping_features_challenges",
+      "managing_production_challenges",
       "email"
     ]
   },
