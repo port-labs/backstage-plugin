@@ -21,7 +21,7 @@ export const devexSurveyPlugin = createPlugin({
 export const DevexSurveyPage = devexSurveyPlugin.provide(
   createRoutableExtension({
     name: 'DevexSurveyPage',
-    component: () => import('./pages/survey').then(m => m.SurveyPage),
+    component: () => import('./pages/router').then(m => m.Router),
     mountPoint: rootRouteRef,
   }),
 );

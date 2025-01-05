@@ -1,4 +1,4 @@
-import { Content, Header, Page } from '@backstage/core-components';
+import { Content } from '@backstage/core-components';
 import { alertApiRef, useApi } from '@backstage/core-plugin-api';
 import { makeStyles, Paper } from '@material-ui/core';
 import React, { useState } from 'react';
@@ -62,18 +62,15 @@ export const SurveyPage = () => {
   };
 
   return (
-    <Page themeId="tool">
-      <Header title="Developer Experience Survey" />
-      <Content>
-        <Paper className={classes.root}>
-          <SurveyForm
-            survey={defaultSurvey}
-            formData={formData}
-            onChange={handleChange}
-            onSubmit={handleSubmit}
-          />
-        </Paper>
-      </Content>
-    </Page>
+    <Content>
+      <Paper className={classes.root}>
+        <SurveyForm
+          survey={defaultSurvey}
+          formData={formData}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+        />
+      </Paper>
+    </Content>
   );
 };
