@@ -1,5 +1,11 @@
 import { Content } from '@backstage/core-components';
-import { Grid } from '@material-ui/core';
+import {
+  Grid,
+  LinearProgress,
+  makeStyles,
+  Paper,
+  Typography,
+} from '@material-ui/core';
 import { ApiHooks } from '@port-labs/backstage-plugin-framework';
 import React from 'react';
 import {
@@ -9,6 +15,20 @@ import {
   SurveyStats,
   TopChallenge,
 } from '../components/charts';
+
+const useStyles = makeStyles(theme => ({
+  loadingContainer: {
+    maxWidth: 800,
+    margin: '0 auto',
+    padding: theme.spacing(3),
+  },
+  message: {
+    padding: theme.spacing(3),
+  },
+  progress: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
 export type SurveyResult = {
   primary_blocker: string;
@@ -22,6 +42,7 @@ export type SurveyResult = {
 };
 
 export const AdminPage = () => {
+  const classes = useStyles();
   const {
     data: surveyResults,
     loading,
@@ -52,14 +73,32 @@ export const AdminPage = () => {
     last_updated: new Date(item.updatedAt),
   }));
 
-  console.log(parsedResults);
-
   if (error) {
-    return <div>Error loading survey results: {error.message}</div>;
+    return (
+      <Content>
+        <Paper className={classes.loadingContainer}>
+          <Typography variant="h4" color="error" className={classes.message}>
+            Error Loading Survey Results
+          </Typography>
+          <Typography variant="body1" className={classes.message}>
+            {error.message}
+          </Typography>
+        </Paper>
+      </Content>
+    );
   }
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <Content>
+        <Paper className={classes.loadingContainer}>
+          <Typography variant="body1" className={classes.message}>
+            Loading survey results...
+          </Typography>
+          <LinearProgress className={classes.progress} />
+        </Paper>
+      </Content>
+    );
   }
 
   return (

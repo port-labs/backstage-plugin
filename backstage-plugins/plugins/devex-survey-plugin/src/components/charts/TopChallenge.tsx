@@ -23,7 +23,6 @@ const useStyles = makeStyles(theme => ({
 export const TopChallenge = ({ results }: Props) => {
   const classes = useStyles();
 
-  console.log(results);
   const { topCategory, topSpecificChallenge } = React.useMemo(() => {
     if (results.length === 0) {
       return {
@@ -48,7 +47,8 @@ export const TopChallenge = ({ results }: Props) => {
         return acc;
       }
 
-      const challenge = curr[topCategoryKey];
+      const challenge =
+        curr[topCategoryKey as keyof Omit<SurveyResult, 'last_updated'>];
       acc[challenge] = (acc[challenge] || 0) + 1;
       return acc;
     }, {} as Record<string, number>);

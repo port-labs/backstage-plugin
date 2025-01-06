@@ -28,6 +28,23 @@ type Options = {
   catalogApi: CatalogApi;
 };
 
+export interface CreateEntityOptions {
+  upsert?: boolean;
+  merge?: boolean;
+  validation_only?: boolean;
+  create_missing_related_entities?: boolean;
+  run_id?: string;
+}
+
+export interface CreateEntityPayload {
+  identifier?: string;
+  title?: string;
+  icon?: string;
+  team?: string | string[];
+  properties: Record<string, any>;
+  relations?: Record<string, string>;
+}
+
 export class PortAPI {
   private readonly fetchApi: FetchApi;
   private readonly configApi: ConfigApi;
@@ -245,5 +262,45 @@ export class PortAPI {
     const json = await response.json();
 
     return json.ok;
+  }
+
+  async createEntity(
+    blueprintId: string,
+    entity: CreateEntityPayload,
+    options: CreateEntityOptions = {},
+  ): Promise<Response> {
+    const queryParams = new URLSearchParams();
+
+    if (options.upsert) queryParams.append('upsert', 'true');
+    if (options.merge) queryParams.append('merge', 'true');
+    if (options.validation_only) queryParams.append('validation_only', 'true');
+    if (options.create_missing_related_entities)
+      queryParams.append('create_missing_related_entities', 'true');
+    if (options.run_id) queryParams.append('run_id', options.run_id);
+
+    const response = await this.fetchApi.fetch(
+      this.getUrl(
+        `/blueprints/${blueprintId}/entities${
+          queryParams.toString() ? `?${queryParams.toString()}` : ''
+        }`,
+      ),
+      {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(entity),
+      },
+    );
+
+    if (!response.ok) {
+      console.log(response.statusText);
+      throw new Error(response.statusText, {
+        cause: response.status,
+      });
+    }
+
+    return response;
   }
 }
