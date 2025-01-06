@@ -27,6 +27,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import LibraryBooks from '@material-ui/icons/LibraryBooks';
 import MenuIcon from '@material-ui/icons/Menu';
 import GroupIcon from '@material-ui/icons/People';
+import PollIcon from '@material-ui/icons/Poll';
 import SearchIcon from '@material-ui/icons/Search';
 import React, { PropsWithChildren } from 'react';
 import LogoFull from './LogoFull';
@@ -88,6 +89,11 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
             icon={AssignmentTurnedInIcon}
             to="dev-daily"
             text="Plan My Day"
+          />
+          <SidebarItem
+            icon={PollIcon}
+            to="devex-survey"
+            text="Developer Experience Survey"
           />
           <SidebarItem icon={BlockIcon} to="new-plugin" text="Empty plugin" />
         </SidebarScrollWrapper>

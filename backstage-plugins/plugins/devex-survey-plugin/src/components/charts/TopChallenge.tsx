@@ -78,7 +78,7 @@ export const TopChallenge = ({ results }: Props) => {
   return (
     <InfoCard title="Top Developer Challenge">
       <Grid container spacing={3} alignItems="center">
-        <Grid item xs={12} className={classes.category}>
+        <Grid item xs={6} className={classes.category}>
           <Typography variant="h6">Most Common Challenge Area:</Typography>
           <Typography variant="h4" className={classes.highlight}>
             {topCategory.name}
@@ -88,7 +88,7 @@ export const TopChallenge = ({ results }: Props) => {
             {Math.round((topCategory.count / topCategory.total) * 100)}%)
           </Typography>
         </Grid>
-        <Grid item xs={12} className={classes.specific}>
+        <Grid item xs={6} className={classes.specific}>
           <Typography variant="h6">
             Top Challenge inside {topCategory.name}:
           </Typography>
