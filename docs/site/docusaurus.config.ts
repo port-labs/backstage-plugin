@@ -72,7 +72,7 @@ const config: Config = {
       ],
     },
     hotjar: {
-      applicationId: 5229272,
+      applicationId: 5251105,
     },
     zoom: {
       selector: ".markdown img:not(.not-zoom)",
