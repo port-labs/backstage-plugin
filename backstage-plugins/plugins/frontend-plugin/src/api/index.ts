@@ -13,6 +13,7 @@ import {
   GlobalAction,
   Integration,
   PortEntity,
+  Scorecard,
 } from './types';
 
 export const PORT_PROXY_PATH = '/api/port/proxy';
@@ -158,6 +159,23 @@ export class PortAPI {
     });
 
     return response;
+  }
+
+  async getScorecardsByBlueprint(blueprintId: string): Promise<Scorecard[]> {
+    const response = await this.fetchApi.fetch(
+      this.getUrl(`/blueprints/${blueprintId}/scorecards`),
+      {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+
+    const json = await response.json();
+
+    return json.scorecards;
   }
 
   async search(searchQuery: object, include?: string[]): Promise<PortEntity[]> {

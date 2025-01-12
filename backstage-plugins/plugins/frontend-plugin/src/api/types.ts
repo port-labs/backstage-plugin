@@ -41,6 +41,49 @@ export type ScorecardRuleCondition =
       operator: 'isEmpty' | 'isNotEmpty';
     });
 
+export type ScorecardRule = {
+  identifier: string;
+  title?: string;
+  description?: string;
+  level: string;
+  query: SingleScorecardQuery;
+};
+
+export type SingleScorecardQuery = {
+  combinator: 'and' | 'or';
+  conditions: ScorecardRuleCondition[];
+};
+
+export type ScorecardLevel = {
+  title: string;
+  color: string;
+};
+
+export type Scorecard = {
+  id: string;
+  identifier: string;
+  title: string;
+  blueprint: string;
+  levels?: ScorecardLevel[];
+  filter?: SingleScorecardQuery;
+  rules: ScorecardRule[];
+} & IWithChangeLog;
+
+export type CreateScorecardDTO = Omit<
+  Scorecard,
+  keyof IWithChangeLog | 'id' | 'blueprint'
+>;
+
+export type UpdateScorecardDTO = Omit<
+  Scorecard,
+  keyof IWithChangeLog | 'id' | 'blueprint'
+>;
+
+export type UpdateManyScorecardDTO = (Omit<
+  Scorecard,
+  'id' | keyof IWithChangeLog | 'blueprint'
+> & { id?: string })[];
+
 export type PortEntity = {
   identifier: string;
   title?: string;
