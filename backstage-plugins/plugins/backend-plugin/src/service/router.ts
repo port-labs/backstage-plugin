@@ -7,8 +7,8 @@ import express from 'express';
 import Router from 'express-promise-router';
 import { createProxyMiddleware, fixRequestBody } from 'http-proxy-middleware';
 import jwt from 'jsonwebtoken';
-import { createAccessToken } from '../lib/api/auth';
-import { getBaseUrl } from '../lib/api/consts';
+import { createAccessToken, PortApiAuth } from '../lib/api/auth';
+import { buildPortUrl, getBaseUrl } from '../lib/api/consts';
 
 export interface RouterOptions {
   logger: LoggerService;
@@ -61,6 +61,35 @@ export function createAuthMiddleware(options: {
   return router;
 }
 
+async function isSuccessfulConfig({
+  clientId,
+  clientSecret,
+  domain,
+}: PortApiAuth) {
+  const accessToken = await createAccessToken({
+    clientId,
+    clientSecret,
+    domain,
+  });
+
+  const response = await fetch(buildPortUrl(domain, '/blueprints'), {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({
+      identifier: 'plugin-framework-test',
+      title: 'Plugin Framework Test',
+      schema: {
+        properties: {},
+      },
+    }),
+  });
+
+  return response.ok || response.status === 409; // 409 is returned if the blueprint already exists
+}
+
 export function createPortProxyMiddleware(options: {
   logger: LoggerService;
   baseUrl: string;
@@ -104,6 +133,12 @@ export async function createRouter(
     });
     response.json({ accessToken });
   });
+
+  if (await isSuccessfulConfig({ clientId, clientSecret, domain: baseUrl })) {
+    logger.info('Port API is configured successfully');
+  } else {
+    logger.error('Port API is not configured successfully');
+  }
 
   const middleware = MiddlewareFactory.create({ logger, config });
 
