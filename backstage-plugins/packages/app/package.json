@@ -44,6 +44,7 @@
     "@material-ui/icons": "^4.9.1",
     "@port-labs/backstage-plugin-dev-daily": "^0.1.0",
     "@port-labs/backstage-plugin-devex-survey": "^0.1.0",
+    "@port-labs/backstage-plugin-devtools": "^0.1.0",
     "@port-labs/backstage-plugin-framework": "^0.1.0",
     "react": "^18.0.2",
     "react-dom": "^18.0.2",

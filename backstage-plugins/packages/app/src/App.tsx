@@ -45,6 +45,7 @@ import { RequirePermission } from '@backstage/plugin-permission-react';
 import { NewPluginPage } from '@internal/backstage-plugin-new-plugin';
 import { DevDailyPluginPage } from '@port-labs/backstage-plugin-dev-daily';
 import { DevexSurveyPage } from '@port-labs/backstage-plugin-devex-survey';
+import { DevToolsPage as DevToolsPortPage } from '@port-labs/backstage-plugin-devtools';
 import {
   ScorecardsPage,
   SettingsPage,
@@ -136,8 +137,9 @@ const routes = (
     {/* Port Labs */}
     <Route path="/scorecards" element={<ScorecardsPage />} />
     <Route path="/dev-daily" element={<DevDailyPluginPage />} />
-    <Route path="/devtools" element={<DevToolsPage />} />
     <Route path="/devex-survey" element={<DevexSurveyPage />} />
+    <Route path="/devtools" element={<DevToolsPage />} />
+    <Route path="/devtools-port" element={<DevToolsPortPage />} />
     <Route path="/new-plugin" element={<NewPluginPage />} />
   </FlatRoutes>
 );

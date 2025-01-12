@@ -106,7 +106,8 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         to="/settings"
       >
         <SidebarSettings />
-        <SidebarItem icon={BuildIcon} to="devtools" text="DevTools" />
+        {/* <SidebarItem icon={BuildIcon} to="devtools" text="DevTools" /> */}
+        <SidebarItem icon={BuildIcon} to="devtools-port" text="DevTools Port" />
       </SidebarGroup>
     </Sidebar>
     {children}
