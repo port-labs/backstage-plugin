@@ -1,0 +1,286 @@
+---
+title: DevTools Plugin
+description: A plugin that provides a dashboard of the current state of the Backstage instance.
+sidebar_position: 4
+---
+
+import GithubIntegration from "../integrations/github.mdx";
+
+Managing a Backstage instance with dozens of plugins installed can be a daunting task. The DevTools plugin provides a dashboard of the current state of the Backstage instance.
+
+- List all the plugins that are installed in the Backstage instance.
+- Get information about a plugin from Datadog or other platforms.
+- Make sure all plugins have up-to-date dependencies.
+- Run initiatives to improve plugins, such as upgrading to the new backend system.
+
+## Screenshots
+
+![DevTools Plugin Dashboard](/img/devtools/devtools-plugin-table.png)
+
+![DevTools initiatives](/img/devtools/devtools-initiatives.png)
+
+## Prerequisites
+
+- Complete the [Getting Started](/getting-started) guide
+- Integrate with Datadog or other platforms needed to monitor the plugins in your Backstage instance
+
+## Setup integrations
+
+In your Backstage instance, click the **Settings** button on the bottom left and click on the **Port** tab.
+
+![Port Settings](/img/settings-page.png)
+
+Yours will be empty, so you'll need to add your Github repositories that includes your plugins and your Backstage instance.
+You can also add your Datadog account to get the uptime of your plugins. or other platforms to get the status of your plugins.
+
+Click on the **Add Integration** button, and follow the instructions to add Github integrations.
+
+<GithubIntegration />
+
+## Setup the blueprint
+
+In your Backstage instance, click the **Settings** button on the bottom left and click on the **Port** tab.
+
+### Add the DevTools blueprint
+
+Click on **Add Blueprint** and add the following blueprint:
+
+<details>
+<summary>DevTools Blueprint</summary>
+
+```json
+{
+  "identifier": "backstage_plugins",
+  "description": "Backstage plugins in our organization",
+  "title": "Backstage plugins",
+  "icon": "Backstage",
+  "schema": {
+    "properties": {
+      "type": {
+        "icon": "DefaultProperty",
+        "title": "Type",
+        "type": "string",
+        "enum": ["frontend-plugin", "backend-plugin", "unknown"],
+        "enumColors": {
+          "frontend-plugin": "blue",
+          "backend-plugin": "green",
+          "unknown": "lightGray"
+        }
+      },
+      "packages": {
+        "items": {
+          "type": "object"
+        },
+        "type": "array",
+        "title": "Packages"
+      },
+      "datadog_uptime_slo": {
+        "type": "boolean",
+        "title": "Datadog Uptime SLO",
+        "icon": "Datadog"
+      },
+      "uptime": {
+        "type": "number",
+        "title": "Uptime",
+        "icon": "Datadog"
+      },
+      "status": {
+        "icon": "DefaultProperty",
+        "title": "Status",
+        "type": "string",
+        "default": "Active",
+        "enum": ["Active", "Not Running"],
+        "enumColors": {
+          "Active": "green",
+          "Not Running": "pink"
+        }
+      },
+      "version": {
+        "type": "string",
+        "title": "Version"
+      }
+    },
+    "required": ["version"]
+  },
+  "mirrorProperties": {},
+  "calculationProperties": {
+    "mui_version": {
+      "title": "Mui Version",
+      "icon": "DefaultProperty",
+      "calculation": ".properties.packages[] | select(.package == \"@material-ui/core\") | (.version.major | tonumber) * 1 + (.version.minor | tonumber) _ 0.01",
+      "type": "number"
+    },
+    "be_common": {
+      "title": "BE Common",
+      "calculation": ".properties.packages[] | select(.package == \"@backstage/backend-common\") | (.version.major | tonumber) _ 1 + (.version.minor | tonumber) _ 0.01",
+      "type": "number"
+    }
+  },
+  "aggregationProperties": {},
+  "relations": {}
+}
+```
+
+</details>
+
+and the following scorecard:
+
+<details>
+<summary>DevTools Scorecard</summary>
+
+```json
+[
+  {
+    "identifier": "packages-scorecard",
+    "title": "Package Compliance",
+    "levels": [
+      {
+        "color": "paleBlue",
+        "title": "Basic"
+      },
+      {
+        "color": "bronze",
+        "title": "Bronze"
+      },
+      {
+        "color": "silver",
+        "title": "Silver"
+      },
+      {
+        "color": "gold",
+        "title": "Gold"
+      }
+    ],
+    "rules": [
+      {
+        "identifier": "MuiVersion",
+        "title": "MUI Core Version",
+        "level": "Silver",
+        "query": {
+          "combinator": "or",
+          "conditions": [
+            {
+              "operator": "isEmpty",
+              "property": "mui_version"
+            },
+            {
+              "operator": ">",
+              "property": "mui_version",
+              "value": 4.09
+            }
+          ]
+        }
+      },
+      {
+        "identifier": "BackendVersion",
+        "title": "Backend Common Version",
+        "level": "Gold",
+        "query": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "operator": "isNotEmpty",
+              "property": "be_common"
+            },
+            {
+              "operator": ">",
+              "property": "be_common",
+              "value": 0.12
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "identifier": "new_be_system",
+    "title": "New Backend Adoption",
+    "levels": [
+      {
+        "color": "paleBlue",
+        "title": "Not adopted"
+      },
+      {
+        "color": "gold",
+        "title": "Gold"
+      }
+    ],
+    "rules": [
+      {
+        "identifier": "BackendVersion",
+        "title": "Backend Common Version",
+        "level": "Gold",
+        "query": {
+          "combinator": "or",
+          "conditions": [
+            {
+              "operator": "isEmpty",
+              "property": "be_common"
+            },
+            {
+              "operator": ">=",
+              "property": "be_common",
+              "value": 1
+            }
+          ]
+        }
+      }
+    ]
+  }
+]
+```
+
+</details>
+
+### Add the mappings
+
+Click on the `MAPPING` button near the **GitHub** integration. and paste the following YAML:
+
+:::note
+Make sure to edit the `path` to match your repository structure. and update the `repos` to match your Github repositories you want to monitor.
+:::
+
+<details>
+<summary>Repository Mapping</summary>
+
+```yaml
+resources:
+  - kind: file
+    selector:
+      query: "true"
+      files:
+        - path: "**/packages/**/package.json"
+          repos:
+            - backstage-plugin
+    port:
+      itemsToParse: .file.content.dependencies | to_entries
+      entity:
+        mappings:
+          identifier: .item.key
+          title: .item.key
+          blueprint: '"backstage_plugins"'
+          properties:
+            type: '"unknown"'
+            version: .item.value
+  - kind: file
+    selector:
+      query: "true"
+      files:
+        - path: "**/plugins/**/package.json"
+          repos:
+            - backstage-plugin
+    port:
+      entity:
+        mappings:
+          identifier: .file.content.name
+          title: .file.content.name
+          blueprint: '"backstage_plugins"'
+          properties:
+            type: .file.content.backstage.role
+            packages: >-
+              .file.content.dependencies | to_entries | map({package: .key,
+              version: (.value |
+              capture("(?<major>0|[1-9]\\d*)\\.(?<minor>0|[1-9]\\d*)\\.(?<patch>0|[1-9]\\d*)"))})
+```
+
+</details>

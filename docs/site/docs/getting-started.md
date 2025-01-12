@@ -6,6 +6,12 @@ sidebar_position: 2
 
 Let's discover **Port's Backstage plugin in less than 5 minutes**.
 
+<center>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/cUgmgUer87s?si=TomNq_-OO88m_sec" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+</center>
+
 By the end of this guide, you will have integrated Jira & Github pull requests into your Backstage instance.
 
 ![Dev Daily Plugin Dashboard](/img/dev-daily/plan-my-day.png)

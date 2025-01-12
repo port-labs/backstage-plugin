@@ -1,11 +1,14 @@
-import { InfoCard, Table } from '@backstage/core-components';
-import { Grid, Typography } from '@material-ui/core';
+import { Table, TableProps } from '@backstage/core-components';
+import { Typography } from '@material-ui/core';
+import StopIcon from '@material-ui/icons/CancelRounded';
 import React from 'react';
 import { Plugin } from '../hooks/usePlugins';
 
 type PluginsTableProps = {
+  title: string;
   plugins: Plugin[];
   loading: boolean;
+  options?: TableProps['options'];
 };
 export const getLevelEmoji = (
   level: 'Bronze' | 'Silver' | 'Gold' | 'Basic',
@@ -48,7 +51,12 @@ export function Chip({
   );
 }
 
-export function PluginsTable({ plugins, loading }: PluginsTableProps) {
+export function PluginsTable({
+  title,
+  plugins,
+  loading,
+  options,
+}: PluginsTableProps) {
   const columns = [
     {
       title: 'Plugin Name',
@@ -110,27 +118,34 @@ export function PluginsTable({ plugins, loading }: PluginsTableProps) {
   ];
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12}>
-        <InfoCard title="Backstage Plugins" noPadding>
-          <Table
-            columns={columns}
-            data={plugins}
-            isLoading={loading}
-            options={{
-              search: true,
-              paging: true,
-              padding: 'dense',
-              sorting: true,
-              columnResizable: true,
-              fixedColumns: {
-                left: 1,
-              },
-              pageSize: 7,
-            }}
-          />
-        </InfoCard>
-      </Grid>
-    </Grid>
+    <Table
+      title={title}
+      columns={columns}
+      data={plugins}
+      isLoading={loading}
+      options={
+        options ?? {
+          search: true,
+          paging: true,
+          padding: 'dense',
+          sorting: true,
+          columnResizable: true,
+          fixedColumns: {
+            left: 1,
+          },
+          pageSize: 7,
+        }
+      }
+      actions={[
+        (rowData: Plugin) => ({
+          icon: StopIcon,
+          tooltip: 'Stop',
+          disabled: rowData.status === 'Not Running',
+          onClick: rowData => {
+            console.log(rowData);
+          },
+        }),
+      ]}
+    />
   );
 }

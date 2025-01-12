@@ -6,6 +6,7 @@ import {
 } from '@backstage/core-components';
 import { Typography } from '@material-ui/core';
 import React from 'react';
+import { InitiativesPage } from '../components/InitiativesPage';
 import { PluginsTable } from '../components/PluginsTable';
 import { usePlugins } from '../hooks/usePlugins';
 
@@ -29,13 +30,15 @@ export function DevToolsPage() {
       <TabbedLayout>
         <TabbedLayout.Route path="/" title="Plugins List">
           <Content noPadding>
-            <PluginsTable plugins={plugins} loading={loading} />
+            <PluginsTable
+              title="All Plugins"
+              plugins={plugins}
+              loading={loading}
+            />
           </Content>
         </TabbedLayout.Route>
-        <TabbedLayout.Route path="/other" title="Initiatives">
-          <Content noPadding>
-            <Typography variant="h4">Coming Soon...</Typography>
-          </Content>
+        <TabbedLayout.Route path="/initiatives" title="Initiatives">
+          <InitiativesPage />
         </TabbedLayout.Route>
       </TabbedLayout>
     </Page>
