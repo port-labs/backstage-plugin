@@ -92,11 +92,15 @@ const config: Config = {
           items: [
             {
               label: "Getting Started",
-              to: "/getting-started",
+              to: "/",
             },
             {
-              label: "Introduction",
-              to: "/",
+              label: "Pre-built Plugins",
+              to: "/examples",
+            },
+            {
+              label: "Integrations",
+              to: "/integrations/all",
             },
           ],
         },
