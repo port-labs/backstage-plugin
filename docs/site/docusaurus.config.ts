@@ -175,6 +175,17 @@ const config: Config = {
     "docusaurus-plugin-hotjar",
     "docusaurus-plugin-image-zoom",
     tailwindPlugin,
+    [
+      "@docusaurus/plugin-client-redirects",
+      {
+        redirects: [
+          {
+            to: "/",
+            from: "/getting-started",
+          },
+        ],
+      },
+    ],
   ],
 };
 
