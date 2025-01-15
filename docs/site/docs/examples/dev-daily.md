@@ -15,7 +15,7 @@ The Dev Daily Plugin provides developers with a consolidated dashboard of their 
 
 ## Prerequisites
 
-- Complete the [Getting Started](/getting-started) guide
+- Complete the [Getting Started](/) guide
 - Jira and Github accounts with the necessary permissions
   - For Jira obtain a [API Token](https://id.atlassian.com/manage-profile/security/api-tokens)
 

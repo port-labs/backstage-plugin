@@ -51,7 +51,7 @@ Please refer to our [docs](https://docs.backstage-plugin.getport.io) for install
 > [!WARNING]\
 > The Backstage plugin framework by Port is currently in beta and may not be fully stable. Please report any issues or suggestions through our GitHub repository.
 
-To start using the Backstage Plugin Framework by Port, see the [Getting Started](https://docs.backstage-plugin.getport.io/getting-started) documentation.
+To start using the Backstage Plugin Framework by Port, see the [Getting Started](https://docs.backstage-plugin.getport.io/) documentation.
 
 ## Pricing
 

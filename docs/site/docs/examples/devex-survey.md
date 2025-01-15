@@ -14,7 +14,7 @@ The DevEx Survey Plugin enables organizations to collect and analyze feedback ab
 
 ## Prerequisites
 
-- Complete the [Getting Started](/getting-started) guide
+- Complete the [Getting Started](/) guide
 - Port account with admin access
 
 ## Setup the blueprint
