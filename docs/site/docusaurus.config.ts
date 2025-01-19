@@ -41,7 +41,7 @@ const config: Config = {
           trackingID: "G-DXRL3V8KF9",
         },
         googleTagManager: {
-          containerId: "GTM-12345",
+          containerId: "GTM-NP6MPT7",
         },
       } satisfies Preset.Options,
     ],
