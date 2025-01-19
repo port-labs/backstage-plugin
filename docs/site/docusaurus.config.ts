@@ -38,7 +38,7 @@ const config: Config = {
           customCss: "./src/css/custom.css",
         },
         gtag: {
-          trackingID: "G-DXRL3V8KF9",
+          trackingID: "GTM-NP6MPT7",
         },
       } satisfies Preset.Options,
     ],
