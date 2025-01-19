@@ -38,7 +38,10 @@ const config: Config = {
           customCss: "./src/css/custom.css",
         },
         gtag: {
-          trackingID: "GTM-NP6MPT7",
+          trackingID: "G-DXRL3V8KF9",
+        },
+        googleTagManager: {
+          containerId: "GTM-12345",
         },
       } satisfies Preset.Options,
     ],

@@ -1,5 +1,5 @@
 {
-  "name": "my-website",
+  "name": "backstage-plugin-framework-docs",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -18,6 +18,7 @@
     "@docusaurus/core": "^3.7.0",
     "@docusaurus/plugin-client-redirects": "^3.7.0",
     "@docusaurus/plugin-google-gtag": "^3.7.0",
+    "@docusaurus/plugin-google-tag-manager": "^3.7.0",
     "@docusaurus/preset-classic": "^3.7.0",
     "@easyops-cn/docusaurus-search-local": "^0.46.1",
     "@mdx-js/react": "^3.0.0",
