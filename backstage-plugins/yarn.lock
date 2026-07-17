@@ -11244,7 +11244,7 @@ __metadata:
     react-use: "npm:^17.5.1"
     ts-jest: "npm:^29.1.4"
     typescript: "npm:^4.8.4"
-    validator: "npm:^13.12.0"
+    validator: "npm:^13.15.22"
     yaml: "npm:^2.6.1"
   peerDependencies:
     react: ^16.13.1 || ^17.0.0 || ^18.0.0
@@ -35649,10 +35649,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"validator@npm:^13.12.0":
-  version: 13.12.0
-  resolution: "validator@npm:13.12.0"
-  checksum: 10c0/21d48a7947c9e8498790550f56cd7971e0e3d724c73388226b109c1bac2728f4f88caddfc2f7ed4b076f9b0d004316263ac786a17e9c4edf075741200718cd32
+"validator@npm:^13.15.22":
+  version: 13.15.22
+  resolution: "validator@npm:13.15.22"
+  checksum: 10c0/69c0ad0abff0bc9f96faeb6790f5dd4e11b685031e4a115a056f3ed729aaac4d218e61f3582c051cb593305614a0a0d3b5da6ca7d5e0b426fa21be256a0ad852
   languageName: node
   linkType: hard
 
