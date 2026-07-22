@@ -15,11 +15,11 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.7.0",
-    "@docusaurus/plugin-client-redirects": "^3.7.0",
-    "@docusaurus/plugin-google-gtag": "^3.7.0",
-    "@docusaurus/plugin-google-tag-manager": "^3.7.0",
-    "@docusaurus/preset-classic": "^3.7.0",
+    "@docusaurus/core": "^3.10.2",
+    "@docusaurus/plugin-client-redirects": "^3.10.2",
+    "@docusaurus/plugin-google-gtag": "^3.10.2",
+    "@docusaurus/plugin-google-tag-manager": "^3.10.2",
+    "@docusaurus/preset-classic": "^3.10.2",
     "@easyops-cn/docusaurus-search-local": "^0.46.1",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
